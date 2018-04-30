@@ -1,0 +1,720 @@
+﻿<!-- Right Side Panel -->
+<div class="containersmall">
+    <style>
+        .FormsTitleHeader {
+            font-size: 20px;
+            font-family: open_sansbold;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+
+        .EditSmallBar {
+            width: 98%;
+        }
+
+        .SaveButtonContainer {
+            margin-top: 5px;
+        }
+
+        #submitButton {
+            width: 97px;
+            height: 34px;
+            border: none;
+            border-radius: 3px;
+            float: right;
+            display: table;
+            cursor: pointer;
+            font-family: open_sansregular;
+            text-align: center;
+        }
+
+        .PSSQrow {
+            font-family: open_sansregular;
+            width: 100%;
+            margin-left: 3px;
+        }
+
+            .PSSQrow div {
+                display: inline-block;
+                width: 24%;
+                margin-right: 1%;
+                float: left;
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+
+            .PSSQrow input[type=checkbox] {
+                margin: 9.5px 0 0 10px;
+            }
+
+            .PSSQrow .DeletePSSQ {
+                margin-top: 6px;
+                float: right;
+                color: red;
+                cursor: pointer;
+            }
+
+        .AddNewQuestion {
+            cursor: pointer;
+            float: right;
+            font-family: open_sansbold;
+            margin: 5px 0 10px 0;
+            font-size: 14px;
+        }
+
+        #PSSQContainer td, #PSSQContainer th {
+            width: 16.6%;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        #PSSQContainer td {
+            padding-left: 5px;
+        }
+
+        #PSSQContainer {
+            border-spacing: 0;
+        }
+
+        .deletePSSQ {
+            cursor: pointer;
+            color: red;
+            font-family: open_sansbold;
+        }
+
+        .selectAllButton .deselectAllButton {
+            font-size: 14px;
+        }
+
+        input[type=checkbox]:checked + label, input[type=radio]:checked + label {
+            color: #00A8C5;
+            font-family: open_sansbold;
+        }
+
+        tr:nth-child(even) {
+            background: #FFF;
+        }
+
+        tr:nth-child(odd) {
+            background: #CCC;
+        }
+    </style>
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Forms</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer" ng-if="formC.ArchivedForm==false">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Active Forms</label>
+                </div>
+                <div class="verticalalign RightRank7">
+                    <div class="Color7 AddNewLocation" ng-click="popup.showAddFormMenu()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation" style="float:right">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add New Form</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="float: right; width: 10px;">&nbsp;</div>
+                <div class="verticalalign RightRank7">
+                    <div class="Color7 AddNewLocation" ng-click="formC.showArchivedForm()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation" style="float:right">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Archived Forms</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Form -->
+                <!--<div class="verticalalign">
+                    <div class="Color7 AddNewLocation" onclick="showAddNew()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioning">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add New Form</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+
+            <!-- Search Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist"></datalist>
+                <select id="SearchConstraint" class="SettingsBox SearchBox">
+                    <option value="title" selected>Form Title</option>
+                </select>
+
+            </div>
+
+            <!-- Datalist Option Template -->
+            <script id="DatalistTemplate" type="text/x-jsrender">
+                <option value="" data-title="{{:Title}}">
+            </script>
+
+            <div style="clear:both;"></div>
+
+            <!-- Forms Containers -->
+            <!--<div class="FormsTitleHeader">Assigned Forms</div>
+            <div id="AssignedFormsContainer"></div>
+
+            <div class="FormsTitleHeader">Unassigned Forms</div>
+            <div id="UnassignedFormsContainer"></div>-->
+
+            <div id="FormsContainer" class="RightRank18 RightRank32">
+
+                <div ng-repeat="survey in formC.BSurveyList" id="{{survey.SurveyID}}" class="EditSmallBar Color3 Searchable" data-title="{{survey.Title}}" data-activated="{{survey.Activated}}">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">{{survey.Title}}</label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <!--<button class="EditButton Color3 FontColor2" ng-click="changeRoute('formeditor/' + survey.SurveyID)">Edit</button>-->
+                        <!--<button class="EditButton Color3 FontColor2" onclick="javascript: location.href = './Survey/#/editor/' + {{survey.SurveyID}}">Edit</button>-->
+                         <button class="EditButton Color3 FontColor2" data-surveyid="{{survey.SurveyID}}" onclick="gotoEditor(this)">Edit</button>
+                        <button class="EditButton Color3 FontColor2" ng-click="popup.showMenu(survey.SurveyID)">Info</button>
+                    </div>
+                    <div class="verticalalgin2">
+                        <button class="EditButton Color3 FontColor2" ng-click="formC.Archive(survey.SurveyID,'archive')" ng-if="formC.acntadmin">Archive</button>
+                        <button class="EditButton Color3 FontColor2" ng-click="formC.CloneSurvey(survey.SurveyID)" ng-if="formC.acntadmin">Clone</button>
+                    </div>
+                </div>
+            </div>
+            <div class="noRightRank18 noRightRank32 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>
+    </div>
+
+    <!-- PopUp Form -->
+    <div class="TransparentBackground  animated fadeIn" id="EditMenu">
+
+        <div class="Transparency"></div>
+
+        <div class="PopUpDisplay">
+            <div class="verticalalign">
+                <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                    <!-- Top Bar -->
+                    <div class="TopBarPopUpWindow">
+
+                        <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                            <div class="SmallBarDisplayBox Color7">
+                                <div class="verticalalign">
+                                    <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalalgin2">
+                            <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">Form - Information</label>
+                            <!--<div class="DeleteEventContainer isEmployee" id="DeleteButton" onclick="deleteForm()">
+                                <div class="FontColor6 DeleteEventText">Delete User?</div>
+                            </div>-->
+                        </div>
+
+                        <div class="verticalalgin2">
+                            <label class="CancelLabel FontColor2" ng-click="popup.closeMenu()">Cancel</label>
+                        </div>
+
+                    </div>
+
+                    <!-- Form Container -->
+                    <div class="AllSettingsContainer" id="FormInputs">
+
+                        <input type="hidden" name="SurveyID" ng-model="surveyInfo.SurveyID" value="" id="SurveyIDHidden" />
+                        <div class="SmallSettingContainer" style="width: 100%;">
+                            <label class="FontColor4 PopUpWindowLabel">Form Title</label>
+                            <input type="text" name="SurveyTitle" id="SurveyTitle" ng-model="surveyInfo.SurveyTitle" placeholder="Title" class="SettingsBox" style="border:none;background-color:lightgrey;text-align:center;" disabled="disabled" readonly="readonly" />
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <hr />
+
+                        <!--START NILESH-TSK3.0-->
+                        <!--<div class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">Form Action</div>
+                        <div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                            <input type="checkbox" id="chkActivated" class="surveryTypeRadio inputRightRank19 inputRightRank33" ng-model="Activated" />
+                            <label for="chkActivated" class="FontColor4 PopUpWindowLabel" style="float:none">Active</label>
+                        </div>
+                        <hr />-->
+                        <!--END NILESH-TSK3.0-->
+                        <!-- Survey Types Container -->
+                        <div class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">Form Types</div>
+                        <div id="SurveyTypesContainer" ng-if="businessrpt==true">
+                            <!--<div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="222b448d-e08a-43b6-b70f-7a19867336ea" style="float:left;" onchange="checkSurveyTypesRADIO('222b448d-e08a-43b6-b70f-7a19867336ea', 'SurveyType')" />
+                                <label for="222b448d-e08a-43b6-b70f-7a19867336ea" class="FontColor4 PopUpWindowLabel" style="float:none">Employee Evaluation Form</label>
+                            </div>
+
+                            <div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none; margin-left: 20px;">
+                                <input type="checkbox" class="surveryTypeCheckbox inputRightRank19 inputRightRank33" id="b58916ce-cd62-4036-937d-8308b8568a6d" style="float:left;" disabled="disabled" data-parent="222b448d-e08a-43b6-b70f-7a19867336ea" onchange="checkSurveyTypes('b58916ce-cd62-4036-937d-8308b8568a6d')" />
+                                <label for="b58916ce-cd62-4036-937d-8308b8568a6d" id="LABELb58916ce-cd62-4036-937d-8308b8568a6d" class="FontColor4 PopUpWindowLabel" style="float:none">Peer Evaluation Form</label>
+                            </div>
+
+                            <div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="55dfe451-6bf3-484b-950d-1384e20ef3b6" style="float:left;" onchange="checkSurveyTypesRADIO('55dfe451-6bf3-484b-950d-1384e20ef3b6', 'SurveyType')" />
+                                <label for="55dfe451-6bf3-484b-950d-1384e20ef3b6" class="FontColor4 PopUpWindowLabel" style="float:none">Special Education Form</label>
+                            </div>-->
+                            <!--<div ng-repeat="surveytype in surveyTypeList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="{{surveytype.SurveyTypeID}}" style="float:left;" ng-model="surveytype.selection" onchange="checkSurveyTypesRADIO('{{surveytype.SurveyTypeID}}', 'SurveyType')" />
+                                <label for="{{surveytype.SurveyTypeID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{surveytype.Name}}</label>
+                            </div>-->
+
+                            <div>
+                                <div class="SmallSettingContainer" ng-repeat="item in formC.SurveyFormTypeList" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                    <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="{{item.SurveyTypeID}}" ng-model="formC.SurveyForm" value="{{item.SurveyTypeName}}" style="float:left;" ng-click="checkSurveyTypesRADIO(item.SurveyTypeID, 'SurveyType')" />
+                                    <label for="{{item.SurveyTypeID}}" ng-hide="formC.showFormText==$index" ng-click="formC.showFormText=$index" class="FontColor4 PopUpWindowLabel" style="float:none">{{item.SurveyTypeTitle}}</label>
+                                    <div ng-show="formC.showFormText==$index">
+                                        <input type="text" ng-model="item.SurveyTypeTitle" />&nbsp;&nbsp;&nbsp;<button type="button" ng-click="formC.setFormTypeTitle(item)" data-toggle="tooltip" title="Save">
+                                            <img src="images/checkmark.png" style="height:10px;width:15px;margin-left:4px;margin-top:5px;" />&nbsp;
+                                        </button>&nbsp;&nbsp;&nbsp;<button type="button" ng-click="formC.showFormText=null" data-toggle="tooltip" title="Cancel"><img src="images/cross.png" style="height:11px;width:15px;margin-right:5px;margin-left:5px;margin-top:5px" /></button>
+                                    </div>
+                                    <input ng-show="formC.showFormText!=$index" type="image" ng-click="formC.showActiveForm(item)" data-toggle="tooltip" title="Cancel" src="images/trash.png" style="height:11px;width:15px;margin-right:5px;margin-left:5px;margin-top:5px" />
+                                </div>
+                            </div>
+
+                            <!--<div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="23385b0f-60e2-482c-b8b3-4ec217df409e" style="float:left;" onchange="checkSurveyTypesRADIO('23385b0f-60e2-482c-b8b3-4ec217df409e', 'SurveyType')" />
+                                <label for="23385b0f-60e2-482c-b8b3-4ec217df409e" class="FontColor4 PopUpWindowLabel" style="float:none">IBS - Safety Audits / Walkthroughs</label>
+                            </div>
+
+                            <div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="9baffb63-2177-424d-9b8f-c1bae984b0f0" style="float:left;" onchange="checkSurveyTypesRADIO('9baffb63-2177-424d-9b8f-c1bae984b0f0', 'SurveyType')" />
+                                <label for="9baffb63-2177-424d-9b8f-c1bae984b0f0" class="FontColor4 PopUpWindowLabel" style="float:none">IBS - Coaching Forms</label>
+                            </div>-->
+                        </div>
+                        <div id="SurveyTypesContainer" ng-if="eductnrpt==true">
+                            <div>
+                                <div class="SmallSettingContainer" ng-repeat="item in formC.SurveyFormTypeList" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                    <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="{{item.SurveyTypeID}}" ng-model="formC.SurveyForm" value="{{item.SurveyTypeName}}" style="float:left;" ng-click="checkSurveyTypesRADIO(item.SurveyTypeID, 'SurveyType')" />
+                                    <label for="{{item.SurveyTypeID}}" ng-hide="formC.showFormText==$index" ng-click="formC.showFormText=$index" class="FontColor4 PopUpWindowLabel" style="float:none">{{item.SurveyTypeTitle}}</label>
+                                    <div ng-show="formC.showFormText==$index">
+                                        <input type="text" ng-model="item.SurveyTypeTitle" />&nbsp;&nbsp;&nbsp;
+                                        <button type="button" ng-click="formC.setFormTypeTitle(item)"><img src="images/checkmark.png" style="height:10px;width:25px;" />&nbsp;</button><button type="button" ng-click="formC.showFormText=null"><img src="images/cross.png" style="height:10px;width:25px;" /></button>
+                                    </div>
+                                    <input ng-show="formC.showFormText!=$index" type="image" ng-click="formC.showActiveForm(item)" data-toggle="tooltip" title="Cancel" src="images/trash.png" style="height:11px;width:15px;margin-right:5px;margin-left:5px;margin-top:5px" />
+                                </div>
+                                <!--<div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                    <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="222b448d-e08a-43b6-b70f-7a19867336ea" style="float:left;" onchange="checkSurveyTypesRADIO('222b448d-e08a-43b6-b70f-7a19867336ea', 'SurveyType')" />
+                                    <label for="222b448d-e08a-43b6-b70f-7a19867336ea" class="FontColor4 PopUpWindowLabel" style="float:none">Teacher Evaluation Form</label>
+                                </div>-->
+                                <!--<div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none; margin-left: 20px;">
+                                    <input type="checkbox" class="surveryTypeCheckbox inputRightRank19 inputRightRank33" id="b58916ce-cd62-4036-937d-8308b8568a6d" style="float:left;" disabled="disabled" data-parent="222b448d-e08a-43b6-b70f-7a19867336ea" onchange="checkSurveyTypes('b58916ce-cd62-4036-937d-8308b8568a6d')" />
+                                    <label for="b58916ce-cd62-4036-937d-8308b8568a6d" id="LABELb58916ce-cd62-4036-937d-8308b8568a6d" class="FontColor4 PopUpWindowLabel" style="float:none">Peer Evaluation Form</label>
+                                </div>
+                                <div class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; float:none;">
+                                    <input type="radio" class="surveryTypeRadio inputRightRank19 inputRightRank33" name="SurveyType" id="55dfe451-6bf3-484b-950d-1384e20ef3b6" style="float:left;" onchange="checkSurveyTypesRADIO('55dfe451-6bf3-484b-950d-1384e20ef3b6', 'SurveyType')" />
+                                    <label for="55dfe451-6bf3-484b-950d-1384e20ef3b6" class="FontColor4 PopUpWindowLabel" style="float:none">Special Education Form</label>
+                                </div>-->
+
+                            </div>
+                        </div>
+                        <div ng-show="formC.ShowFormName=='hide'">
+                            <br />
+                            <input type="text" ng-model="formC.NewFormName" />&nbsp;&nbsp;
+                            <button type="button" ng-click="formC.AddFormSurveyType()" data-toggle="tooltip" title="Save">
+                                <img src="images/checkmark.png" style="height:9px;width:15px;margin-right:5px;margin-left:5px;margin-top:5px" />
+                            </button>&nbsp;&nbsp;
+                            <button type="button" ng-click="formC.ShowFormName=null" data-toggle="tooltip" title="Cancel">
+                                <img src="images/cross.png" style="height:9px;width:15px;margin-right:5px;margin-left:5px;margin-top:5px" />
+                            </button>
+                        </div><br />
+                        <button type="button" ng-hide="formC.ShowFormName=='hide'" ng-click="formC.ShowFormName='hide'" data-toggle="tooltip" title="Add Row">
+                            <img src="images/plus-png-image-97161.png" style="height:11px;width:15px;margin-right:5px;margin-left:5px;margin-top:5px" />
+                        </button>
+
+                        <div style="clear:both"></div>
+                        <hr />
+
+                        <!-- Merchants Container -->
+                        <div class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">
+                            Merchants&nbsp;<span style="font-size:12px;">(Selecting a merchant does not requre a site to be selected)</span>
+                            <span class="deselectAllButton FontColor2 RightRank19 RightRank33" ng-click="formC.deselectAllMerchants()">Deselect All</span>
+                            <span class="selectAllButton FontColor2 RightRank19 RightRank33" ng-click="formC.selectAllMerchants()">Select All</span>
+                        </div>
+                        <div id="MerchantsContainer">
+                            <div ng-repeat="merchant in merchantList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                                <input type="checkbox" class="surveryMerchantCheckbox inputRightRank19 inputRightRank33" id="{{merchant.MerchantID}}" ng-model="merchant.selection" value="{{merchant.MerchantID}}" ng-change="formC.checkSurveyMerchantCheckboxes(merchant.MerchantID)" style="float:left;" />
+                                <label for="{{merchant.MerchantID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{merchant.Name}}</label>
+                            </div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <hr />
+
+                        <!-- Schools Container -->
+                        <div class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">
+                            <lable ng-if="businessrpt==true">Sites</lable>
+                            <lable ng-if="eductnrpt==true">Schools</lable>
+                            <span class="deselectAllButton FontColor2 RightRank19 RightRank33" ng-click="formC.deselectAllSchools()">Deselect All</span>
+                            <span class="selectAllButton FontColor2 RightRank19 RightRank33" ng-click="formC.selectAllSchools()">Select All</span>
+                        </div>
+                        <div id="SchoolsContainer">
+                            <div ng-repeat="school in schoolList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                                <input type="checkbox" class="surverySchoolCheckbox inputRightRank19 inputRightRank33" id="{{school.SchoolID}}" ng-model="school.selection" value="{{school.SchoolID}}" ng-change="formC.checkSurveySchoolCheckboxes(school.SchoolID)" style="float:left;" />
+                                <label for="{{school.SchoolID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{school.Name}}</label>
+                            </div>
+                        </div>
+
+                        <!--<div style="clear:both"></div>
+                        <hr />
+
+                        <!-- PSSQ Header -->
+                        <!--<div class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">Pre-Survey Survey Questions</div>-->
+                        <!-- PSSQ container -->
+                        <!--<table id="PSSQContainer" class="FontColor4 PSSQrow">
+                            <tr>
+                                <th>Display Order</th>
+                                <th>Display Text</th>
+                                <th>Value Variable</th>
+                                <th>Placeholder</th>
+                                <th>Is Required?</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            <tr ng-repeat="item in pssqs" id="pssq{{item.SurveyID}}{{item.DisplayOrder}}">
+                                <td>{{item.DisplayOrder}}</td>
+                                <td>{{item.RequestText}}</td>
+                                <td>{{item.ValueVariableName}}</td>
+                                <td>{{item.PlaceholderVariableName}}</td>
+                                <td>{{item.IsRequired}}</td>
+                                <td><span class="deletePSSQ deleteRightRank19 deleteRightRank33" ng-click="formC.deletePSSQ(item.SurveyID + ',' + item.DisplayOrder)">Delete?</span></td>
+                            </tr>
+                        </table>
+
+                        <div style="clear:both"><br /></div>-->
+                        <!--<div class="FontColor4 PopUpWindowLabel RightRank19 RightRank33" style="float:none; font-size:16px;">New Pre-Survey Survey Question</div>-->
+                        <!-- Column Headers-->
+                        <!--<div class="FontColor2 PSSQrow RightRank19 RightRank33">
+                            <div>Display Order</div>
+                            <div>Request Type</div>
+                            <div>Display Text</div>
+                            <div>Is Required?</div>
+                        </div>-->
+                        <!-- New PSSQ -->
+                        <!--<form class="FontColor2 PSSQrow RightRank19 RightRank33" id="FormInputs" ng-submit="formC.submitForm()">
+                            <div>
+                                <input type="number" ng-model="pssqInfo.DisplayOrder" class="SettingsBox" name="DisplayNumber" id="nPSSQdisplayOrder" placeholder="Display Order" />
+                            </div>
+                            <div ng-if="businessrpt==true">
+                                <select name="RequestType" ng-model="pssqInfo.RequestType" class="SettingsBox FontColor3" id="nPSSQrequestType" ng-change="formC.suggestVariableNames('business')">
+                                    <option disabled selected class="FontColor3" value="">Request Type</option>
+                                    <!--<option value="B062342A-38C1-47B8-A855-689CCD8A62E7">Merchant</option>-->
+                        <!--<option value="FF0A0374-FC4E-4D99-9EA4-CBCB4E71E4D7">Site</option>
+                                <option value="11BFA2AE-D9CB-4084-AEEC-644F775D25D0">Employee</option>
+                                <option value="1AC11D81-BC04-44D6-8686-55788566D370">Group</option>
+                                <option value="332DB95C-34ED-4EAF-808C-361115A9A6D9">Department</option>
+                            </select>
+                        </div>
+                        <div ng-if="eductnrpt==true">
+                            <select name="RequestType" ng-model="pssqInfo.RequestType" class="SettingsBox FontColor3" id="nPSSQrequestType" ng-change="formC.suggestVariableNames('education')">
+                                <option disabled selected class="FontColor3">Request Type</option>
+                                <option value="8503ede7-ba45-45fb-9db7-b3d2b8332c1b">School</option>
+                                <option value="07a8026f-7c0a-4951-8bd3-45b15b29d29e">Teacher</option>
+                                <option value="625e0804-46bb-4da4-a73f-e7e57386f0e2">Grade</option>
+                                <option value="2a2a3272-18e5-402b-8d58-7c0d98b12728">Subject</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input type="text" ng-model="pssqInfo.DisplayText" name="DisplayText" placeholder="Display Text" class="SettingsBox" id="nPSSQdisplayText" />
+                        </div>
+                        <div>
+                            <input type="checkbox" ng-model="pssqInfo.IsRequired" name="IsRequired" value="true" id="nPSSQisRequired" />
+                        </div>
+
+                        <br style="clear:both" />
+
+                        <div class="FontColor2 PSSQrow" style="width:100%">
+                            <div>Value Variable Name</div>
+                            <div style="width:initial">Placeholder Variable Name</div>
+                        </div>
+
+                        <div>
+                            <input type="text" class="SettingsBox" ng-model="pssqInfo.ValueVariableName" name="ValueVariableName" id="nPSSQvalueVariableName" placeholder="e.g. siteid" />
+                        </div>
+                        <div>
+                            <input type="text" class="SettingsBox" ng-model="pssqInfo.PlaceholderVariableName" name="PlaceholderVariableName" id="nPSSQplaceholderVariableName" placeholder="e.g. sitename" />
+                        </div>-->
+                        <!-- Add New PSSQ -->
+                        <!--<section class="SaveButtonContainer RightRank19 RightRank33" style="margin-bottom: 20px;">
+                                <button value="Save" id="submitButton" class="Color7 FontColor1" style="width:200px">
+                                    <section style="margin-left:17px">
+                                        <span class="icon-TS-22 SaveButtonIcon"></span>
+                                        <span class="SaveButtonText">Add New Question</span>
+                                    </section>
+                                </button>
+                            </section>
+                        </form>-->
+
+
+                        <hr class="RightRank19 RightRank33" style="clear:both" />
+
+                        <!-- Save Button -->
+                        <div class="SaveButtonContainer RightRank19 RightRank33" style="margin-bottom: 20px;">
+                            <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1" ng-click="formC.saveFormVariables()">
+                                <div style="margin-left:17px">
+                                    <span class="icon-TS-22 SaveButtonIcon"></span>
+                                    <span class="SaveButtonText">Save</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function checkSurveyTypesRADIO(SurveyTypeID, type) {
+                var scope = angular.element(document.getElementById("FormsContainer")).scope();
+                scope.$apply(function () {
+                    scope.checkSurveyTypesRADIO(SurveyTypeID, type);
+                });
+            }
+        </script>
+    </div>
+
+    <!-- Add Survey Form -->
+    <div class="TransparentBackground  animated fadeIn" id="AddFormMenu">
+        <div class="Transparency"></div>
+        <div class="PopUpDisplay">
+            <div class="verticalalign">
+                <div class="Color3 PopUpWindow animated2 fadeIn">
+                    <!-- Top Bar -->
+                    <div class="TopBarPopUpWindow">
+                        <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                            <div class="SmallBarDisplayBox Color7">
+                                <div class="verticalalign">
+                                    <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="verticalalgin2">
+                            <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">Form - Information</label>
+                        </div>
+                        <div class="verticalalgin2">
+                            <label class="CancelLabel FontColor2" ng-click="popup.closeAddFormMenu()">Cancel</label>
+                        </div>
+                    </div>
+
+                    <!-- Form Container -->
+                    <form class="AllSettingsContainer" id="FormInputs" ng-submit="formC.CreateSurveyForm()" novalidate="novalidate" style="max-height:150px;">
+                        <center><u>Create a Blank Survey</u></center>
+                        <div class="SmallSettingContainer" style="width:100%;">
+                            <label class="FontColor4 PopUpWindowLabel">Form Title</label>
+                            <input type="text" name="SurveyTitle" id="SurveyTitle" ng-model="SurveyTitle" placeholder="Survey Title" class="SettingsBox">
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="SaveButtonContainer RightRank19 RightRank33" style="margin-bottom: 20px;">
+                            <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1" style="width: 153px;">
+                                <div style="margin-left:17px">
+                                    <span class="icon-TS-22 SaveButtonIcon"></span>
+                                    <span class="SaveButtonText">Create Survey!</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
+                    </form>
+                    <form>
+                        <div class="AllSettingsContainer" id="FormInputs" novalidate="novalidate" style="max-height:150px;">
+                            <hr size=2 noshade>
+                            <center><u>Create a Survey Using a Base</u></center>
+                            <div class="SmallSettingContainer" style="width:100%;">
+                                <label class="FontColor4 PopUpWindowLabel">Form Title</label>
+                                <input type="text" name="SurveyTitle" id="SurveyTitle" ng-model="FixedSurveyTitle" placeholder="Survey Title" class="SettingsBox">
+                            </div>
+                            <br />
+                            <input type="radio" ng-show="formC.showFormTitle" ng-model="formC.SurveyForm" name="SpecialSurveyForm" value="iAspire - RISE Evaluation Form" />
+                            <label>iAspire - RISE Evaluation Form</label><br />
+                            <input type="radio" ng-show="formC.showFormTitle" ng-model="formC.SurveyForm" name="SpecialSurveyForm" value="iAspire - Short Observation Form" />
+                            <label>iAspire - Short Observation Form</label><br />
+                            <input type="radio" ng-show="formC.showFormTitle" ng-model="formC.SurveyForm" name="SpecialSurveyForm" value="iAspire - Teacher Walkthrough Form" />
+                            <label>iAspire - Teacher Walkthrough Form</label>
+                            <input type="button" value="Create Survey!" id="submitButton" class="Color7 FontColor1" style="width: 153px;" ng-click="formC.CreateFixedSurveyForm()" />
+                            <!-- Save Button -->
+                            <div class="SaveButtonContainer RightRank19 RightRank33">
+
+                                <!-- <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1" style="width: 153px;" ng-click="formC.CreateFixedSurveyForm()"> -->
+                                <!-- <div style="margin-left:17px"> -->
+                                <!-- <span class="icon-TS-22 SaveButtonIcon"></span> -->
+                                <!-- <span class="SaveButtonText">Create Survey!</span> -->
+                                <!-- </div> -->
+                                <!-- </button> -->
+                            </div>
+                        </div><br>
+                        <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
+                    </form><br>
+                    <form class="AllSettingsContainer" id="FormInputs" ng-submit="formC.ImportXmlSurvey();" novalidate="novalidate" style="max-height:150px;">
+                        <br /><br />
+                        <hr size=2 noshade>
+                        <center><u>Create Survey by importing Form</u></center>
+                        <div class="SmallSettingContainer" style="width:100%;">
+                            <label class="FontColor4 PopUpWindowLabel">Import Form from XML</label>
+                            <input type="file" file-model="SurveyXML" name="xmlSurvey" id="xmlSurvey" class="SettingsBox" style="padding:3px;" />
+                        </div>
+                        <!-- Save Button -->
+                        <div class="SaveButtonContainer RightRank19 RightRank33" style="margin-bottom: 20px;">
+                            <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1" ng-click="formC.saveFormVariables()" style="width: 153px;">
+                                <div style="margin-left:17px">
+                                    <span class="icon-TS-22 SaveButtonIcon"></span>
+                                    <span class="SaveButtonText">Import XML</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function gotoEditor(elem) {
+                location.href = './Survey/#/editor/' + elem.getAttribute("data-surveyid");
+            }
+        </script>
+    </div>
+
+    <!------------------------------------------Active Forms by Forms Type------------------------------------->
+    <div class="TransparentBackground  animated fadeIn" id="ActiveForms">
+        <div class="Transparency"></div>
+        <div class="PopUpDisplay">
+            <div class="verticalalign">
+                <div class="Color3 PopUpWindow animated2 fadeIn">
+                    <!-- Top Bar -->
+                    <div class="TopBarPopUpWindow">
+                        <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                            <div class="SmallBarDisplayBox Color7">
+                                <div class="verticalalign">
+                                    <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="verticalalgin2">
+                            <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">Active Form - Information</label>
+                        </div>
+                        <div class="verticalalgin2">
+                            <label class="CancelLabel FontColor2" ng-click="formC.CloseActiveFormPopup()">Cancel</label>
+                        </div>
+                    </div>
+
+                    <form class="AllSettingsContainer" id="FormInputs" ng-submit="formC.CreateSurveyForm()" novalidate="novalidate" style="max-height:150px;">
+                        <center><u>List of Survey</u></center><br />
+                        <div>
+                            <table align="center" style="width: 100%;">
+                                <thead></thead>
+                                <tbody style="text-align:center;">
+                                    <tr ng-repeat="item in formC.ActiveFormList">
+                                        <td width="80%">
+                                            {{item.Title}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--------------------------------------------------------------------------------------------------------->
+
+    <div class="Color3 BigRightContainer" ng-if="formC.ArchivedForm==true">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Archived Forms</label>
+                </div>
+                <div class="verticalalign">
+                    <div class="Color7 AddNewLocation" ng-click="formC.showArchivedForm()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation" style="float:right">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Active Forms</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SeformC Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." ng-model="formC.ArchivedItem" />
+            </div>
+            <div style="clear:both;"></div>
+            <div id="FormsContainer" class="RightRank18 RightRank32">
+                <div ng-repeat="survey in formC.TEArchivedSurveyList" id="{{survey.SurveyID}}" class="EditSmallBar Color3 SeformCable" data-title="{{survey.Title}}" data-activated="{{survey.Activated}}" ng-if="show">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">{{survey.Title}}</label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <button class="EditButton Color3 FontColor2" ng-click="formC.Archive(survey.SurveyID,'restore')" ng-if="formC.acntadmin">Restore</button>
+                    </div>
+                </div>
+
+                <div ng-repeat="survey in formC.BArchivedSurveyList|filter:formC.ArchivedItem" id="{{survey.SurveyID}}" class="EditSmallBar Color3 SeformCable" data-title="{{survey.Title}}" data-activated="{{survey.Activated}}">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">{{survey.Title}}</label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <button class="EditButton Color3 FontColor2" ng-click="formC.Archive(survey.SurveyID,'restore')" ng-if="formC.acntadmin">Restore</button>
+                    </div>
+                </div>
+            </div>
+            <div class="noRightRank18 noRightRank32 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>
+    </div>
+
+

@@ -1,0 +1,49 @@
+﻿.HeadingBar, .WhiteBackgroundContainerMenu {
+    background-color: #555;
+}
+
+.TitleWrapperPosition > .TitleImageWrapper, .SMAClientAlertContainer > .Info, .SMAClientAlertContainer > .Confirm {
+    background-color: #999;
+}
+
+.BigRightContainer, .TopAdminBar, .Color3, .dl-menuwrapper li a {
+    background-color: #444;
+}
+
+.FontColor2, #themeButton, .collapseAllButton, .MerchantNameHeader, .SchoolNameHeader, .NoRolesHeader {
+    color: #eee;
+}
+
+.EditButton, .dl-menuwrapper ul {
+    color: #444;
+    background-color: #eee;
+}
+
+.FontColor4, .TemplateButton, .bulk_disclaimer, .bulk_disclaimer_list {
+    color: #FFF;
+}
+
+/*.bulk_disclaimer, .bulk_disclaimer_list {
+    color: #00A8C5;
+    font-weight: bold;
+}*/
+
+html {
+    background-color: #333;
+}
+
+.WhiteBackgroundContainerMenu {
+    border: none;
+}
+
+.EditSmallBar {
+    border-color: #666;
+}
+
+.LoginBox {
+    background-color: #777 !important;
+}
+
+.LoginBoxVA {
+    background-color: #444 !important;
+}

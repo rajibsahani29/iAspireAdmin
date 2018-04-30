@@ -1,0 +1,30 @@
+﻿<div class="Color3 TopAdminBar" ng-controller="HeaderController as headC">
+    <div class="verticalalign">
+        <div class="Trigger" style="float: left;">
+            <div class="icon-TS-19 TriggerIcon FontColor2"></div>
+        </div>
+        <div class="AdminTextContainer">
+            <div class="Color6 IconBackgroundContainer">
+                <div class="verticalalign">
+                    <div class="icon-iaspire-04 FontColor1 PersonIcon"></div>
+                </div>
+            </div>
+            <div class="TopRightTextContainer">
+                <div class="verticalalign">
+                    <label class="AdminText FontColor2" id="UserNameDisplay" onclick-route="account">{{userName}}</label>
+                </div>
+            </div>
+            <div class="TopRightTextContainer">
+                <div class="verticalalign">
+                    <label class="DividerText FontColor2">|</label>
+                </div>
+            </div>
+            <div class="TopRightTextContainer">
+                <div class="verticalalign">
+                    <label class="LogoutText FontColor2" ng-click="Logout()">Logout</label>
+                </div>
+            </div>
+            <div id="themeButton" onclick="loadDarkTheme()">Dark Theme</div>
+        </div>
+    </div>
+</div>

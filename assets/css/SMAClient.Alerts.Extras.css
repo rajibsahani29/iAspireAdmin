@@ -1,0 +1,49 @@
+﻿/* styling for Survey List popup */
+
+.SurveyRowWrapper {
+    -ms-box-orient: vertical;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+    align-items: stretch;
+}
+
+.SurveyRow {
+    position: relative;
+    text-align: left;
+    padding: 10px;
+    padding-right: 5px;
+    font-size: 20px;
+    background-color: #00BCDB;
+    box-shadow: inset 2px 0px 4px 1px rgba(0,0,0,0.5);
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.SurveyText {
+    position: relative;
+    color: white;
+}
+
+.SMAClientAlertContainer {
+    font-size: 12px;
+}
+
+/* Fablet Layout: 481px.  Inherits styles from: Mobile Layout. */
+@media only screen and (min-width: 481px) and (min-height: 585px) {
+    .SMAClientAlertContainer {
+        font-size: 14px;
+    }
+}
+
+/* Tablet Layout: 761px.  Inherits styles from: Mobile Layout and Fablet Layout. */
+@media only screen and (min-width: 761px) and (min-height: 585px) {
+    .SMAClientAlertContainer {
+        font-size: 16px;
+    }
+}

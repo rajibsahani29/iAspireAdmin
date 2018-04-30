@@ -1,0 +1,278 @@
+﻿<!-- Right Side Panel -->
+<div class="containersmall">
+    <style>
+        #RightsCheckboxContainer .SmallSettingContainer input {
+            float: left;
+        }
+
+        .SaveButtonContainer {
+            margin-top: 5px;
+        }
+
+        #submitButton {
+            width: 97px;
+            height: 34px;
+            border: none;
+            border-radius: 3px;
+            float: right;
+            display: table;
+            cursor: pointer;
+            font-family: open_sansregular;
+            text-align: center;
+        }
+
+        .SmallSettingContainer {
+            height: initial;
+            min-height: 66px;
+        }
+
+
+        .MerchantNameHeader, .SchoolNameHeader, .NoRolesHeader {
+            font-family: open_sansregular;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+
+        .MerchantNameHeader {
+            font-size: 20px;
+            font-family: open_sansbold;
+            /*text-decoration: underline;*/
+        }
+
+        .SchoolNameHeader {
+            font-size: 18px;
+            font-family: open_sansbold;
+            margin: 0 2% 10px 2%;
+        }
+
+        .NoRolesHeader {
+            font-size: 16px;
+            font-weight: initial;
+            margin: 0 3% 10px 3%;
+            height: 32px;
+        }
+
+        input[type=checkbox]:checked + label {
+            color: #00A8C5;
+            font-family: open_sansbold;
+        }
+
+        .userRoleDiv {
+            min-height: initial;
+        }
+    </style>
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Roles</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Roles</label>
+                </div>
+
+                <!-- Add Role button -->
+                <div class="verticalalign RightRank25">
+                    <div class="Color7 AddNewLocation" ng-click="popup.showMenu()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add New Role</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Between Buttons Padding -->
+                <!--<div style="float: right; width: 10px;">&nbsp;</div>-->
+                <!-- Add Roles Bulk button -->
+                <!--<div class="verticalalign isEmployee">
+                    <div class="Color7 AddNewLocation" onclick="showBulkMenu()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add Roles Bulk</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+
+            <!-- Search Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist">
+                    <option ng-repeat="item in merchantList" value="" data-name="{{item.RoleName}}" data-description="{{item.Description}}" data-merchantid="{{item.MerchantID}}" data-merchantname="{{item.MerchantName}}">
+                </datalist>
+                <select id="SearchConstraint" class="SettingsBox SearchBox">
+                    <option value="name" selected>Role Name</option>
+                    <option value="descriptipon">Description</option>
+                    <option value="schoolname">Merchant Name</option>
+                </select>
+            </div>
+            <div style="clear:both;"></div>
+
+            <div class="collapseAllButton RightRank24" ng-click="roleC.collapseAll()">- Collapse All</div>
+            <div class="collapseAllButton RightRank24" ng-click="roleC.expandAll()">+ Expand All</div>
+
+            <div style="clear:both;"></div>
+            <!-- Roles Container -->
+            <div id="RolesContainer" class="RightRank24">
+                <div ng-repeat="merchant in merchantsList">
+                    <div class='MerchantNameHeader'><span class='collapsible' id='{{merchant.MerchantID}}' ng-click='roleC.collapse(merchant.MerchantID)'> - </span>{{merchant.Name}}</div>
+                    <div ng-if="merchant.roleList.length == 0" class='NoRolesHeader Searchable' data-merchantid='{{merchant.MerchantID}}'>No roles are available for this merchant.</div>
+                    <div ng-repeat="role in merchant.roleList" id="{{role.RoleID}}" class="EditSmallBar Color3 Searchable" data-name="{{role.RoleName}}" data-description="{{role.Description}}" data-merchantid="{{role.MerchantID}}" data-merchantname="{{role.MerchantName}}"  ng-if="role.RoleName!='AccountAdmin'&& role.RoleName!='Audit-Viewer'&&role.RoleName!='Auditor'&& role.RoleName!='Peer Evaluation Viewer'">
+                             <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                                <div class="SmallBarDisplayBox Color7">
+                                    <div class="verticalalign">
+                                        <span class="icon-iaspire-04 FontColor1 IconLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="verticalalgin2">
+                                <label class="SmallBarLabel FontColor2">{{role.RoleName}}</label>
+                            </div>
+
+                            <div class="verticalalgin2">
+                                <button class="EditButton Color3 FontColor2" ng-click="popup.showMenu(role.RoleID)">Info</button>
+                            </div>                                                
+                    </div>
+                </div>
+            </div>
+            <div class="noRightRank24 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- PopUp Form -->
+<div class="TransparentBackground  animated fadeIn" id="EditMenu">
+
+    <div class="Transparency"></div>
+
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-04 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">Role - Information</label>
+                        <div class="DeleteEventContainer isEmployee" id="DeleteButton" ng-click="roleC.deleteRole()">
+                            <!-- CHANGE FUNCTION NAME-->
+                            <span class="icon-TS-21 FontColor6 DeleteEventIcon"></span>
+                            <div class="FontColor6 DeleteEventText deleteRightRank25">Delete Role?</div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" ng-click="popup.closeMenu()">Cancel</label>
+                    </div>
+                </div>
+
+                <!-- Form Container -->
+                <form class="AllSettingsContainer" id="FormInputs" ng-submit="roleC.saveForm()" >
+                    <input type="hidden" name="RoleID" ng-model="roleInfo.RoleID" value="" id="RoleIDHidden" />
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Role Name</label>
+                        <input type="text" name="RoleName" ng-model="roleInfo.RoleName" id="RoleName" placeholder="Role Name" class="SettingsBox inputRightRank25" />
+                    </div>
+
+                    <div class="SmallSettingContainer" style="float:right;">
+                        <label class="FontColor4 PopUpWindowLabel">Role Description</label>
+                        <input type="text" name="RoleDescription" ng-model="roleInfo.Description" id="RoleDescription" placeholder="Role Description" class="SettingsBox inputRightRank25" />
+                    </div>
+
+                    <!-- Merchant Select Dropdown -->
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Merchant</label>
+
+                        <!-- Merchant Select Container-->
+                        <select class="FontColor3 EditDropdownBar SettingsBox inputRightRank25" name="MerchantSelect" id="MerchantSelect" ng-model="roleInfo.MerchantID" ng-change="roleC.selectColorBlack('MerchantSelect')">
+                            <option class="FontColor3" disabled selected value="">Merchant</option>
+                            <option ng-repeat="item in merchantsList" value="{{item.MerchantID}}">{{item.Name}}</option>
+                        </select>
+                         
+                    </div>
+
+                    <div style="clear:both;"></div>
+                    <hr />
+
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px; font-family:open_sansbold">Role Rights</div>
+
+                    <!-- Rights Checkbox Container -->
+                    <div id="RightsCheckboxContainer">
+                        <div ng-repeat="objRight in roleInfo.RightList" id="RightRank{{objRight.RightID}}" class="SmallSettingContainer">
+                            <!-- style="height: 20px; min-height:20px; max-height: 20px;"-->
+                            <input type="checkbox" class="roleRightCheckbox inputRightRank25" id="{{objRight.RightID}}" ng-model="objRight.selection" ng-change="roleC.checkRoleRightsCheckboxes(objRight.RightID)" />
+                            <label for="{{objRight.RightID}}" class="FontColor4 PopUpWindowLabel" style="float:none"><b>{{objRight.RightRank}} - {{objRight.RightName}}</b> - {{objRight.Description}}</label>
+                            <!--<br style="clear:both" />-->
+                            <!--<label for="{{objRight.RightID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{objRight.Description}}</label>-->
+                        </div>
+                    </div>
+                    
+                    <div id="UserRolesContainer">
+                        <div style="clear:both"></div>
+                        <hr />
+
+                        <div class="FontColor4 PopUpWindowLabel">
+                            <span style="font-size:16px; font-family:open_sansbold;">User Roles</span>
+                            <span class="deselectAllButton FontColor2 RightRank25" ng-click="roleC.selectAllUserRoles()">Select All</span>
+                            <span class="deselectAllButton FontColor2 RightRank25" ng-click="roleC.deselectAllUserRoles()">Deselect All</span>
+                        </div>
+
+                        <!-- Users Checkbox Container -->
+                        <div id="UsersCheckboxContainer">
+                            <div ng-repeat="user in roleInfo.UserList" id="User{{user.UserID}}" class="SmallSettingContainer userRoleDiv">
+                                <input type="checkbox" class="userRoleCheckbox inputRightRank25" id="{{user.UserID}}" ng-model="user.selection" ng-change="roleC.checkUserRoleCheckboxes(user.UserID)" />
+                                <label for="{{user.UserID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{user.LastName}}, {{user.FirstName}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="SaveButtonContainer RightRank25" style="margin-bottom: 20px;">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="noRightRank25" style="clear:both;height:30px;"></div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

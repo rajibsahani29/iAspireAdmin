@@ -1,0 +1,565 @@
+﻿<!-- Right Side Panel -->
+<div class="containersmall">
+    <style>
+        .abtn {
+            height: auto;
+            width: auto;
+            padding: 0px 10px;
+        }
+
+        .btn1 {
+            margin-top: 5px;
+        }
+
+        #ClassesCheckboxContainer .SmallSettingContainer input {
+            float: left;
+        }
+
+        #ClassesCheckboxContainer .SmallSettingContainer label {
+            font-weight: 500;
+        }
+
+        .SaveButtonContainer {
+            margin-top: 5px;
+        }
+
+        #submitButton {
+            width: 97px;
+            height: 34px;
+            border: none;
+            border-radius: 3px;
+            float: right;
+            display: table;
+            cursor: pointer;
+            font-family: open_sansregular;
+            text-align: center;
+        }
+
+        .SmallSettingContainer {
+            height: initial;
+            min-height: 66px;
+        }
+
+        .MerchantNameHeader, .NoTeachersHeader {
+            font-family: open_sansregular;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+
+        .MerchantNameHeader {
+            font-size: 20px;
+            font-weight: 700;
+            /*text-decoration: underline;*/
+        }
+
+        .NoUsersHeader {
+            font-size: 16px;
+            font-weight: initial;
+            margin: 0 3% 10px 3%;
+            height: 32px;
+        }
+
+        .MerchantContainer {
+            /*margin-right: 20px;*/
+            width: 100%;
+        }
+
+            .MerchantContainer .SmallSettingContainer {
+                float: none;
+                display: inline-block;
+            }
+
+        .tab {
+            background-color: white;
+            border: solid 2px grey;
+            padding: 1px 5px 0 5px;
+            border-radius: 10px 10px 0px 0px;
+            border-bottom: none;
+        }
+
+        input[type=checkbox]:checked + label {
+            color: #00A8C5;
+            font-family: open_sansbold;
+        }
+
+        .TeacherContainer, .SchoolContainer, .RoleContainer {
+            margin-left: 50px;
+        }
+
+            .TeacherContainer label, .SchoolContainer label, .RoleContainer label {
+                font-weight: initial;
+            }
+
+        .ContainerHeader {
+            float: none;
+            font-size: 14px;
+            margin: 3px 0 0 -6px;
+        }
+
+        .MerchantContainerHeader {
+            cursor: pointer;
+        }
+
+        .toggleButton {
+            float: right;
+            cursor: pointer;
+        }
+
+        #changePassword, #changeTeacher {
+            font-family: open_sansbold;
+            text-align: center;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        #TeacherSelectContainer_chosen {
+            display: none;
+            font-family: open_sansregular;
+        }
+
+        .SmallBarLabel span {
+            font-size: 12px;
+        }
+
+        *:checked + label {
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Users</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Users</label>
+                </div>
+
+                <!-- Add User Button -->
+                <div class="verticalalign RightRank7">
+                    <div class="Color7 AddNewLocation" ng-click="popup.showMenu()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add New User</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Between Buttons Padding -->
+                <div style="float: right; width: 10px;">&nbsp;</div>
+
+                <!-- Add Users Bulk button -->
+                <div class="verticalalign RightRank7">
+                    <div class="Color7 AddNewLocation" id="showBulkMenu" ng-click="popup.showBulkMenu()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add Users Bulk</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Search Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist">
+                    <option ng-repeat="user in userList" value="" data-username="{{user.UserName}}" data-fullname="{{user.FirstName}} {{user.LastName}}" data-email="{{user.Email}}">
+                </datalist>
+                <select id="SearchConstraint" class="SettingsBox SearchBox">
+                    <option value="fullname" selected>User's Full Name</option>
+                    <option value="username">Email / Username</option>
+                </select>
+            </div>
+
+            <div style="clear:both;"></div>
+
+            <!--<div class="collapseAllButton" onclick="collapseAll()">- Collapse All</div>
+            <div class="collapseAllButton" onclick="expandAll()">+ Expand All</div>
+
+            <div style="clear:both;"></div>-->
+            <!-- Users Container -->
+            <div id="UsersContainer" class="RightRank6">
+                <div ng-repeat="user in userList" id="{{user.UserID}}" class="EditSmallBar Color3 Searchable" data-username="{{user.UserName}}" data-firstname="{{user.FirstName}}" data-lastname="{{user.LastName}}" data-fullname="{{user.LastName}}, {{user.FirstName}}" data-email="{{user.Email}}" data-merchantid="{{user.MerchantID}}" data-teacherid="{{user.userTeacher.TeacherID}}">
+                    <div id="teacher_{{user.userTeacher.TeacherID}}" class="EditSmallBar Color3" data-userid="{{user.UserID}}" data-firstname="{{user.FirstName}}" data-lastname="{{user.LastName}}" data-email="{{user.Email}}" data-merchantid="{{user.MerchantID}}" ></div>
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div ng-if="user.userState == 'inactive'" class="SmallBarDisplayBox" style="background-color:#c51d00">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-05 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                        <div ng-if="user.userState != 'inactive'" class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-05 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">
+                            <span ng-if="user.userState == 'inactive'" style="font-size:inherit;color:#c51d00;">{{user.UserName}}</span>
+                            {{user.userState != 'inactive'? user.UserName : ""}}
+                            <br />
+                            <span>{{user.LastName}}, {{user.FirstName}}</span>
+                        </label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <button class="abtn EditButton Color3 FontColor2" ng-click="popup.showMenu(user.UserID)">Info</button></br>
+                        <button class="abtn btn1 EditButton Color3 FontColor2" ng-if="user.userTeacher.TeacherID != ''" ng-click="popup.showDeptMenu(user.userTeacher.TeacherID)" style="width:109px">Department</button>
+                    </div>
+                </div>
+            </div>
+            <div class="noRightRank6 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>
+    </div>
+</div>
+<!-- PopUp Form -->
+<div class="TransparentBackground animated fadeIn" id="EditMenu">
+
+    <div class="Transparency"></div>
+
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-05 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">{{popup.title}}</label>
+                        <div class="DeleteEventContainer isEmployee deleteRightRank7" ng-if="popup.showDeleteButton == true" id="DeleteButton" ng-click="userC.deactivateUser()">
+                            <div class="FontColor6 DeleteEventText">Deactivate User?</div>
+                        </div>
+                        <!--<span class="icon-TS-21 FontColor6 DeleteEventIcon"></span>-->
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" ng-click="popup.closeMenu()">Cancel</label>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <form class="AllSettingsContainer" id="FormInputs" ng-submit="userC.submitForm();">
+
+                    <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+                    <input style="display:none" type="text" name="fakeusernameremembered" />
+                    <input style="display:none" type="password" name="fakepasswordremembered" />
+
+                    <input type="hidden" name="UserID" ng-model="userInfo.UserID" value="" id="UserIDHidden" />
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Email/Username</label>
+                        <input type="text" name="UserEmail" ng-model="userInfo.Email" id="UserEmail" placeholder="Email" class="SettingsBox inputRightRank7" />
+                    </div>
+
+                    <div class="SmallSettingContainer" style="float:right">
+                        <label class="FontColor4 PopUpWindowLabel" ng-hide="true">Password</label>
+                        <input ng-hide="true"  type="password" name="UserPassword" ng-if="popup.showChangePassword == true" ng-model="userInfo.Password" id="UserPassword" placeholder="Password" class="SettingsBox inputRightRank7" />
+                        <div ng-hide="true" id="changePassword" class="FontColor5 deleteRightRank7" ng-click="userC.togglePasswordInput()">{{popup.changePasswordText}}</div>
+                    </div>
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">First Name</label>
+                        <input type="text" name="UserFirstName" ng-model="userInfo.FirstName" id="UserFirstName" placeholder="First Name" class="SettingsBox inputRightRank7" />
+                    </div>
+
+                    <div class="SmallSettingContainer" style="float:right">
+                        <label class="FontColor4 PopUpWindowLabel">Last Name</label>
+                        <input type="text" name="UserLastName" ng-model="userInfo.LastName" id="UserLastName" placeholder="Last Name" class="SettingsBox inputRightRank7" />
+                    </div>
+
+                    <!--<div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Account</label>                       
+                        <select class="FontColor3 EditDropdownBar SettingsBox inputRightRank13" name="MerchantSelect" id="MerchantSelect"
+                                ng-model="userInfo.MerchantID"
+                                ng-change="userC.selectColorBlack('MerchantSelect')">
+                            <option class="FontColor3" disabled selected value="">Account</option>
+                            <option ng-repeat="merchant in userInfo.merchantList" value="{{merchant.MerchantID}}">{{merchant.Name}}</option>
+                        </select>
+                    </div>-->
+
+                    <!-- Merchant Select Dropdown -->
+                    <!--<div class="SmallSettingContainer" style="float:right;">
+                        <label class="FontColor4 PopUpWindowLabel">District</label>
+                        <select class="FontColor3 EditDropdownBar SettingsBox" name="MerchantSelect" id="MerchantSelect" onchange="selectColorBlack('MerchantSelect')">
+                            <option class="FontColor3" disabled selected value="">District</option>
+                        </select>
+                        <script type="text/x-jsrender" id="MerchantOptionTemplate">
+                            <option value="{{:MerchantID}}">{{:Name}}</option>
+                        </script>
+                    </div>-->
+
+                    <div style="clear:both"></div>
+                    <hr />
+                    <!-- Merchan
+                    ts Container -->
+                    <div class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px">Merchants <span class="toggleButton" ng-click="userC.toggleAllContainers()">Expand/Collapse All</span></div>
+                    <div id="MerchantsContainer">
+                        <div ng-repeat="merchant in userInfo.merchantList" id="merchant{{merchant.MerchantID}}" class="MerchantContainer" style="clear:both;padding-top:10px;">
+                            <div class="MerchantContainerHeader" style="height:20px;">
+                                <input type="checkbox" class="merchantCheckbox merchantID{{merchant.MerchantID}} inputRightRank7" id="{{merchant.MerchantID}}" value="{{merchant.MerchantID}}" style="float:left;height:16px;width:16px;" ng-model="merchant.selection" ng-change="userC.loadMerchantInfo(merchant.MerchantID)" hidden/>
+                                <label for="{{merchant.MerchantID}}" class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">{{merchant.Name}}</label>
+                            </div>
+                            <div ng-if="merchant.selection == true" id="RoleContainerFor{{merchant.MerchantID}}" class="RoleContainer">
+                                <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseRoles{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseRoles(merchant.MerchantID)"> - </span>Roles<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllRoles(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllRoles(merchant.MerchantID)">Deselect All</span></div>
+                                <div ng-if="merchant.roleList.length > 0" ng-repeat="role in merchant.roleList" class="SmallSettingContainer collapsibleRole" data-merchantid="{{role.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                                    <input type="checkbox" class="userRoleCheckbox merchantID{{role.MerchantID}} inputRightRank7" id="{{role.RoleID}}" value="{{role.RoleID}}" ng-model="role.selection" ng-change="userC.checkUserRoleCheckboxes(role.RoleID)" style="float:left" data-merchantid="{{role.MerchantID}}" data-rolename="{{role.RoleName}}" />
+                                    <label for="{{role.RoleID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{role.RoleName}}</label>
+                                </div>
+                                <div ng-if="merchant.roleList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="{{merchant.MerchantID }}" style="margin:8px 16px;font-weight:initial;">There are no roles for this Merchant.</div>
+                            </div>
+                            <div ng-if="merchant.selection == true" id="SchoolContainerFor{{merchant.MerchantID}}" class="SchoolContainer">
+                                <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseSchools{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseSchools(merchant.MerchantID)"> - </span>Sites<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllSchools(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllSchools(merchant.MerchantID)">Deselect All</span></div>
+                                <div ng-if="merchant.schoolList.length > 0" ng-repeat="schooll in merchant.schoolList" class="SmallSettingContainer collapsibleSchool" data-merchantid="{{schooll.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                                    <input type="checkbox" class="userSchoolCheckbox merchantID{{schooll.MerchantID}} inputRightRank7" ng-model="schooll.selection" id="{{schooll.SchoolID}}" value="{{schooll.SchoolID}}" ng-change="userC.checkUserSchoolCheckboxes(schooll.SchoolID)" style="float:left" data-merchantid="{{schooll.MerchantID}}" />
+                                    <label for="{{schooll.SchoolID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{schooll.Name}}</label>
+                                </div>
+                                <div ng-if="merchant.schoolList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no sites for this Merchant.</div>
+                            </div>
+                            <div ng-if="merchant.selection == true" id="TeacherContainerFor{{merchant.MerchantID}}" class="TeacherContainer">
+                                <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseTeachers{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseTeachers(merchant.MerchantID)"> - </span>Employees<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllTeachers(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllTeachers(merchant.MerchantID)">Deselect All</span></div>
+                                <div ng-if="merchant.teacherList.length > 0" ng-repeat="teacher in merchant.teacherList" class="SmallSettingContainer collapsibleTeacher" data-merchantid="{{teacher.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                                    <input type="checkbox" class="userTeacherCheckbox merchantID{{teacher.MerchantID}} inputRightRank7" id="{{teacher.TeacherID}}" value="{{teacher.TeacherID}}" data-teacherid="{{teacher.TeacherID}}" data-teachername="{{teacher.LastName}}, {{teacher.FirstName}}" ng-model="teacher.selection" ng-change="userC.checkUserTeacherAccessCheckboxes(teacher.TeacherID)" style="float:left" data-merchantid="{{teacher.MerchantID}}" />
+                                    <label for="{{teacher.TeacherID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{teacher.LastName}}, {{teacher.FirstName}}</label>
+                                </div>
+                                <div ng-if="merchant.teacherList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no employees for this Merchant.</div>
+                            </div>                            
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="SaveButtonContainer RightRank7" style="margin-bottom: 20px;">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bulk Menu Pop Up Form -->
+<div class="TransparentBackground animated fadeIn" id="BulkMenu">
+    <div class="Transparency"></div>
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-05 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2">Bulk Users Upload</label><!-- CHANGE THE NAME -->
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" id="CancelLabel" ng-click="popup.closeBulkMenu()">Close</label>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <form id="BulkForm" class="AllSettingsContainer" ng-submit="userC.submitBulkForm();">
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">File</label>
+                        <input type="file" name="BulkFile" id="BulkFile" class="SettingsBox" style="padding: 3px;" />
+                    </div>
+
+                    <div class="SmallSettingContainer" style="float:right">
+                        <br />
+                        <!--<label class="FontColor4 PopUpWindowLabel">
+                            <span style="float:left">Are users employees?</span>
+                            <input type="checkbox" id="AreTeachers" style="float:left" />
+                        </label>-->
+                    </div>
+
+                    <a href="templates/users.xls" class="TemplateButton" style="float:left">Need a Template?</a>
+                    <br />
+                    <span class="masterSelectButton FontColor2" ng-click="userC.selectAll_selectAll()">Select All</span>
+                    <span class="masterSelectButton FontColor2" ng-click="userC.selectAll_deselectAll()">Deselect All</span>
+
+                    <div style="clear:both"></div>
+                    <hr />
+
+                    <!-- Merchants Container -->
+                    <div id="BulkMerchantsContainer">
+                        <div ng-repeat="merchant in userInfo.merchantList" id="bulkMerchant{{merchant.MerchantID}}" class="MerchantContainer" style="clear:both;padding-top:10px;">
+                            <div class="MerchantContainerHeader" style="height:20px;">
+                                <input type="checkbox" class="merchantCheckbox bulkMerchantID{{merchant.MerchantID}}" id="bulk{{merchant.MerchantID}}" value="{{merchant.MerchantID}}" style="float:left;height:16px;width:16px;" ng-model="merchant.selection" ng-change="userC.loadBulkMerchantInfo('{{merchant.MerchantID}}')" hidden/>
+                                <label for="bulk{{merchant.MerchantID}}" class="FontColor4 PopUpWindowLabel" style="float:none; font-size:16px;">{{merchant.Name}}</label>
+                            </div>
+                            <div ng-if="merchant.selection == true" id="BulkRoleContainerFor{{merchant.MerchantID}}" class="RoleContainer">
+                                <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseRoles{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseRoles(merchant.MerchantID)"> - </span>Roles<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllRoles(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllRoles(merchant.MerchantID)">Deselect All</span></div>
+                                <div ng-if="merchant.roleList.length > 0" ng-repeat="role in merchant.roleList" class="SmallSettingContainer collapsibleRole" data-merchantid="{{role.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                                    <input type="checkbox" class="userRoleCheckbox BulkMerchantID{{role.MerchantID}}" id="bulk{{role.RoleID}}" value="{{role.RoleID}}" ng-model="role.selection" ng-change="userC.checkUserRoleCheckboxes('bulk'+role.RoleID)" style="float:left" />
+                                    <label for="bulk{{role.RoleID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{role.RoleName}}</label>
+                                </div>
+                                <div ng-if="merchant.roleList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no roles for this Merchant.</div>
+                            </div>
+                            <div ng-if="merchant.selection == true" id="BulkSchoolContainerFor{{merchant.MerchantID}}" class="SchoolContainer">
+                                <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseSchools{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseSchools(merchant.MerchantID)"> - </span>Sites<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllSchools(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllSchools(merchant.MerchantID)">Deselect All</span></div>
+                                <div ng-if="merchant.schoolList.length > 0" ng-repeat="schooll in merchant.schoolList" class="SmallSettingContainer collapsibleSchool" data-merchantid="{{schooll.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                                    <input type="checkbox" class="userSchoolCheckbox BulkMerchantID{{schooll.MerchantID}}" id="bulk{{schooll.SchoolID}}" value="{{schooll.SchoolID}}" ng-model="schooll.selection" ng-change="userC.checkUserSchoolCheckboxes('bulk'+schooll.SchoolID)" style="float:left" />
+                                    <label for="bulk{{schooll.SchoolID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{schooll.Name}}</label>
+                                </div>
+                                <div ng-if="merchant.schoolList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no sites for this Merchant.</div>
+                            </div>
+                            <div ng-if="merchant.selection == true" id="BulkTeacherContainerFor{{merchant.MerchantID}}" class="TeacherContainer">
+                                <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseTeachers{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseTeachers(merchant.MerchantID)"> - </span>Employees<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllTeachers(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllTeachers(merchant.MerchantID)">Deselect All</span></div>
+                                <div ng-if="merchant.teacherList.length > 0" ng-repeat="teacher in merchant.teacherList" class="SmallSettingContainer collapsibleTeacher" data-merchantid="{{teacher.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                                    <input type="checkbox" class="userTeacherCheckbox BulkMerchantID{{teacher.MerchantID}}" id="bulk{{teacher.TeacherID}}" value="{{teacher.TeacherID}}" data-teacherid="{{teacher.TeacherID}}" data-teachername="{{teacher.LastName}}, {{teacher.FirstName}}" ng-model="teacher.selection" ng-change="userC.checkUserTeacherAccessCheckboxes('bulk'+teacher.TeacherID)" style="float:left" />
+                                    <label for="bulk{{teacher.TeacherID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{teacher.LastName}}, {{teacher.FirstName}}</label>
+                                </div>
+                                <div ng-if="merchant.teacherList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no employees for this Merchant.</div>
+                            </div>                            
+                        </div>
+                    </div>
+
+                    <div class="SaveButtonContainer RightRank7" style="margin-bottom: 20px;">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Department Pop Up Form -->
+<div class="TransparentBackground  animated fadeIn" id="DeptMenu">
+    <div class="Transparency"></div>
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-09 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">User - Information</label>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" ng-click="popup.closeDeptMenu()">Close</label>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <form class="AllSettingsContainer" id="FormInputs" ng-submit="userC.submitDepartmentForm();">
+
+                    <input type="hidden" name="DeptTeacherIDHidden" ng-model="userInfo.UserID" value="" id="DeptTeacherIDHidden" />
+
+                    <!-- Merchant Select Dropdown -->
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">District</label>
+
+                        <!-- Merchant Select Container-->
+                        <select class="FontColor3 EditDropdownBar SettingsBox inputRightRank13" name="DeptMerchantSelect" id="DeptMerchantSelect"
+                                ng-model="userInfo.MerchantID"
+                                ng-change="userC.setDepartmentMerchant()">
+                            <option class="FontColor3" disabled selected value="">District</option>
+                            <option ng-repeat="merchant in userInfo.merchantList" value="{{merchant.MerchantID}}">{{merchant.Name}}</option>
+                        </select>
+                    </div>
+
+                    <div style="clear:both;"></div>
+                    <hr />
+
+                    <div class="FontColor4 PopUpWindowLabel">Departments</div>
+
+                    <!-- Class Container -->
+                    <div id="ClassesCheckboxContainer">
+                        <div ng-repeat="school in DeptSchoolList">
+                            <div class="{{school.SchoolID}} FontColor4 PopUpWindowLabel"><br />{{school.Name}}<span class="selectAllButton FontColor2 RightRank13" ng-click="userC.selectAllDeptSchool(school.SchoolID)">Select All</span><span class="deselectAllButton FontColor2 RightRank13" ng-click="userC.deselectAllDeptSchool(school.SchoolID)">Deselect All</span></div>
+                            <div ng-repeat="objclass in school.classList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                                <input type="checkbox" class="teacherClassCheckbox schoolID{{objclass.SchoolID}} inputRightRank13" id="{{objclass.ClassID}}" value="{{objclass.ClassID}}" ng-model="objclass.selection" ng-change="userC.checkTeacherClassCheckboxes(objclass.ClassID)" />
+                                <label for="{{objclass.ClassID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{objclass.Name}}</label>
+                            </div>
+                            <div ng-if="school.classList.length == 0" class='{{school.SchoolID}} FontColor4 PopUpWindowLabel'><br />{{school.Name}}</div>
+                            <div ng-if="school.classList.length == 0" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; margin: 5px 0 5px 10px;"><label class="FontColor4 PopUpWindowLabel" style="float:none">No departments available for this site.</label></div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="SaveButtonContainer RightRank13" style="margin-bottom: 20px;">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="noRightRank13" style="clear:both;height:30px;"></div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

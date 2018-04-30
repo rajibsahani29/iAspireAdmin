@@ -1,0 +1,178 @@
+﻿<!-- Right Side Panel -->
+<div class="containersmall">
+    <style>
+        .FormsTitleHeader {
+            font-size: 20px;
+            font-family: open_sansbold;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+
+        .EditSmallBar {
+            width: 98%;
+        }
+
+        .SaveButtonContainer {
+            margin-top: 5px;
+        }
+
+        #submitButton {
+            width: 97px;
+            height: 34px;
+            border: none;
+            border-radius: 3px;
+            float: right;
+            display: table;
+            cursor: pointer;
+            font-family: open_sansregular;
+            text-align: center;
+        }
+
+        .PSSQrow {
+            font-family: open_sansregular;
+            width: 100%;
+            margin-left: 3px;
+        }
+
+            .PSSQrow div {
+                display: inline-block;
+                width: 24%;
+                margin-right: 1%;
+                float: left;
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+
+            .PSSQrow input[type=checkbox] {
+                margin: 9.5px 0 0 10px;
+            }
+
+            .PSSQrow .DeletePSSQ {
+                margin-top: 6px;
+                float: right;
+                color: red;
+                cursor: pointer;
+            }
+
+        .AddNewQuestion {
+            cursor: pointer;
+            float: right;
+            font-family: open_sansbold;
+            margin: 5px 0 10px 0;
+            font-size: 14px;
+        }
+
+        #PSSQContainer td, #PSSQContainer th {
+            width: 16.6%;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        #PSSQContainer td {
+            padding-left: 5px;
+        }
+
+        #PSSQContainer {
+            border-spacing: 0;
+        }
+
+        .deletePSSQ {
+            cursor: pointer;
+            color: red;
+            font-family: open_sansbold;
+        }
+
+        .selectAllButton .deselectAllButton {
+            font-size: 14px;
+        }
+
+        input[type=checkbox]:checked + label, input[type=radio]:checked + label {
+            color: #00A8C5;
+            font-family: open_sansbold;
+        }
+    </style>
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Forms</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Active Forms</label>
+                </div>
+                
+            </div>
+
+            <!-- Search Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist"></datalist>
+                <select id="SearchConstraint" class="SettingsBox SearchBox">
+                    <option value="title" selected>Form Title</option>
+                </select>
+
+            </div>
+
+            <!-- Datalist Option Template -->
+            <script id="DatalistTemplate" type="text/x-jsrender">
+                <option value="" data-title="{{:Title}}">
+            </script>
+
+            <div style="clear:both;"></div>
+            <div id="FormsContainer" class="RightRank18 RightRank32">
+                <div ng-repeat="survey in arcH.EducationLst" id="{{survey.SurveyID}}" class="EditSmallBar Color3 Searchable" data-title="{{survey.Title}}" data-activated="{{survey.Activated}}" ng-if="show">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">{{survey.Title}}</label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <button class="EditButton Color3 FontColor2" ng-click="arcH.Archive(survey.SurveyID)" ng-if="arcH.acntadmin">Restore</button>
+                    </div>
+                </div>
+
+                <div ng-repeat="survey in arcH.BSurveyList" id="{{survey.SurveyID}}" class="EditSmallBar Color3 Searchable" data-title="{{survey.Title}}" data-activated="{{survey.Activated}}">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-03 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">{{survey.Title}}</label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <button class="EditButton Color3 FontColor2" ng-click="arcH.Archive(survey.SurveyID)" ng-if="arcH.acntadmin">Restore</button>
+                    </div>
+                </div>
+            </div>
+            <div class="noRightRank18 noRightRank32 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>
+    </div>
+</div>

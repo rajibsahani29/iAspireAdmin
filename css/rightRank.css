@@ -1,0 +1,16 @@
+﻿.RightRank1, .RightRank2, .RightRank3, .RightRank4, .RightRank5, .RightRank6, .RightRank7, .RightRank8, .RightRank9, .RightRank10, .RightRank11, .RightRank12, .RightRank13, .RightRank14, .RightRank15, .RightRank16, .RightRank17, .RightRank18, .RightRank19, .RightRank20, .RightRank21, .RightRank22, .RightRank23, .RightRank24, .RightRank25, .RightRank26, .RightRank27, .RightRank28, .RightRank29, .RightRank30, .RightRank31, .RightRank32, .RightRank33, .RightRank34, .RightRank35, .RightRank36, .RightRank37, .RightRank38, .RightRank39, .RightRank40, .RightRank41 {
+    display: none;
+}
+
+.inputRightRank1, .inputRightRank2, .inputRightRank3, .inputRightRank4, .inputRightRank5, .inputRightRank6, .inputRightRank7, .inputRightRank8, .inputRightRank9, .inputRightRank10, .inputRightRank11, .inputRightRank12, .inputRightRank13, .inputRightRank14, .inputRightRank15, .inputRightRank16, .inputRightRank17, .inputRightRank18, .inputRightRank19, .inputRightRank20, .inputRightRank21, .inputRightRank22, .inputRightRank23, .inputRightRank24, .inputRightRank25, .inputRightRank26, .inputRightRank27, .inputRightRank28, .inputRightRank29, .inputRightRank30, .inputRightRank31, .inputRightRank32, .inputRightRank33, .inputRightRank34, .inputRightRank35, .inputRightRank36, .inputRightRank37, .inputRightRank38, .inputRightRank39, .inputRightRank40, .inputRightRank41 {
+    pointer-events: none;
+}
+
+.inputRightRank1+ label, .inputRightRank2+ label, .inputRightRank3+ label, .inputRightRank4+ label, .inputRightRank5+ label, .inputRightRank6+ label, .inputRightRank7+ label, .inputRightRank8+ label, .inputRightRank9+ label, .inputRightRank10+ label, .inputRightRank11+ label, .inputRightRank12+ label, .inputRightRank13+ label, .inputRightRank14+ label, .inputRightRank15+ label, .inputRightRank16+ label, .inputRightRank17+ label, .inputRightRank18+ label, .inputRightRank19+ label, .inputRightRank20+ label, .inputRightRank21+ label, .inputRightRank22+ label, .inputRightRank23+ label, .inputRightRank24+ label, .inputRightRank25+ label, .inputRightRank26+ label, .inputRightRank27+ label, .inputRightRank28+ label, .inputRightRank29+ label, .inputRightRank30+ label, .inputRightRank31+ label, .inputRightRank32+ label, .inputRightRank33+ label, .inputRightRank34+ label, .inputRightRank35+ label, .inputRightRank36+ label, .inputRightRank37+ label, .inputRightRank38+ label, .inputRightRank39+ label, .inputRightRank40+ label, .inputRightRank41 + label {
+    pointer-events: none;
+}
+
+.deleteRightRank1, .deleteRightRank2, .deleteRightRank3, .deleteRightRank4, .deleteRightRank5, .deleteRightRank6, .deleteRightRank7, .deleteRightRank8, .deleteRightRank9, .deleteRightRank10, .deleteRightRank11, .deleteRightRank12, .deleteRightRank13, .deleteRightRank14, .deleteRightRank15, .deleteRightRank16, .deleteRightRank17, .deleteRightRank18, .deleteRightRank19, .deleteRightRank20, .deleteRightRank21, .deleteRightRank22, .deleteRightRank23, .deleteRightRank24, .deleteRightRank25, .deleteRightRank26, .deleteRightRank27, .deleteRightRank28, .deleteRightRank29, .deleteRightRank30, .deleteRightRank31, .deleteRightRank32, .deleteRightRank33, .deleteRightRank34, .deleteRightRank35, .deleteRightRank36, .deleteRightRank37, .deleteRightRank38, .deleteRightRank39, .deleteRightRank40, .deleteRightRank41 {
+    visibility: hidden;
+    pointer-events: none;
+}

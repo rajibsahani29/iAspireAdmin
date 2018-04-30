@@ -1,0 +1,57 @@
+﻿<!-- CSS Files -->
+<div class="LoginBoxVA">
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            display: table;
+        }
+
+        label.error {
+            width: 100%;
+            display: block;
+            text-align: center;
+            color: red;
+            font-family: open_sansregular;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <div class="verticalalign">
+        <div class="LoginBox Color1 animated3 zoomIn">
+            <form id="LoginForm" action="JavaScript:validateLogin();">
+                <div class="LogoContainer">
+                    <div class="InformationBox">
+                        <div class="PictureContainer">
+                            <img src="images/MainLogo.png" width="803" height="212" />
+                        </div>
+                    </div>
+                </div>
+                <div class="TextboxContainer">
+                    <div class="InformationBox">
+                        <input type="text" id="userLoginUserName" name="userLoginUserName" placeholder="Login ID"  
+                               data-ng-keypress="loginC.keyPressedEmail($event);" class="LoginTextbox FontColor3" data-ng-model="loginC.UserLoginUserName" removengemailvalidation />
+                    </div>
+                </div>
+                <div class="TextboxContainer">
+                    <div class="InformationBox">
+                        <input type="password" id="userLoginPassword" name="userLoginPassword" placeholder="Password" class="LoginTextbox FontColor3" 
+                                data-ng-keypress="loginC.keyPressedPassword($event);"
+                                data-ng-model="loginC.UserLoginPassword"/>
+                    </div>
+                </div>
+                <div class="LoginTextContainer">
+                    <div class="InformationBox">
+                        <input type="button" class="FontColor1 Color7 LoginButton" value="Log In" 
+                                data-ng-disabled="loginC.userClickedButton == true"
+                                data-ng-click="loginC.Login();"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="TransparentBackground  animated fadeIn" id="EditMenu">
+    <div class="Transparency"></div>
+</div>

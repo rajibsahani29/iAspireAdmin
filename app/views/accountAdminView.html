@@ -1,0 +1,280 @@
+﻿<style>
+    @-webkit-keyframes rotate {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    #circle_spinner {
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 0.8s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+    }
+
+    .SaveButtonContainer {
+        margin-top: 5px;
+    }
+
+    #submitButton {
+        width: 97px;
+        height: 34px;
+        border: none;
+        border-radius: 3px;
+        float: right;
+        display: table;
+        cursor: pointer;
+        font-family: open_sansregular;
+        text-align: center;
+    }
+
+    .SmallSettingContainer {
+        height: initial;
+        min-height: 53px;
+    }
+
+    label.error {
+        color: red;
+        font-family: open_sansregular;
+        font-size: 12px;
+        float: left;
+    }
+</style>
+
+<div class="containersmall">
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Accounts - Admin</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a style="text-decoration:none;" class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu" style="overflow-y:auto;">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <!--<div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Districts</label>
+                </div>-->
+                <!-- Add Account button -->
+                <div class="verticalalign isEmployee">
+                    <div class="Color7 AddNewLocation" ng-click="aaC.showMenu()" style="float:none;margin:15px auto 0 auto;">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add New Account</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Search Box -->
+            <!--<input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+            <datalist id="Datalist"></datalist>
+
+            <select id="SearchConstraint" class="SettingsBox SearchBox">
+                <option value="name" selected>Merchant Name</option>
+                <option value="state">State</option>
+                <option value="county">County</option>
+                <option value="contactname">ContactName</option>
+            </select>-->
+            <!-- Datalist Option Template -->
+            <!--<script id="DatalistTemplate" type="text/x-jsrender">
+                <option value="" data-name="{{:Name}}" data-state="{{:State}}" data-county="{{:County}}" data-contactname="{{:ContactName}}">
+            </script>-->
+            <!-- Datalist Option Template -->
+            <!-- Merchants Container -->
+            <!--<div id="MerchantContainer"></div>-->
+            <!-- Merchant Template -->
+            <!--<script id="MerchantTemplate" type="text/x-jsrender">
+                <div class="EditSmallBar Color3 Searchable" data-name="{{:Name}}" data-state="{{:State}}" data-county="{{:County}}" data-contactname="{{:ContactName}}">
+
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-04 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">{{:Name}}</label>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <button class="EditButton Color3 FontColor2" onclick="showMenu('{{:MerchantID}}')">Info</button>
+                    </div>
+
+                </div>
+            </script>-->
+            <!-- Item Container Template -->
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Edit Menu Pop Up Form -->
+<div class="TransparentBackground  animated fadeIn" id="EditMenu">
+    <div class="Transparency"></div>
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-04 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">District - Information</label>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" ng-click="aaC.closeMenu()">Close</label>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <form class="AllSettingsContainer" id="FormInputs" ng-submit="aaC.submitForm()">
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Customer ID</label>
+                        <input type="number" name="CustomerID" id="CustomerID" ng-model="AccountAdminInfo.CustomerID" placeholder="Customer ID" class="SettingsBox" />
+                    </div>
+
+                    <!--<input type="hidden" name="MerchantID" value="" id="MerchantIDHidden" />-->
+
+                    <div class="SmallSettingContainer" style="float: right;">
+                        <label class="FontColor4 PopUpWindowLabel">District Name</label>
+                        <input type="text" name="AccountName" id="AccountName" ng-model="AccountAdminInfo.AccountName" placeholder="Account Name" class="SettingsBox" />
+                    </div>
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">State</label>
+                        <select class="FontColor3 EditDropdownBar SettingsBox" id="StateSelect" ng-model="AccountAdminInfo.StateSelect" name="StateSelect" onchange="selectColorBlack('StateSelect')">
+                            <option class="FontColor3" disabled selected value="">State</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+
+                    <div class="SmallSettingContainer" style="float: right;">
+                        <label class="FontColor4 PopUpWindowLabel">County</label>
+                        <input type="text" name="County" id="County" ng-model="AccountAdminInfo.County" placeholder="County" class="SettingsBox" />
+                    </div>
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Contact Name</label>
+                        <input type="text" name="ContactName" id="ContactName" ng-model="AccountAdminInfo.ContactName" placeholder="Contact Name" class="SettingsBox" />
+                    </div>
+
+                    <div class="SmallSettingContainer" style="float: right;">
+                        <label class="FontColor4 PopUpWindowLabel">Contact Email</label>
+                        <input type="text" name="ContactEmail" id="ContactEmail" ng-model="AccountAdminInfo.ContactEmail" placeholder="Contact Email" class="SettingsBox" />
+                    </div>
+
+                    <!--<div class="SmallSettingContainer" style="float: right;">
+                        <label class="FontColor4 PopUpWindowLabel">Expiration Date</label>
+                        <input type="date" name="ExpirationDate" id="ExpirationDate" class="FontColor3 DatePicker SettingsBox" onchange="selectColorBlack('ExpirationDate')" />
+                    </div>-->
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">Is Trial Account?</label>
+                        <input type="checkbox" name="IsTrialAccount" id="IsTrialAccount" ng-model="AccountAdminInfo.IsTrialAccount" style="margin:auto; display:block;" />
+                    </div>
+
+                    <div class="SaveButtonContainer isEmployee">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+
+                </form>
+
+                <style>
+                </style>
+
+            </div>
+        </div>
+    </div>
+
+</div>

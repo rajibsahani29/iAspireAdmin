@@ -1,0 +1,407 @@
+﻿<!-- Right Side Panel -->
+<div class="containersmall">
+    <style>
+        input[type=checkbox]:checked + label {
+            color: #00A8C5 !important;
+            font-family: open_sansbold !important;
+        }
+
+        #GradesCheckboxContainer .SmallSettingContainer input, .classGradeCheckbox {
+            float: left;
+        }
+
+        #GradesCheckboxContainer .SmallSettingContainer label {
+            font-weight: 500;
+        }
+
+        .SaveButtonContainer {
+            margin-top: 5px;
+        }
+
+        #submitButton {
+            width: 97px;
+            height: 34px;
+            border: none;
+            border-radius: 3px;
+            float: right;
+            display: table;
+            cursor: pointer;
+            font-family: open_sansregular;
+            text-align: center;
+        }
+
+        .SmallSettingContainer {
+            height: initial;
+            min-height: 66px;
+        }
+
+        label.error {
+            color: red;
+            font-family: open_sansregular;
+            font-size: 12px;
+            float: left;
+        }
+
+        .MerchantNameHeader, .SchoolNameHeader, .NoClassesHeader {
+            font-family: open_sansregular;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+
+        .MerchantNameHeader {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .SchoolNameHeader {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 2% 10px 2%;
+        }
+
+        .NoClassesHeader {
+            font-size: 16px;
+            font-weight: initial;
+            margin: 0 3% 10px 3%;
+            height: 32px;
+        }
+    </style>
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4" ng-if="businessrpt==true">Departments</label>
+                <label class="HeadingLabel FontColor4" ng-if="eductnrpt==true">Subjects</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel" ng-if="businessrpt==true">Departments</label>
+                    <label class="FontColor2 HeadingTopLabel" ng-if="eductnrpt==true">Subjects</label>
+                </div>
+                <!-- Add Subject button -->
+                <div class="verticalalign RightRank17">
+                    <div class="Color7 AddNewLocation" ng-click="popup.showMenu()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText" ng-if="businessrpt==true">Add New Department</label>
+                                <label class="FontColor1 AddNewArticleText" ng-if="eductnrpt==true">Add New Subject</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Between Buttons Padding -->
+                <div style="float: right; width: 10px;">&nbsp;</div>
+                <!-- Add Teachers Bulk button -->
+                <div class="verticalalign RightRank17">
+                    <div class="Color7 AddNewLocation" ng-click="deptC.loadBulkForm()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText" ng-if="businessrpt==true">Add Departments Bulk</label>
+                                <label class="FontColor1 AddNewArticleText" ng-if="eductnrpt==true">Add Subjects Bulk</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Search Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist">
+                    <option ng-repeat="objClass in ddlClassList" value="" data-name="{{objClass.Name}}" data-description="{{objClass.Description}}" data-schoolname="{{objClass.SchoolName}}">
+                </datalist>
+            </div>
+            <select id="SearchConstraint" class="SettingsBox SearchBox">
+                <option value="name" selected ng-if="businessrpt==true">Department Name</option>
+                <option value="name" selected ng-if="eductnrpt==true">Subject Name</option>
+                <option value="description">Description</option>
+                <option value="schoolname">Site Name</option>
+            </select>
+
+            <div style="clear:both;"></div>
+
+            <div class="collapseAllButton RightRank16" ng-click="deptC.collapseAll()">- Collapse All</div>
+            <div class="collapseAllButton RightRank16" ng-click="deptC.expandAll()">+ Expand All</div>
+
+            <div style="clear:both;"></div>
+
+            <!-- Classes Container -->
+            <div id="ClassesContainer" class="RightRank16">
+                <div ng-repeat="merchant in merchantList">
+                    <div class='MerchantNameHeader'> {{merchant.Name }}</div>
+                    <div ng-repeat="school in merchant.schoolList">
+                        <div class='SchoolNameHeader'><span class='collapsible' id="{{school.SchoolID}}" ng-click="deptC.collapse(school.SchoolID )"> - </span>{{school.Name}}</div>
+                        <div ng-repeat="objClass in school.classList" id="{{objClass.ClassID}}" class="EditSmallBar Color3 Searchable" data-name="{{objClass.Name}}" data-description="{{objClass.Description}}" data-schoolid="{{objClass.SchoolID}}" data-schoolname="{{objClass.SchoolName}}">
+                            <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                                <div class="SmallBarDisplayBox Color7">
+                                    <div class="verticalalign">
+                                        <span class="icon-iaspire-02 FontColor1 IconLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="verticalalgin2">
+                                <label class="SmallBarLabel FontColor2">{{objClass.Name}}</label>
+                            </div>
+                            <div class="verticalalgin2">
+                                <button class="EditButton Color3 FontColor2" ng-click="popup.showMenu(objClass.ClassID)">Info</button>
+                            </div>
+                        </div>
+                        <div ng-if="school.classList.length == 0" class='NoClassesHeader Searchable' data-schoolid="{{school.SchoolID }}">No departments are available for this site.</div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="noRightRank16 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- PopUp Form -->
+<div class="TransparentBackground animated fadeIn" id="EditMenu">
+    <div class="Transparency"></div>
+
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-02 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">{{popup.title}}</label>
+                        <div class="DeleteEventContainer  deleteRightRank17" id="DeleteButton" ng-click="deptC.deleteSubject()">
+                            <!-- CHANGE FUNCTION NAME-->
+                            <!--<span class="icon-TS-21 FontColor6 DeleteEventIcon"></span>-->
+                            <div class="FontColor6 DeleteEventText" ng-if="businessrpt == true">Delete Department?</div>
+                            <div class="FontColor6 DeleteEventText" ng-if="eductnrpt == true">Delete Subject?</div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" ng-click="popup.closeMenu()">Cancel</label>
+                    </div>
+                </div>
+
+                <!-- Form Container -->
+                <form class="AllSettingsContainer" id="FormInputs" ng-submit="deptC.AddBulkSchool()">
+
+                    <input type="hidden" name="ClassID" value="" ng-model="classInfo.ClassID" id="ClassIDHidden" />
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel" ng-if="businessrpt == true">Department Name</label>
+                        <label class="FontColor4 PopUpWindowLabel" ng-if="eductnrpt == true">Subject Name</label>
+                        <input type="text" name="ClassName" ng-model="classInfo.Name" id="ClassName" placeholder="Department Name" class="SettingsBox inputRightRank17" />
+                    </div>
+
+                    <!--<div class="SmallSettingContainer" style="float:right;">
+                        <label class="FontColor4 PopUpWindowLabel">Description</label>
+                        <input type="text" name="ClassDescription" id="ClassDescription" ng-model="classInfo.Description" placeholder="Department Description" class="SettingsBox inputRightRank17" />
+                    </div>-->
+                    <!-- School Select Dropdown -->
+                    <div class="SmallSettingContainer" id="SchoolSelectDiv">
+                        <label class="FontColor4 PopUpWindowLabel" ng-if="businessrpt == true">Site</label>
+                        <label class="FontColor4 PopUpWindowLabel" ng-if="eductnrpt == true">School</label>
+                        <!-- School Select Container-->
+                        <select class="FontColor3 EditDropdownBar SettingsBox inputRightRank17" ng-model="classInfo.SchoolID" name="SchoolSelect" id="SchoolSelect" ng-change="deptC.selectColorBlack()">
+                            <option class="FontColor3" disabled selected value="" ng-if="businessrpt == true">Site</option>
+                            <option class="FontColor3" disabled selected value="" ng-if="eductnrpt == true">School</option>
+                            <option ng-repeat="school in ddlSchoolList" value="{{school.SchoolID}}">{{school.Name}}</option>
+                        </select>
+                    </div>
+
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div id="SiteSchoolDiv">
+                        <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="businessrpt == true">Sites<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>
+                        <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="eductnrpt == true">Schools<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>
+                    </div>
+                        <div id="BulkSchoolsCheckboxContainer">
+                        <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseSchools{{merchant.MerchantID}}"><span class="symbol" ng-click="collapseSchools(merchant.MerchantID)"></span></div>
+                        <div ng-if="ddlSchoolList.length > 0" ng-repeat="schooll in ddlSchoolList" class="SmallSettingContainer collapsibleSchool" data-merchantid="{{schooll.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                            <input type="checkbox" class="userSchoolCheckbox merchantID{{schooll.MerchantID}} inputRightRank7" ng-model="selection" id="{{schooll.SchoolID}}" value="{{schooll.SchoolID}}" ng-click="deptC.checkUserSchoolCheckboxes(schooll.SchoolID,this)" style="float:left" data-merchantid="{{schooll.MerchantID}}" />
+                            <label for="{{schooll.SchoolID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{schooll.Name}}</label>
+                        </div>
+                    </div>
+                    <br style="clear:both;" />
+                    <hr />
+                     <!-- Header / Select All -->
+                    <!--<div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="businessrpt == true">Groups<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>-->
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="eductnrpt == true">Grades<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>
+
+                    <!-- Grades Checkbox Container -->
+                    <div id="GradesCheckboxContainer" ng-if="eductnrpt == true">
+                        <div ng-repeat="grade in objGradeList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                            <input type="checkbox" class="classGradeCheckbox inputRightRank17" id="{{grade.GradeID}}" value="{{grade.GradeID}}" ng-model="grade.selection" ng-change="deptC.checkClassGradeCheckboxes(grade.GradeID,'single')" disabled="disabled"/>
+                            <label class="FontColor4 PopUpWindowLabel" style="float:none">{{grade.Name}}</label>
+                        </div>
+                    </div>
+                    <!-- Header / Select All -->
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="businessrpt == true">Employees<span class="selectAllButton FontColor2 RightRank13" ng-click="deptC.selectAllTeachers()">Select All</span><span class="selectAllButton FontColor2 RightRank13" ng-click="deptC.deselectAllTeachers()">Deselect All</span></div>
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="eductnrpt == true">Teachers<span class="selectAllButton FontColor2 RightRank13" ng-click="deptC.selectAllTeachers()">Select All</span><span class="selectAllButton FontColor2 RightRank13" ng-click="deptC.deselectAllTeachers()">Deselect All</span></div>
+
+                    <!-- Teacher Checkbox Container -->
+                    <div id="TeacherCheckboxContainer">
+                        <div ng-repeat="teacher in objTeacherList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                            <input type="checkbox" class="teacherClassCheckbox inputRightRank13" id="{{teacher.TeacherID}}" value="{{teacher.TeacherID}}" ng-model="teacher.selection" ng-change="deptC.checkTeacherClassCheckboxes(teacher.TeacherID,'single')" />
+                            <label for="{{teacher.TeacherID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{teacher.LastName}}, {{teacher.FirstName}}</label>
+                        </div>
+                    </div>
+                    <!-- Save Button -->
+                    <div class="SaveButtonContainer RightRank17" style="margin-bottom: 20px;">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bulk Menu Pop Up Form -->
+<div class="TransparentBackground  animated fadeIn" id="BulkMenu">
+
+    <div class="Transparency"></div>
+
+    <div class="PopUpDisplay">
+        <div class="verticalalign">
+            <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                <!-- Top Bar -->
+                <div class="TopBarPopUpWindow">
+
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-02 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="PopUpWindowHeading FontColor2">Bulk Department Upload</label><!-- CHANGE THE NAME -->
+                    </div>
+
+                    <div class="verticalalgin2">
+                        <label class="CancelLabel FontColor2" ng-click="deptC.deloadBulkForm()">Cancel</label>
+                    </div>
+                </div>
+
+                <!-- Form Container -->
+                <form id="BulkForm" class="AllSettingsContainer" ng-submit="deptC.submitBulkForm();">
+
+                    <div class="SmallSettingContainer">
+                        <label class="FontColor4 PopUpWindowLabel">File</label>
+                        <input type="file" name="BulkFile" id="BulkFile" class="SettingsBox" style="padding: 3px;" />
+                    </div>
+
+                    <!-- School Select Dropdown -->
+                    <div class="SmallSettingContainer" style="float:right;">
+                       <!-- <label class="FontColor4 PopUpWindowLabel">Site</label>
+
+                        <!-- School Select Container-->
+                        <!--<select class="FontColor3 EditDropdownBar SettingsBox" id="SchoolBulkSelect" name="SchoolBulkSelect" ng-model="classInfo.SchoolID" ng-change="deptC.selectColorBlack()">
+                            <option class="FontColor3" disabled selected value="">Site</option>
+                            <option ng-repeat="school in ddlSchoolList" value="{{school.SchoolID}}">{{school.Name}}</option>
+                        </select>-->
+
+                    </div>
+
+                    <a href="templates/departments.xls" class="TemplateButton">Need a Template?</a>
+
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;">Sites<span class="selectAllButton FontColor2" ng-click="deptC.selectAllGradesBulk()"></span><span class="selectAllButton FontColor2" ng-click="deptC.deselectAllGradesBulk()"></span></div>
+                    <div id="BulkSchoolsCheckboxContainer">
+                        <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseSchools{{merchant.MerchantID}}"><span class="symbol" ng-click="collapseSchools(merchant.MerchantID)"></span></div>
+                        <div ng-if="ddlSchoolList.length > 0" ng-repeat="schooll in ddlSchoolList" class="SmallSettingContainer collapsibleSchool" data-merchantid="{{schooll.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
+                            <input type="checkbox" class="userSchoolCheckbox merchantID{{schooll.MerchantID}} inputRightRank7" ng-model="selection" id="{{schooll.SchoolID}}" value="{{schooll.SchoolID}}" ng-click="deptC.checkUserSchoolCheckboxes(schooll.SchoolID,this)" style="float:left" data-merchantid="{{schooll.MerchantID}}" />
+                            <label for="{{schooll.SchoolID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{schooll.Name}}</label>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <!-- Header / Select All -->
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="eductnrpt == true"  >Grades<span class="selectAllButton FontColor2" ng-click="deptC.selectAllGradesBulk()"></span><span class="selectAllButton FontColor2" ng-click="deptC.deselectAllGradesBulk()"></span></div>
+                    <!-- Grades Checkbox Container -->
+                    <div id="BulkGradesCheckboxContainer" ng-if="eductnrpt == true">
+                        <div ng-repeat="grade in objGradeList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                            <input type="checkbox" class="classGradeCheckbox inputRightRank17" id="{{grade.GradeID}}1" value="{{grade.GradeID}}" ng-model="grade.selection" ng-change="deptC.checkClassGradeCheckboxes(grade.GradeID,'bulk')" disabled="disabled"/>
+                            <label class="FontColor4 PopUpWindowLabel" style="float:none" disabled="disabled">{{grade.Name}}</label>
+                        </div>
+                    </div>                   
+                    <!-- Header / Select All -->
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;">Employees<span class="selectAllButton FontColor2" ng-click="deptC.selectAllTeachersBulk()">Select All</span><span class="selectAllButton FontColor2" ng-click="deptC.deselectAllTeachersBulk()">Deselect All</span></div>
+
+                    <!-- Teachers Checkbox Container -->
+                    <div id="BulkTeacherCheckboxContainer">
+                        <div ng-repeat="teacher in objTeacherList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                            <input type="checkbox" class="teacherClassCheckbox inputRightRank13" id="{{teacher.TeacherID}}1" value="{{teacher.TeacherID}}" ng-model="teacher.selection" ng-change="deptC.checkTeacherClassCheckboxes(teacher.TeacherID,'bulk')" />
+                            <label for="{{teacher.TeacherID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{teacher.LastName}}, {{teacher.FirstName}}</label>
+                        </div>
+                    </div>
+
+                    <div style="clear:both;"></div>
+
+                    <div class="SaveButtonContainer RightRank17" style="margin-bottom: 20px;">
+                        <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                            <div style="margin-left:17px">
+                                <span class="icon-TS-22 SaveButtonIcon"></span>
+                                <span class="SaveButtonText">Save</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="bulk_disclaimer">Note:</div>
+                    <ul class="bulk_disclaimer_list">
+                        <li>Doing a bulk upload will <b>NOT</b> check for duplicates. If a Department is already in the system, a dupllicate will be created.</li>
+                        <li>Department to group connections will not be created, this will need to be done manually per Department that is uploaded using the bulk upload.</li>
+                        <li>Do <b>NOT</b> modify the first line of the template.</li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkClassGradeCheckboxes(gradID) {
+            angular.element(document.getElementById(gradID)).scope().checkClassGradeCheckboxes(gradID);
+        }
+    </script>
+</div>

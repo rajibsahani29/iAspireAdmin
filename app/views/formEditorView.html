@@ -1,0 +1,79 @@
+﻿<!-- Right Side Panel -->
+<div class="containersmall">
+    <style>
+        .FormsTitleHeader {
+            font-size: 20px;
+            font-family: open_sansbold;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+    </style>
+    <link href="css/nsurveyadmin.css" rel="stylesheet" />
+    <header></header>
+    <!-- Heading Bar -->
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Forms</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Forms Editor</label>
+                </div>
+                <div class="verticalalign">
+                    <div class="Color7 AddNewLocation" ng-click="popup.showAddFormMenu()">
+                        <div class="verticalalign" ng-click="changeRoute('form')">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Back to Form</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+            <div id="FormEditorContainer">
+                <div id="mainBody" class="mainBody contentHolder ps-container">
+                    <div id="Panel" class="Panel content">
+                        <div surveyform survey="formEditC.SurveyInfo"></div>
+
+                        <table style="width:100%;">
+                            <tr>
+                                <td>
+                                    <table class="questionBuilder">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="noRightRank18 noRightRank32 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿/* Hover effects
+.Color1 {background-color:#92E3F2;} Baby Blue
+.Color2 {background-color:#3d3d3d;}
+.Color3 {background-color:#ececec;}
+.Color4 {background-color:#f5f5f5;}
+.Color5 {background-color:white;}
+.Color6 {background-color:#707070;} Standard Grey
+.Color7 {background-color:#00A8C5;} Darker Blue
+.Color8 {background-color:white;}
+.Color9 {background-color:lightgray;}
+
+.FontColor1 {color:white;}
+.FontColor2 {color:#707070;}
+.FontColor3 {color:#acacac}
+.FontColor4 {color:black;}
+.FontColor5 {color:#00A8C5;}
+.FontColor6 {color:red;}
+.FontColor7 {color:green;}*/
+
+/* Grey on Hover */
+.LoginButton:hover, .SaveButton:hover, .AddNewLocation:hover, .Option:hover, #submitButton:hover {
+    background-color: #707070;
+    transition: all 0.3s ease;
+}
+
+/* Blue on Hover */
+.TopAdminBar .TriggerIcon:hover, .LogoutText:hover, .CancelLabel:hover, .AdminText:hover, .BarContainer:hover .BigIconPositioning, .BarContainer:hover .SmallIconPositioning, .TitleImageWrapperPosition > .RightOfImage:hover, .TemplateButton:hover, .selectAllButton:hover, .collapsible:hover, .collapseAllButton:hover, .deselectAllButton:hover, .masterSelectButton:hover, .symbol:hover, .toggleButton:hover, #themeButton:hover, .AddNewQuestion:hover, #ptdClear:hover, #CustomerIDEditButton:hover {
+    color: #00A8C5;
+    transition: all 0.3s ease;
+}
+
+/* Blue background, white text */
+.EditButton:hover {
+    background-color: #00A8C5;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+/* Blue Border*/
+.SettingsBox:hover {
+    border-color: #00A8C5;
+    transition: all 0.3s ease;
+}
+
+/* Baby Blue on hover*/
+a.FontColor5:hover {
+    color: #92E3F2;
+    transition: all 0.3s ease;
+}

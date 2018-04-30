@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"C:\\Workspace\\Assembla\\iAspire_www\\www_iAspire_App\\app\\services\\SMAClientAngularModules\\SMAClient.FileHandler.Angular.min.js",
+"lineCount":2,
+"mappings":"AAAC,SAAS,EAAG,CAITA,OAAAC,OAAA,CACY,gBADZ,CAC8B,EAD9B,CAEAD,QAAAC,OAAA,CACY,gBADZ,CAAAC,OAAA,CAOAA,QAAe,EAAG,CAGd,MADWC,KAFG,CAPlB,CAAAC,IAAA,CAaAC,QAAe,EAAG,CAGd,MADSC,KAFK,CAblB,CAAAC,QAAA,CAIa,sBAJb,CAmBAC,QAAe,EAAG,CAEJC,IACVC,uBAAA,CAA8B,SADpBD,KAEVE,YAAA,CAAkBC,CAFRH,KAGVI,UAAA,CAAgBC,CAEhB,KAAIF,EAAc,CACd,KAAQ,IADM,CAEd,cAAiB,IAFH,CAGd,YAAe,IAHD,CAId,aAAgB,IAJF,CAKd,WAAc,IALA,CAAlB,CAQIE,EAAY,CACZ,KAAQ,CACAC,mBAAgB,CAAE,MAAO,MAAT,CADhB,CAEAC,cAAW,CAAE,MAAO,YAAT,CAFX,CADI,CAKZ,KAAQ,CACAD,mBAAgB,CAAE,MAAO,OAAT,CADhB,CAEAC,cAAW,CAAE,MAAO,6BAAT,CAFX,CALI;AASZ,IAAO,CACCD,mBAAgB,CAAE,MAAO,MAAT,CADjB,CAECC,cAAW,CAAE,MAAO,UAAT,CAFZ,CATK,CAaZ,MAAS,CACDD,mBAAgB,CAAE,MAAO,iBAAT,CADf,CAEDC,cAAW,CAAE,MAAO,wBAAT,CAFV,CAbG,CAiBZ,MAAS,CACDD,mBAAgB,CAAE,MAAO,iBAAT,CADf,CAEDC,cAAW,CAAE,MAAO,uBAAT,CAFV,CAjBG,CAuBhB,OApCUP,KAFI,CAnBlB,CAAAF,QAAA,CAKa,yBALb,CAKwC,CAAC,sBAAD,CAuDxCU,QAAuB,CAACC,CAAD,CAAuB,EAvDN,CALxC,CANS,CAAZ,CAAD;",
+"sources":["C:/Workspace/Assembla/iAspire_www/www_iAspire_App/app/services/SMAClientAngularModules/SMAClient.FileHandler.Angular.js"],
+"names":["angular","module","config","conf","run","runner","ru","factory","values","val","RequestedDirectorySize","Directories","directories","FileTypes","fileTypes","FileExtension","Encoding","SMAFHInterface","SMAFileHandlerValues"]
+}

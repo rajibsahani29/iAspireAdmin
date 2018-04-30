@@ -1,0 +1,648 @@
+﻿/*  
+    Please do not Modify this file.
+    Instead, Modify the attached Custom css file
+*/
+
+/*@-webkit-keyframes alertIn {
+    0% {
+        top: 150%;
+        -webkit-transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+        transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+    }
+
+    0.001% {
+        top: 150%;
+        -webkit-transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+        transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+    }
+
+    33% {
+        top: 50%;
+    }
+
+    100% {
+        -webkit-transform: translate3d(-50%,-50%,0px);
+        transform: translate3d(-50%,-50%,0px);
+    }
+}*/
+
+/*@keyframes alertIn {
+    0% {
+        top: 150%;
+        -webkit-transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+        transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+    }
+
+    0.001% {
+        top: 150%;
+        -webkit-transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+        transform: perspective(500px) translate3d(-50%,-50%,25px) rotateX(5deg);
+    }
+
+    33% {
+        top: 50%;
+    }
+
+    100% {
+        -webkit-transform: translate3d(-50%,-50%,0px);
+        transform: translate3d(-50%,-50%,0px);
+    }
+}*/
+
+@-webkit-keyframes alertIn {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes alertIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/*@-webkit-keyframes alertOut {
+    0% {
+        top: 50%;
+        -webkit-animation-duration: 0.35s;
+        animation-duration: 0.35s;
+    }
+
+    50% {
+        -webkit-transform: translateY(-50%) translateX(-50%) perspective(1000px) translate3d(0,0,0) rotateX(2deg);
+        transform: translateY(-50%) translateX(-50%) perspective(1000px) translate3d(0,0,0) rotateX(2deg);
+    }
+
+    75% {
+        top: 150%;
+    }
+
+    100% {
+        display: none;
+    }
+}
+
+@keyframes alertOut {
+    0% {
+        top: 50%;
+        -webkit-animation-duration: 0.35s;
+        animation-duration: 0.35s;
+    }
+
+    50% {
+        -webkit-transform: translateY(-50%) translateX(-50%) perspective(1000px) translate3d(0,0,0) rotateX(2deg);
+        transform: translateY(-50%) translateX(-50%) perspective(1000px) translate3d(0,0,0) rotateX(2deg);
+    }
+
+    75% {
+        top: 150%;
+    }
+
+    100% {
+        display: none;
+    }
+}*/
+
+@-webkit-keyframes alertOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes alertOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Mobile Layout: 480px and below. */
+
+.SMAClientAlertBlur {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
+.SMAClientAlertDarken {
+    background-color: rgba(0,0,0,0.65);
+}
+
+.SMAClientAlertContainer {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 99999;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    .SMAClientAlertContainer * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+
+
+    .SMAClientAlertContainer > .AlertPosition {
+        min-width: 250px;
+        min-height: 180px;
+        max-height: 95%;
+        height: auto;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        -webkit-transform: perspective(1000px) translate3d(-50%,-50%,0px);
+        transform: perspective(1000px) translate3d(-50%,-50%,0px);
+        margin: auto;
+        z-index: 99999999999;
+        /*-ms-box-orient: vertical;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -moz-flex;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: column;
+        flex-flow: column;
+        -webkit-align-items: stretch;
+        align-items: stretch;*/
+        display: table;
+        overflow-y: auto;
+    }
+
+        .SMAClientAlertContainer > .AlertPosition:hover {
+        }
+
+    .SMAClientAlertContainer > .Alert {
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        backface-visibility: visible;
+        box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.65);
+        /*-webkit-transform-origin: 50%, 50%, 0px;
+        transform-origin: 50%, 50%, 0px;*/
+    }
+
+    .SMAClientAlertContainer > .AnimateIn {
+        -webkit-animation: alertIn;
+        animation: alertIn;
+        -webkit-animation-duration: 0.3s;
+        animation-duration: 0.3s;
+        /*-webkit-animation-duration: 0.4s;
+        animation-duration: 0.4s;*/
+    }
+
+    .SMAClientAlertContainer > .AnimateOut {
+        /*-webkit-animation-duration: 0s;
+        animation-duration: 0s;*/
+        /*top: 150%;*/
+        -webkit-animation: alertOut;
+        animation: alertOut;
+        -webkit-animation-duration: 0.2s;
+        animation-duration: 0.2s;
+    }
+
+    .SMAClientAlertContainer > .Info {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .SMAClientAlertContainer > .Success {
+        background-color: #12BB00;
+    }
+
+    .SMAClientAlertContainer > .Error {
+        background-color: #610000;
+    }
+
+    .SMAClientAlertContainer > .Warning {
+        background-color: darkorange;
+        color: black;
+    }
+
+    .SMAClientAlertContainer > .Dismissable {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .SMAClientAlertContainer > .Confirm {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .SMAClientAlertContainer > .Input {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+.AlertPosition > .TitleContainerPosition {
+    position: relative;
+    /*width: 100%;*/
+    top: 0;
+    /*height: auto;*/
+    /*display: block;*/
+    /*padding: 10px;*/
+    /*padding-bottom: 0px;*/
+    display: table-row;
+}
+
+.AlertPosition > .TitleContainer {
+    text-align: center;
+}
+
+.TitleContainerPosition > .TitleWrapperPosition {
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+    border-color: transparent;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.TitleContainerPosition > .TitleWrapper {
+}
+
+.TitleWrapperPosition > .TitleImageWrapperPosition {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row;
+    flex-flow: row;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+
+.TitleWrapperPosition > .TitleImageWrapper {
+    background-color: #FFFFFF;
+}
+
+.TitleImageWrapperPosition > .TitleImagePosition {
+    width: 100%;
+    /*height: 100%;*/
+    flex-grow: 1;
+}
+
+.TitleImageWrapperPosition > .TitleImage {
+    /*background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url(../images/iAspire-landscaped.png);
+    background-size: auto;*/
+    /*min-width: 215px; hard-coded image width 250px*/
+    /*min-height: 91px; hard-coded image height 91px*/
+    /*height: calc(43px + 10px);*/
+}
+
+.TitleImageWrapperPosition > .LeftOfImagePosition {
+    flex-grow: 0;
+    /*padding: 10px;*/
+}
+
+.TitleImageWrapperPosition > .LeftOfImage {
+    font-size: 0px;
+    color: transparent;
+    min-width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.TitleImageWrapperPosition > .RightOfImagePosition {
+    flex-grow: 0;
+    /*padding: 10px;*/
+}
+
+.TitleImageWrapperPosition > .RightOfImage {
+    font-size: 0px;
+    color: transparent;
+    min-width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.RightOfImage::before,
+.RightOfImage::after {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background-color: black;
+    content: ' ';
+}
+
+.RightOfImage::before {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.RightOfImage::after {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.TitleWrapperPosition > .TitleLabelWrapperPosition {
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.TitleWrapperPosition > .TitleLabelWrapper {
+}
+
+.TitleLabelWrapperPosition > .TitleLabelPosition {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+
+.TitleLabelWrapperPosition > .TitleLabel {
+}
+
+.AlertPosition > .BodyContainerPosition {
+    position: relative;
+    margin-top: 10px;
+    display: table-row;
+}
+
+.AlertPosition > .BodyContainer {
+    text-align: center;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.BodyContainerPosition > .BodyWrapperPosition {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    padding-top: 10px;
+    /*top: 50%;
+    transform: translateY(-50%);*/
+    /*margin: 0 -10px;*/
+    /*height: 100%;*/
+}
+
+.BodyContainerPosition > .BodyWrapper {
+}
+
+.BodyWrapperPosition > .BodyPosition {
+    display: block;
+    vertical-align: middle;
+}
+
+.BodyWrapperPosition > .Body {
+    white-space: pre;
+}
+
+.BodyWrapperPosition > .InputBoxWrapperPosition {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.BodyWrapperPosition > .WebpageObjectPosition {
+}
+
+.BodyWrapperPosition > WebpageObject {
+    padding-top: 10px;
+    overflow: auto;
+}
+
+.BodyWrapperPosition > .InputBoxWrapper {
+}
+
+.InputBoxWrapperPosition > .InputBoxPosition {
+}
+
+.InputBoxWrapperPosition > .InputBox {
+}
+
+.BodyWrapperPosition > .EnterButtonWrapperPosition {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.BodyWrapperPosition > .EnterButtonWrapper {
+    color: white;
+    text-align: center;
+}
+
+.EnterButtonWrapperPosition > .FooterButtonPosition {
+    width: 100%;
+}
+
+.EnterButtonWrapperPosition > .FooterButton {
+    background-color: #00A8C6;
+}
+
+
+.BodyContainerPosition > .UnorderedListPosition {
+}
+
+.BodyContainerPosition > .UnorderedListPosition {
+    list-style-type: none;
+    -webkit-padding-start: 0px;
+    white-space: pre;
+    font-size: 12px;
+}
+
+.AlertPosition > .FooterContainerPosition {
+    width: 100%;
+    display: table-row;
+}
+
+.AlertPosition > .FooterContainer {
+    color: white;
+}
+
+.FooterContainerPosition > .FooterWrapperPosition {
+    width: 100%;
+    height: 100%;
+}
+
+.FooterContainerPosition > .FooterWrapper {
+    text-align: center;
+}
+
+.FooterWrapperPosition > .FooterPosition {
+}
+
+.FooterWrapperPosition > .Footer {
+}
+
+.FooterWrapperPosition > .FooterButtonPosition {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.FooterWrapperPosition > .FooterButton {
+    background-color: #00A8C6;
+}
+
+.FooterWrapperPosition > .FooterButtonOnePosition {
+    display: inline-block;
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.FooterWrapperPosition > .FooterButtonOne {
+    background-color: #265a88;
+    background-image: linear-gradient(to bottom,#00A8C6 0,#265a88 100%);
+    background-repeat: repeat-x;
+    background-position: 0px 0px;
+    transition: all 100ms;
+    box-shadow: inset 10px 10px 15px -7px rgba(0,0,0,0.5), inset -10px -3px 10px -7px rgba(0,0,0,0.5);
+    /*box-shadow: inset 10px 3px 15px -7px rgba(0,0,0,0.5), inset -10px -10px 10px -7px rgba(0,0,0,0.5);*/
+}
+
+    .FooterWrapperPosition > .FooterButtonOne:hover {
+        background-position: 0px -10px;
+    }
+
+.FooterWrapperPosition > .FooterButtonTwoPosition {
+    display: inline-block;
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.FooterWrapperPosition > .FooterButtonTwo {
+    background-color: #265a88;
+    background-image: linear-gradient(to bottom,#00A8C6 0,#265a88 100%);
+    background-repeat: repeat-x;
+    background-position: 0px 0px;
+    transition: all 100ms;
+    box-shadow: inset 10px 10px 15px -7px rgba(0,0,0,0.5), inset -10px -3px 10px -7px rgba(0,0,0,0.5);
+    /*box-shadow: inset 10px 3px 15px -7px rgba(0,0,0,0.5), inset -10px -10px 10px -7px rgba(0,0,0,0.5);*/
+    /*border-top: 1px solid black;*/
+}
+
+    .FooterWrapperPosition > .FooterButtonTwo:hover {
+        background-position: 0px -10px;
+    }
+
+.FooterWrapperPosition > .FooterButtonThreePosition {
+    margin-top: 10px;
+    display: inline-block;
+    width: 75%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.FooterWrapperPosition > .FooterButtonThree {
+    background-color: #00A8C6;
+}
+
+/* other styling */
+
+.SMAAlertMonospace {
+    text-align: left;
+    font-size: 14px;
+    font-family: Courier New, Courier, monospace;
+}
+
+.SMAProgress {
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+    .SMAProgress:not([value]) {
+    }
+
+/* Fablet Layout: 481px.  Inherits styles from: Mobile Layout. */
+@media only screen and (min-width: 481px) and (min-height: 585px) {
+
+    .SMAClientAlertContainer > .AlertPosition {
+        min-width: 320px;
+        min-height: 190px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonPosition {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .AlertPosition > .BodyContainerPosition {
+    }
+
+    .BodyContainerPosition > .BodyWrapperPosition {
+        min-height: 105px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonOnePosition {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonTwoPosition {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonThreePosition {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+}
+
+/* Tablet Layout: 761px.  Inherits styles from: Mobile Layout and Fablet Layout. */
+@media only screen and (min-width: 761px) and (min-height: 585px) {
+
+    .SMAClientAlertContainer > .AlertPosition {
+        min-width: 350px;
+        min-height: 220px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonPosition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .AlertPosition > .BodyContainerPosition {
+    }
+
+    .BodyContainerPosition > .BodyWrapperPosition {
+        min-height: 115px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonOnePosition {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonTwoPosition {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .FooterWrapperPosition > .FooterButtonThreePosition {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}

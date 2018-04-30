@@ -1,0 +1,57 @@
+﻿/* styling for Survey List popup */
+
+.BodyPosition ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    list-style: none;
+    padding-bottom: 20px;
+}
+
+.BodyPosition ul li {
+    padding: 0px 10px;
+}
+
+.FooterButtonOne {
+    border-bottom-left-radius: 5px;
+    cursor:pointer;
+}
+
+.FooterButtonTwo {
+    border-bottom-right-radius: 5px;
+    cursor:pointer;
+}
+
+.SurveyRowWrapper {
+    -ms-box-orient: vertical;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+    align-items: stretch;
+}
+
+.SurveyRow {
+    position: relative;
+    text-align: left;
+    padding: 10px;
+    padding-right: 5px;
+    font-size: 20px;
+    background-color: #00BCDB;
+    box-shadow: inset 2px 0px 4px 1px rgba(0,0,0,0.5);
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.SurveyText {
+    position: relative;
+    color: white;
+}
+
+.Confirm .RightOfImage, .Confirm .FooterButton {
+    display: none;
+}

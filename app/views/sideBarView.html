@@ -1,0 +1,96 @@
+﻿
+<div ng-model="iAspireApp" ng-controller="SidebarController">
+    <div class="navigation_menu_text Color2" style="overflow-x:hidden;">
+        <div class="navigation_menu_image Color1" style="display: table; width: 100%;">
+            <div class="verticalalign">
+                <div id="button2" class="hide2">
+                    <img src="images/MainLogo.png" style="width: 75%; margin: auto; display: block; text-align: center;" />
+                </div>
+                <div id="button1" class="hide1">
+                    <img src="images/MainLogo_Small.png" style="width: 45px; height: 55px; margin:auto; display:block; text-align:center;" />
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="BarContainer" onclick-route="account">
+            <!-- ACCOUNT -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-04 FontColor3 BigIconPositioning" id="BarIcon3"></div>
+                <div id="button3" class="FontColor1 BarText">Account</div>
+            </div>
+        </div>
+        <div class="BarContainer RightRank1" onclick-route="accountAdmin" id="hsn" ng-show="acntadmin==true">
+            <!-- ACCOUNT ADMIN -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-04 FontColor3 BigIconPositioning" id="BarIcon12"></div>
+                <div id="button12" class="FontColor1 BarText">Account Admin</div>
+            </div>
+        </div>
+        <div class="BarContainer" onclick-route="users">
+            <!-- USERS -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-05 FontColor3 BigIconPositioning" id="BarIcon4"></div>
+                <div id="button4" class="FontColor1 BarText">Users</div>
+            </div>
+        </div>        
+        <div class="BarContainer" onclick-route="sites">
+            <!-- SITES -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-01 FontColor3 BigIconPositioning" id="BarIcon5"></div>
+                <div id="button5" class="FontColor1 BarText" ng-if="businessrpt==true">Sites</div>
+                <div id="button5" class="FontColor1 BarText" ng-if="eductnrpt==true">Schools</div>
+            </div>
+        </div>
+        <div class="BarContainer" onclick-route="Grade" ng-if="eductnrpt==true">
+            <!-- Forms -->
+            <div class="verticalalign">
+                <div class="FontColor3 BigIconPositioning" id="BarIcon9"><span><img src="{{ImgUrl}}" style="height:36px;width:36px;"/></span></div>
+                <div id="button9" class="FontColor1 BarText">Grades</div>
+            </div>
+        </div>
+        <!--
+        <div class="BarContainer">
+            <div class="verticalalign">
+                <div class="icon-iaspire-09 FontColor3 BigIconPositioning" id="BarIcon6"></div>
+                <div id="button6" class="FontColor1 BarText">Employees</div>
+            </div>
+        </div>
+        -->
+        <div class="BarContainer" onclick-route="departments">
+            <!-- DEPARTMENTS -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-02 FontColor3 BigIconPositioning" id="BarIcon7"></div>
+                <div id="button7" class="FontColor1 BarText" ng-if="businessrpt==true">Departments</div>
+                <div id="button7" class="FontColor1 BarText" ng-if="eductnrpt==true">Subjects</div>
+            </div>
+        </div>
+        <div class="BarContainer" onclick-route="form">
+            <!-- Forms -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-03 FontColor3 BigIconPositioning" id="BarIcon9"></div>
+                <div id="button9" class="FontColor1 BarText">Forms</div>
+            </div>
+        </div>
+        <div class="BarContainer" onclick-route="roles">
+            <!-- ROLES -->
+            <div class="verticalalign">
+                <div class="icon-iaspire-04 FontColor3 BigIconPositioning" id="BarIcon14"></div>
+                <div id="button14" class="FontColor1 BarText">Roles</div>
+            </div>
+        </div>
+        <!-- <div class="BarContainer" onclick-route="archive" ng-show="acntadmin==true"> -->
+            <!-- <!-- ROLES -->
+            <!-- <div class="verticalalign"> -->
+                <!-- <div class="icon-iaspire-04 FontColor3 BigIconPositioning" id="BarIcon14"></div> -->
+                <!-- <div id="button14" class="FontColor1 BarText">Archive</div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="BarContainer" onclick="javascript:location.href='./Survey/'"> -->
+        <!-- <!-- Forms -->
+        <!-- <div class="verticalalign"> -->
+        <!-- <div class="icon-iaspire-03 FontColor3 BigIconPositioning" id="BarIcon9"></div> -->
+        <!-- <div id="button9" class="FontColor1 BarText">Forms Builder</div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+    </div>
+</div>

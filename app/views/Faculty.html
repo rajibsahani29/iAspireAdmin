@@ -1,0 +1,526 @@
+﻿
+<div class="containersmall">
+    <style>
+        input[type=checkbox]:checked + label {
+            color: #00A8C5 !important;
+            font-family: open_sansbold !important;
+        }
+
+        #ClassesCheckboxContainer .SmallSettingContainer input, #BulkClassesCheckboxContainer .SmallSettingContainer input {
+            float: left;
+        }
+
+        #ClassesCheckboxContainer .SmallSettingContainer label, #BulkClassesCheckboxContainer .SmallSettingContainer label {
+            font-weight: 500;
+        }
+
+        .SaveButtonContainer {
+            margin-top: 5px;
+        }
+
+        #submitButton {
+            width: 97px;
+            height: 34px;
+            border: none;
+            border-radius: 3px;
+            float: right;
+            display: table;
+            cursor: pointer;
+            font-family: open_sansregular;
+            text-align: center;
+        }
+
+        .SmallSettingContainer {
+            height: initial;
+            min-height: 66px;
+        }
+
+        .MerchantNameHeader, .SchoolNameHeader, .NoTeachersHeader {
+            font-family: open_sansregular;
+            clear: both;
+            color: #707070;
+            margin: 0 1% 10px 1%;
+        }
+
+        .MerchantNameHeader {
+            font-size: 20px;
+            font-weight: 700;
+            /*text-decoration: underline;*/
+        }
+
+        .SchoolNameHeader {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 2% 10px 2%;
+        }
+
+        .NoTeachersHeader {
+            font-size: 16px;
+            font-weight: initial;
+            margin: 0 3% 10px 3%;
+            height: 32px;
+        }
+
+        img.teacherUserImage {
+            margin-top: 3px;
+            margin-left: 10px;
+        }
+
+        .imageKey div {
+            height: 30px;
+            margin: 5px 0 5px 10px;
+            float: left;
+        }
+
+        .imageKey span, .imageKey img {
+            display: inline-block;
+            /*position: relative;
+            top: 50%;
+            transform: translateY(-50%);*/
+            line-height: 30px;
+            font-family: open_sansregular;
+            font-size: 16px;
+            float: left;
+            margin: 0 3px;
+        }
+    </style>
+    <div class="HeadingBar Color4">
+        <div class="verticalalign">
+            <div>
+                <label class="HeadingLabel FontColor4">Departments</label>
+            </div>
+        </div>
+        <div class="verticalalign">
+            <label class="FontColor2 HelpLabel">
+                Need Help?
+                <span class="FontColor5">
+                    <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="Color3 BigRightContainer">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Departments</label>
+                </div>
+
+                <!-- Add Subject button -->
+                <div class="verticalalign RightRank17">
+                    <div class="Color7 AddNewLocation" ng-click="popup.showMenu('123')">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add New Department</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Between Buttons Padding -->
+                <div style="float: right; width: 10px;">&nbsp;</div>
+
+                <!-- Add Teachers Bulk button -->
+                <div class="verticalalign RightRank17">
+                    <div class="Color7 AddNewLocation" ng-click="Facultyf.loadBulkForm()">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Add Departments Bulk</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Search Box -->
+           
+           
+
+            <div style="clear:both;"></div>
+
+            <div class="collapseAllButton RightRank16" ng-click="Facultyf.collapseAll()">- Collapse All</div>
+            <div class="collapseAllButton RightRank16" ng-click="Facultyf.expandAll()">+ Expand All</div>
+
+            <div style="clear:both;"></div>
+
+            <!-- Classes Container -->
+            
+            <div class="noRightRank16 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+
+        </div>
+    </div>
+
+</div>
+   
+    <div class="containersmall">
+
+        <!-- Top Admin Bar -->
+        <div class="Color3 TopAdminBar">
+            <div class="verticalalign">
+                <div class="Trigger" style="float:left;">
+                    <div class="icon-TS-19 TriggerIcon FontColor2"></div>
+                </div>
+                <div class="AdminTextContainer">
+                    <div class="Color6 IconBackgroundContainer">
+                        <div class="verticalalign">
+                            <div class="icon-iaspire-04 FontColor1 PersonIcon"></div>
+                        </div>
+                    </div>
+                    <div class="TopRightTextContainer">
+                        <div class="verticalalign">
+                            <label class="AdminText FontColor2" id="UserNameDisplay" ng-click="window.location.href = 'account.html'">Account</label>
+                        </div>
+                    </div>
+                    <div class="TopRightTextContainer">
+                        <div class="verticalalign">
+                            <label class="DividerText FontColor2">|</label>
+                        </div>
+                    </div>
+                    <div class="TopRightTextContainer">
+                        <div class="verticalalign">
+                            <label class="LogoutText FontColor2" ng-click="logout()">Logout</label>
+                        </div>
+                    </div>
+                    <div id="themeButton" ng-click="loadDarkTheme()">Dark Theme</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Heading Bar -->
+        <div class="HeadingBar Color4">
+            <div class="verticalalign">
+                <div>
+                    <label class="HeadingLabel FontColor4">Faculty</label>
+                </div>
+            </div>
+            <div class="verticalalign">
+                <label class="FontColor2 HelpLabel">
+                    Need Help?
+                    <span class="FontColor5">
+                        <a class="FontColor5" href="http://www.iAspireApp.com" target="_blank">www.iAspireApp.com</a>
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Main Content Panel -->
+        <div class="Color3 BigRightContainer">
+            <div class="Color5 WhiteBackgroundContainerMenu">
+
+                <!-- Settings Header -->
+                <div class="CustomSettingsContainer">
+
+                    <div class="verticalalign" style="width:100%;">
+                        <label class="FontColor2 HeadingTopLabel">Faculty</label>
+                    </div>
+
+                    <!-- Add Teacher button -->
+                    <div class="verticalalign RightRank13">
+                        <div class="Color7 AddNewLocation" ng-click="showMenu('123')">
+                            <div class="verticalalign">
+                                <div class="ButtonPositioningLocation">
+                                    <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                    <label class="FontColor1 AddNewArticleText">Add New Faculty</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Between Buttons Padding -->
+                    <div style="float: right; width: 10px;">&nbsp;</div>
+
+                    <!-- Add Teachers Bulk button -->
+                    <div class="verticalalign RightRank13">
+                        <div class="Color7 AddNewLocation" ng-click="showBulkMenu()">
+                            <div class="verticalalign">
+                                <div class="ButtonPositioningLocation">
+                                    <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                    <label class="FontColor1 AddNewArticleText">Add Faculty Bulk</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Search Box -->
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist"></datalist>
+
+                <select id="SearchConstraint" class="SettingsBox SearchBox">
+                    <option value="fullname" selected>Name</option>
+                    <option value="email">Email</option>
+                    <option value="merchantname">District</option>
+                </select>
+
+                <!-- Datalist Option Template -->
+                <!--<script id="DatalistTemplate" type="text/x-jsrender">
+                    <option value="" data-fullname="{{:LastName}}, {{:FirstName}}" data-email="{{:Email}}" data-merchantname="{{:MerchantName}}">
+                </script>-->
+
+                <div style="clear:both;"></div>
+
+                <div class="imageKey FontColor2 RightRank12">
+                    <div>
+                        <img src="images/checkmark.png" />
+                        <span>=&nbsp;&nbsp;Faculty is attached to a user</span>
+                    </div>
+                    <div>
+                        <img src="images/cross.png" />
+                        <span>=&nbsp;&nbsp;Faculty is not attached to a user</span>
+                    </div>
+                </div>
+
+                <div style="clear:both;"></div>
+
+                <div class="collapseAllButton RightRank12" ng-click="Facultyf.collapseAll()">- Collapse All</div>
+                <div class="collapseAllButton RightRank12" ng-click="Facultyf.expandAll()">+ Expand All</div>
+
+                <div style="clear:both;"></div>
+
+                <!-- Teachers Container -->
+                <div id="TeachersContainer" class="RightRank12"></div>
+                <div class="noRightRank12 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+
+                <!-- Teacher Template ... -->
+                
+                    <div ng-repeat="item in objTeacherList">
+                        <div id="{{item.TeacherID}}" class="EditSmallBar Color3 Searchable" data-fullname="{{item.LastName}}, {{item.FirstName}}" data-firstname="{{item.FirstName}}" data-lastname="{{item.LastName}}" data-email="{{item.Email}}" data-merchantid="{{item.MerchantID}}" data-merchantname="{{item.MerchantName}}" data-istiedtouser="{{item.IsTiedToUser}}">
+                            <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                                <div class="SmallBarDisplayBox Color7">
+                                    <div class="verticalalign">
+                                        <span class="icon-iaspire-09 FontColor1 IconLogo"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="verticalalgin2" style="width:initial;">
+                                <label class="SmallBarLabel FontColor2 verticalalgin2" style="width:initial;">                                   
+                                    <img src="images/checkmark.png" class="teacherUserImage" ng-if="item.IsTiedToUser == true"/>
+                                    <img src="images/cross.png" class="teacherUserImage" ng-if="item.IsTiedToUser == false"/>                                 
+                                </label>
+                            </div>
+
+                            <div class="verticalalgin2">
+                                <label class="SmallBarLabel FontColor2 verticalalgin2">{{item.LastName}}, {{item.FirstName}}</label>
+                            </div>
+
+                            <div class="verticalalgin2">
+                                <button class="EditButton Color3 FontColor2" ng-click="popup.showMenu(item.TeacherID)">Info</button>
+                            </div>
+                        </div>
+                    </div>               
+                <!-- ... Teacher Template -->
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PopUp Form -->
+    <div class="TransparentBackground  animated fadeIn" id="EditMenu">
+
+        <div class="Transparency"></div>
+
+        <div class="PopUpDisplay">
+            <div class="verticalalign">
+                <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                    <!-- Top Bar -->
+                    <div class="TopBarPopUpWindow">
+
+                        <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                            <div class="SmallBarDisplayBox Color7">
+                                <div class="verticalalign">
+                                    <span class="icon-iaspire-09 FontColor1 IconLogo"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalalgin2">
+                            <label class="PopUpWindowHeading FontColor2" id="PopUpWindowHeading">Faculty - Information</label>
+                            <div class="DeleteEventContainer deleteRightRank13" id="DeleteButton" ng-click="deleteTeacher()">
+                                <!-- CHANGE FUNCTION NAME-->
+                                <div class="FontColor6 DeleteEventText">Delete Faculty?</div>
+                            </div>
+                        </div>
+
+                        <div class="verticalalgin2">
+                            <label class="CancelLabel FontColor2" ng-click="closeMenu()">Close</label>
+                        </div>
+
+                    </div>
+
+                    <!-- Form Container -->
+                    <form class="AllSettingsContainer" id="FormInputs" action="JavaScript:submitForm();">
+
+                        <input type="hidden" name="TeacherID" value="" id="TeacherIDHidden" />
+
+                        <div class="SmallSettingContainer">
+                            <label class="FontColor4 PopUpWindowLabel">First Name</label>
+                            <input type="text" name="FirstName" id="TeacherFirstName" placeholder="First Name" class="SettingsBox inputRightRank13" />
+                        </div>
+
+                        <div class="SmallSettingContainer" style="float:right;">
+                            <label class="FontColor4 PopUpWindowLabel">Last Name</label>
+                            <input type="text" name="LastName" id="TeacherLastName" placeholder="Last Name" class="SettingsBox inputRightRank13" />
+                        </div>
+
+                        <div class="SmallSettingContainer">
+                            <label class="FontColor4 PopUpWindowLabel">Email</label>
+                            <input type="text" name="Email" id="TeacherEmail" placeholder="Email" class="SettingsBox inputRightRank13" />
+                        </div>
+
+                        <!-- Merchant Select Dropdown -->
+                        <div class="SmallSettingContainer" style="float:right;">
+                            <label class="FontColor4 PopUpWindowLabel">District</label>
+
+                            <!-- Merchant Select Container-->
+                            <select class="FontColor3 EditDropdownBar SettingsBox inputRightRank13" name="MerchantSelect" id="MerchantSelect" onchange="selectColorBlack('MerchantSelect')">
+                                <option class="FontColor3" disabled selected value="">District</option>
+                            </select>
+
+                            <!-- Merchant Option Template -->
+                            <!--<script type="text/x-jsrender" id="MerchantOptionTemplate">
+                                <option value="{{:MerchantID}}">{{:Name}}</option>
+                            </script>-->
+
+                        </div>
+
+                        <div style="clear:both;"></div>
+                        <hr />
+
+                        <div class="FontColor4 PopUpWindowLabel">Classes</div>
+
+                        <!-- Class Container -->
+                        <div id="ClassesCheckboxContainer"></div>
+
+                        <!-- Class Checkbox Template -->
+                        <div >
+                            <div ng-repeat="cls in ddlClassList" class="{{cls.schoolid}} fontcolor4 popupwindowlabel"><br />{{cls.schoolname}}<span class="selectallbutton fontcolor2 rightrank13" ng-click="selectall(cls.schoolid)">select all</span><span class="deselectallbutton fontcolor2 rightrank13" ng-click="deselectall(cls.schoolid)">deselect all</span></div>
+                            <div class="smallsettingcontainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                                <input type="checkbox" class="teacherclasscheckbox schoolid{{cls.schoolid}} inputrightrank13" id="{{cls.classid}}" value="{{cls.classid}}" onchange="checkteacherclasscheckboxes(cls.classid)" />
+                                <label for="{{cls.classid}}" class="fontcolor4 popupwindowlabel" style="float:none">{{cls.name}}</label>
+                            </div>
+                        </div>
+                        <!-- Save Button -->
+                        <div class="SaveButtonContainer RightRank13" style="margin-bottom: 20px;">
+                            <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                                <div style="margin-left:17px">
+                                    <span class="icon-TS-22 SaveButtonIcon"></span>
+                                    <span class="SaveButtonText">Save</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="noRightRank13" style="clear:both;height:30px;"></div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bulk Menu Pop Up Form -->
+    <div class="TransparentBackground animated fadeIn" id="BulkMenu">
+
+        <div class="Transparency"></div>
+
+        <div class="PopUpDisplay">
+            <div class="verticalalign">
+                <div class="Color3 PopUpWindow animated2 fadeIn">
+
+                    <!-- Top Bar -->
+                    <div class="TopBarPopUpWindow">
+
+                        <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                            <div class="SmallBarDisplayBox Color7">
+                                <div class="verticalalign">
+                                    <span class="icon-iaspire-04 FontColor1 IconLogo"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalalgin2">
+                            <label class="PopUpWindowHeading FontColor2">Bulk Faculty Upload</label><!-- CHANGE THE NAME -->
+                        </div>
+
+                        <div class="verticalalgin2">
+                            <label class="CancelLabel FontColor2" id="CancelLabel" ng-click="closeBulkMenu()">Close</label>
+                        </div>
+
+                    </div>
+
+                    <!-- Form Container -->
+                    <form id="BulkForm" class="AllSettingsContainer" action="JavaScript:submitBulkForm();">
+
+                        <div class="SmallSettingContainer">
+                            <label class="FontColor4 PopUpWindowLabel">File</label>
+                            <input type="file" name="BulkFile" id="BulkFile" class="SettingsBox" style="padding: 3px;" />
+                        </div>
+
+                        <!-- Merchant Select Dropdown -->
+                        <div class="SmallSettingContainer" style="float:right;">
+                            <label class="FontColor4 PopUpWindowLabel">District</label>
+
+                            <!-- Merchant Select Container-->
+                            <select class="FontColor3 EditDropdownBar SettingsBox" id="MerchantBulkSelect" name="MerchantBulkSelect" onchange="selectColorBlack('MerchantBulkSelect')">
+                                <option class="FontColor3" disabled selected value="">District</option>
+                            </select>
+
+                            <!-- Merchant Option Template -->
+                            <!--<script type="text/x-jsrender" id="MerchantBulkOptionTemplate">
+                                <option value="{{:MerchantID}}">{{:Name}}</option>
+                            </script>-->
+
+                        </div>
+
+                        <a href="templates/faculty.xls" class="TemplateButton">Need a Template?</a>
+
+                        <br />
+
+                        <span class="masterSelectButton FontColor2" ng-click="selectAll_selectAll()">Select All</span>
+                        <span class="masterSelectButton FontColor2" ng-click="selectAll_deselectAll()">Deselect All</span>
+
+                        <!-- Class Container -->
+                        <div id="BulkClassesCheckboxContainer"></div>
+
+                        <hr style="clear:both;border-color:grey;margin:10px 0;" />
+
+                        <div class="bulk_disclaimer">Note:</div>
+                        <ul class="bulk_disclaimer_list">
+                            <li>Doing a bulk upload will <b>NOT</b> check for duplicates. If a faculty member is already in the system, a dupllicate will be created.</li>
+                            <li>By selecting any or all classes listed, this will create a Faculty to Subject connection between <b>EACH</b> Faculty being uploaded and each Subject that is checked.</li>
+                            <li>Do <b>NOT</b> modify the first line of the template.</li>
+                        </ul>
+
+                        <div class="SaveButtonContainer RightRank13" style="margin-bottom: 20px;">
+                            <button type="submit" value="Save" id="submitButton" class="Color7 FontColor1">
+                                <div style="margin-left:17px">
+                                    <span class="icon-TS-22 SaveButtonIcon"></span>
+                                    <span class="SaveButtonText">Save</span>
+                                </div>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <style type="text/css">
+        .inputRightRank13, .inputRightRank13 + label, .deleteRightRank13 {
+            visibility: visible !important;
+        }
+    </style>

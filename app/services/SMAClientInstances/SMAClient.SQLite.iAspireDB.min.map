@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"C:\\Workspace\\Assembla\\iAspire_www\\www_iAspire_App\\app\\services\\SMAClientInstances\\SMAClient.SQLite.iAspireDB.min.js",
+"lineCount":1,
+"mappings":"AAAC,SAAS,EAAG,CAITA,OAAAC,OAAA,CACY,0BADZ,CACwC,CAAC,kBAAD,CADxC,CAEAD,QAAAC,OAAA,CACY,0BADZ,CAAAC,SAAA,CAEc,cAFd,CAE8B,CACtBC,KAAM,iBADgB,CAEtBC,QAAS,KAFa,CAGtBC,YAAa,0CAHS,CAItBC,KAAO,EAJe,CAF9B,CAAAC,QAAA,CAQa,iBARb,CAQgC,CAAC,cAAD,CAAiB,sBAAjB,CAAyC,iBAAzC,CAEhCC,QAAwB,CAACC,CAAD,CAAeC,CAAf,CAAqCC,CAArC,CAAsD,CAE1E,IAAIC,EAAO,IAEXA,EAAAC,GAAA,CAAU,IAEVD,EAAAE,KAAA,CAIAC,QAAuB,EAAG,CACtB,GAAI,CACA,IAAIF,EAAKH,CAAAI,KAAA,CAA0BL,CAA1B,CACLI,EAAJ,GACID,CAAAC,GADJ,CACcA,CADd,CAFA,CAKF,MAAOG,CAAP,CAAW,CACTC,OAAAC,MAAA,CAAcF,CAAd,CADS,CANS,CAF1B,OAAOJ,EARmE,CAF9C,CARhC,CANS,CAAZ,CAAD;",
+"sources":["C:/Workspace/Assembla/iAspire_www/www_iAspire_App/app/services/SMAClientInstances/SMAClient.SQLite.iAspireDB.js"],
+"names":["angular","module","constant","Name","Version","Description","Size","factory","iAspireDatabase","App_DB_CONST","SMASQLInitialization","SMASQLFunctions","iADB","db","init","initialization","ex","console","error"]
+}

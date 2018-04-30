@@ -1,0 +1,27 @@
+﻿<table style="position: relative;" width="100%" class="questionOptions">
+    <tr>
+        <td>
+            <input type="image" name="UpImageButton" id="UpImageButton" src="images/questionupbutton.gif">
+            <input type="image" name="DownImageButton" id="DownImageButton" src="images/questiondownbutton.gif">
+            <a id="EditHyperLink" href="EditSingleQuestion.aspx?surveyid=2320&amp;questionid=16409&amp;MenuIndex=12">Edit question</a>|&nbsp;
+            <a id="EditAnswersHyperLink" href="EditSingleQuestionAnswers.aspx?surveyid=2320&amp;questionid=16409&amp;MenuIndex=12">Edit answers</a>|&nbsp;
+            <a id="DeleteButton" onclick="javascript:if(confirm('Are you sure your want to delete this question?')== false) return false;" href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolder1$ContentPlaceHolder1$QuestionOptions_16409$DeleteButton','')">Delete</a>|&nbsp;
+            <a id="CloneButton" href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolder1$ContentPlaceHolder1$QuestionOptions_16409$CloneButton','')">Clone</a>|&nbsp;
+            <a id="InsertHyperLink" href="InsertQuestion.aspx?SurveyID=2320&amp;DisplayOrder=7&amp;Page=1&amp;MenuIndex=12&amp;QuestionId=16409">Insert question</a>|&nbsp;
+            <a id="InsertPageBreakButton" href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolder1$ContentPlaceHolder1$QuestionOptions_16409$InsertPageBreakButton','')">Insert page break</a>|&nbsp;
+            <a id="InsertLineBreakButton" href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolder1$ContentPlaceHolder1$QuestionOptions_16409$InsertLineBreakButton','')">Insert line break</a>|&nbsp;
+            <a id="EditSkipLogicHyperLink" class="aspNetDisabled">Skip logic</a>
+        </td>
+    </tr>
+    <tr class="IdLabel">
+        <td>
+            ID :<span id="lblId" style="color:black;"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span id="lblHelpLabel">Help Text: </span>
+            <span id="lblHelpText" class="DesignHelpText"></span>
+        </td>
+    </tr>
+</table>

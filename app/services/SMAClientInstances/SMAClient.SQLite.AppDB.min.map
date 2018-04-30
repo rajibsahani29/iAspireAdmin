@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"C:\\Workspace\\Assembla\\iAspire_www\\www_iAspire_App\\app\\services\\SMAClientInstances\\SMAClient.SQLite.AppDB.min.js",
+"lineCount":1,
+"mappings":"AAAC,SAAS,EAAG,CAITA,OAAAC,OAAA,CACY,sBADZ,CACoC,CAAC,kBAAD,CADpC,CAEAD,QAAAC,OAAA,CACY,sBADZ,CAAAC,SAAA,CAEc,aAFd,CAE6B,CACrBC,KAAM,aADe,CAErBC,QAAS,KAFY,CAGrBC,YAAa,0CAHQ,CAIrBC,KAAO,EAJc,CAF7B,CAAAC,QAAA,CAQa,aARb,CAQ4B,CAAC,aAAD,CAAgB,sBAAhB,CAE5BC,QAAoB,CAACC,CAAD,CAAcC,CAAd,CAAoC,CAEpD,IAAIC,EAAQ,IAEZA,EAAAC,GAAA,CAAW,IAEXD,EAAAE,KAAA,CAIAC,QAAuB,EAAG,CACtB,GAAI,CACA,IAAIF,EAAKF,CAAAG,KAAA,CAA0BJ,CAA1B,CACLG,EAAJ,GACID,CAAAC,GADJ,CACeA,CADf,CAFA,CAKF,MAAOG,CAAP,CAAW,CACTC,OAAAC,MAAA,CAAcF,CAAd,CADS,CANS,CAF1B,OAAOJ,EAR6C,CAF5B,CAR5B,CANS,CAAZ,CAAD;",
+"sources":["C:/Workspace/Assembla/iAspire_www/www_iAspire_App/app/services/SMAClientInstances/SMAClient.SQLite.AppDB.js"],
+"names":["angular","module","constant","Name","Version","Description","Size","factory","appDatabase","iA_DB_CONST","SMASQLInitialization","appDB","db","init","initialization","ex","console","error"]
+}

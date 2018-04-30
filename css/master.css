@@ -1,0 +1,3308 @@
+﻿/***** GLOABL STYLE *****/
+body {
+    background-color: #ececec;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    font-weight: 400 !important;
+}
+
+#themeButton {
+    clear: both;
+    /*margin: 5px auto 0 auto;*/
+    float: right;
+    cursor:  pointer;
+    font-family: open_sansbold;
+    font-size: 14px;
+    color: #707070;
+}
+
+.symbol {
+    cursor: pointer;
+}
+
+.collapsible {
+    cursor: pointer;
+}
+
+.collapseAllButton {
+    cursor:  pointer;
+    font-family: open_sansbold;
+    margin: 10px 20px 10px 1%;
+    float: left;
+    color: #707070;
+}
+
+.selectAllButton, .deselectAllButton, .masterSelectButton {
+    cursor: pointer;
+    float: right;
+    margin: 0 8px;
+}
+
+.masterSelectButton {
+    font-size: 16px !important;
+    font-family: open_sansbold;
+    display: none;
+}
+
+.PopUpWindowHeading span {
+    margin: 0 5px;
+}
+
+.TemplateButton {
+    cursor: pointer;
+    font-size: 13px;
+    color: #707070;
+    font-family: open_sansregular;
+    font-weight: bold;
+}
+
+.bulk_disclaimer, .bulk_disclaimer_list {
+    font-family: open_sansregular;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.bulk_disclaimer_list {
+
+}
+
+label.error {
+    color: red;
+    font-family: open_sansregular;
+    font-size: 12px;
+    float: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+.Spinner .RightOfImage, .Spinner .LeftOfImage {
+    display: none;
+}
+
+/*.isEmployee {
+    display: none !important;
+}*/
+
+#LeftSidebar {
+    height: 100%;
+    position: relative;
+    float: left;
+}
+
+select option {
+    color: black;
+}
+
+.SMAClientAlertContainer * {
+    font-family: open_sansregular;
+}
+
+.navigation_menu_text {
+    display: none;
+}
+
+.mobile {
+    display: block;
+}
+
+.Trigger {
+    display: none;
+}
+
+.containersmall {
+    width: 100%;
+    height: 85%;
+    position: absolute;
+    z-index: 9998;
+    float: left;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+
+.containersmall2 {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    z-index: 9998;
+    float: left;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+
+.verticalalign {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.verticalalgin2 {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.BigIconPositioning {
+    font-size: 36px;
+    text-align: right;
+    float: left;
+    box-sizing: border-box;
+    width: 35%;
+    position: relative;
+    z-index: 9999;
+    display: block;
+}
+
+.SmallIconPositioning {
+    font-size: 40px;
+    text-align: center;
+    float: left;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    z-index: 9999;
+    display: block;
+}
+
+.BarText {
+    float: left;
+    text-align: left;
+    font-size: 16px;
+    font-family: open_sansregular;
+    position: relative;
+    width: 65%;
+    z-index: 9999;
+    padding: 9px 0 0 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.BarContainer {
+    width: 100%;
+    height: 8%;
+    float: left;
+    display: table;
+    box-sizing: border-box;
+    border-bottom-style: solid;
+    border-bottom-color: #333333;
+    transition: all 0.7s ease-out;
+    cursor: pointer;
+}
+
+.TopAdminBar {
+    width: 100%;
+    height: 10%;
+    float: left;
+    background-color: none;
+    display: table;
+}
+
+.TriggerIcon {
+    font-size: 25px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.AdminTextContainer {
+    float: right;
+    margin: auto;
+    display: block;
+    text-align: center;
+    background-color: none;
+    padding-right: 10px;
+}
+
+.IconBackgroundContainer {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    float: left;
+    display: table;
+}
+
+.PersonIcon {
+    text-align: center;
+    display: block;
+    font-size: 14px;
+}
+
+.TopRightTextContainer {
+    float: left;
+    padding-left: 6px;
+    background-color: none;
+    height: 100%;
+    display: table;
+}
+
+.AdminText {
+    font-size: 16px;
+    float: left;
+    font-family: open_sansbold;
+    cursor: pointer;
+}
+
+.DividerText {
+    font-size: 16px;
+    float: left;
+    font-family: open_sansbold;
+}
+
+.LogoutText {
+    font-size: 12px;
+    padding-top: 8%;
+    float: left;
+    font-family: open_sansbold;
+    cursor: pointer;
+}
+
+.HeadingBar {
+    height: 10%;
+    width: 100%;
+    float: left;
+    display: table;
+}
+
+.HeadingLabel {
+    padding-left: 10px;
+    font-size: 22px;
+    float: left;
+    font-family: open_sansbold;
+}
+
+.HelpLabel {
+    float: right;
+    font-size: 10px;
+    padding-right: 10px;
+    font-family: open_sansbold;
+}
+
+.BigRightContainer {
+    height: 80%;
+    width: 100%;
+    float: left;
+}
+
+.WhiteBackgroundContainerMenu {
+    width: 96%;
+    overflow: auto;
+    padding-bottom: 20px;
+    height: auto;
+    margin: auto;
+    margin-top: 1.5%;
+    box-sizing: border-box;
+    border: 2pt solid #e2e2e2;
+}
+
+.WhiteBackgroundContainerMenuFacts {
+    width: 96%;
+    height: auto;
+    margin: auto;
+    margin-top: 1.5%;
+    box-sizing: border-box;
+    border: 2pt solid #e2e2e2;
+}
+
+.WhiteBackgroundContainerMenuPhotobooth {
+    width: 96%;
+    height: 157px;
+    margin: auto;
+    margin-top: 1.5%;
+    box-sizing: border-box;
+    border: 2pt solid #e2e2e2;
+}
+
+.WhiteBackgroundContainerMap {
+    width: 97.3%;
+    height: 152px;
+    float: left;
+    margin-left: 1.3%;
+    box-sizing: border-box;
+    border: 2pt solid #e2e2e2;
+}
+
+.WhiteBackgroundContainerMapBig {
+    width: 97.2%;
+    height: auto;
+    margin: auto;
+    margin-top: 195px;
+    box-sizing: border-box;
+    border: 2pt solid #e2e2e2;
+}
+
+.CustomSettingsContainer {
+    width: 100%;
+    height: 62px;
+    background-color: none;
+    display: table;
+}
+
+.CustomSettingsLabel {
+    font-size: 18px;
+    margin-left: 2%;
+    float: left;
+    font-family: open_sansbold;
+}
+
+.HeadingTopLabel {
+    font-size: 18px;
+    margin-left: 5%;
+    float: left;
+    font-family: open_sansbold;
+}
+
+.HeadingTopLabelMap {
+    font-size: 18px;
+    margin-left: 3%;
+    float: left;
+    font-family: open_sansbold;
+}
+
+.EditSmallBar {
+    margin-left: 1.5%;
+    width: 97%;
+    height: 70px;
+    float: left;
+    margin-bottom: 10px;
+    background-color: none;
+    border-radius: 5px;
+    display: table;
+    border: 2pt solid #dbdbdb;
+    box-sizing: border-box;
+}
+
+.EditSmallBarLong {
+    margin-left: 1.5%;
+    width: 97%;
+    height: 70px;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: none;
+    border-radius: 5px;
+    display: table;
+    border: 2pt solid #dbdbdb;
+    box-sizing: border-box;
+}
+
+.CategoryBar {
+    width: 96%;
+    height: 70px;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: none;
+    display: block;
+    box-sizing: border-box;
+}
+
+.SmallBarDisplayBoxWidth {
+    width: 35px;
+}
+
+.SmallBarDisplayBox {
+    height: 56%;
+    width: 35px;
+    margin-left: 6px;
+    border-radius: 5px;
+    float: left;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    display: table;
+}
+
+.SmallBarLabel {
+    font-size: 13px;
+    float: left;
+    padding-left: 3.5%;
+    font-family: open_sansregular;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.SmallBarLabelMapCenter {
+    font-size: 14px;
+    float: left;
+    padding-left: 3%;
+    font-family: open_sansregular;
+}
+
+.EditButton {
+    width: 60px;
+    height: 25px;
+    border: solid 2px #acacac;
+    font-size: 13px;
+    font-family: open_sansbold;
+    border-radius: 3px;
+    float: right;
+    margin-right: 15%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.EditBigBar {
+    width: 97%;
+    margin-left: 1.5%;
+    margin-bottom: 10px;
+    height: 275px;
+    float: left;
+    border: 2pt solid #dbdbdb;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.BigBarTopContainer {
+    width: 100%;
+    height: 65px;
+    float: left;
+    display: table;
+}
+
+.BigBarBottomContainer {
+    height: 205px;
+    width: 100%;
+    background-color: none;
+    float: left;
+    display: table;
+}
+
+.IconLogo {
+    margin: auto;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+}
+
+.LogoPicture {
+    width: 220px;
+    height: 125px;
+    margin: auto;
+    display: block;
+}
+
+.CoverImagePicture {
+    width: 100px;
+    height: 175px;
+    margin: auto;
+    display: block;
+}
+
+.TopBarPopUpWindow {
+    width: 96%;
+    height: 65px;
+    float: left;
+    display: table;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.PopUpWindowHeading {
+    font-size: 14px;
+    margin-left: 5%;
+    font-family: open_sansbold;
+}
+
+.CancelLabel {
+    float: right;
+    margin-right: 15%;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: open_sansregular;
+}
+
+.PopUpWindowLabel {
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    margin-left: 3px;
+    font-family: open_sansregular;
+}
+
+.SmallSettingContainer {
+    width: 100%;
+    height: 53px;
+    background-color: none;
+    float: left;
+    margin-top: 8px;
+}
+
+.AllSettingsContainer {
+    width: 94%;
+    margin-left: 3%;
+    height: 264px;
+    background-color: none;
+    float: left;
+}
+
+.AllSettingsContainerSmall {
+    width: 94%;
+    margin-left: 3%;
+    height: 86px;
+    background-color: none;
+    float: left;
+}
+
+.AllSettingsContainerBig {
+    width: 94%;
+    margin-left: 3%;
+    height: auto;
+    background-color: none;
+    float: left;
+}
+
+.SettingsBox {
+    width: 100%;
+    height: 30px;
+    margin-top: 2px;
+    background-color: white;
+    box-sizing: border-box;
+    border: 2px solid #e2e2e2;
+    border-radius: 3px;
+    float: left;
+}
+input.SettingsBox, select.SettingsBox {
+    padding: 5px;
+    font-family: open_sansregular;
+}
+
+#ptdDayContainer, #ptdMonthContainer, #ptdYearContainer, #ptdClear {
+    width: 20%;
+    float: left;
+}
+
+label#ptdMonth-error, label#ptdDay-error, label#ptdYear-error {
+    clear: both;
+}
+
+#ptdDayContainer {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#ptdMonth, #ptdDay, #ptdYear {
+    float: none;
+    color: grey;
+    padding: 0px 5px !important;
+    box-sizing: border-box;
+}
+
+#ptdMonthPlaceholder, #ptdDayPlaceholder, #ptdYearPlaceholder {
+    color: grey;
+}
+
+#ptdClear {
+    margin-left: 2%;
+    font-family: open_sansregular;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.SearchBox {
+    margin-left: 1.5%;
+    width: 97%;
+    margin-bottom: 10px;
+}
+
+.PixelFontSize {
+    font-size: 11px;
+}
+
+.TransparentBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10001;
+    display: none;
+    margin-top: -70px;
+}
+
+.Transparency {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: .8;
+    background-color: black;
+}
+
+.PopUpDisplay {
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    position: absolute;
+    display: table;
+}
+
+.PopUpWindow {
+    width: 95%;
+    height: 410px;
+    margin: auto;
+    display: block;
+    overflow: auto;
+}
+
+.PopUpWindowSmall {
+    width: 95%;
+    height: 213px;
+    margin: auto;
+    display: block;
+}
+
+.PopUpWindowBig {
+    width: 95%;
+    height: 450px;
+    margin: auto;
+    overflow: auto;
+    display: block;
+}
+
+.PictureNameLabel {
+    float: left;
+    padding-left: 8px;
+    font-size: 12px;
+    font-family: open_sansregular;
+}
+
+.BrowseButton {
+    font-size: 12px;
+    font-family: open_sansbold;
+    border: none;
+    float: right;
+    margin-right: 4%;
+    border-radius: 3px;
+    width: 60px;
+    height: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.LogoContainer {
+    width: 47%;
+    height: 140px;
+    float: left;
+    margin-top: 8px;
+    margin-left: .75%;
+    display: none;
+}
+
+.CoverImageContainer {
+    width: 48%;
+    height: 140px;
+    float: right;
+    margin-top: 8px;
+    margin-right: 1px;
+}
+
+.LogoPopUpWindow {
+    height: 140px;
+    width: 100%;
+    display: none;
+}
+
+.CoverImageHolderPopUp {
+    width: 80px;
+    height: 140px;
+    margin: auto;
+    display: none;
+}
+
+.SaveButtonContainer {
+    height: 35px;
+    width: 94%;
+    margin-left: 3%;
+    background-color: none;
+    float: left;
+}
+
+.SaveButton {
+    width: 95px;
+    height: 34px;
+    border: none;
+    border-radius: 3px;
+    float: right;
+    display: table;
+    cursor: pointer;
+}
+
+.SaveButtonIcon {
+    font-size: 17px;
+    float: left;
+    cursor: pointer;
+    padding-top: 1px;
+}
+
+.SaveButtonText {
+    font-size: 14px;
+    cursor: pointer;
+    float: left;
+    padding-left: 8px;
+    font-family: open_sansregular;
+}
+
+.ColorPicker {
+    width: 98%;
+    height: 94%;
+    margin: auto;
+    display: block;
+}
+
+.AddNewArticle {
+    width: 130px;
+    height: 35px;
+    margin-right: 7%;
+    float: right;
+    display: table;
+    cursor: pointer;
+}
+
+.ButtonPositioning {
+    height: auto;
+    width: 115px;
+    margin: auto;
+    display: block;
+    background-color: none;
+}
+
+.CrossArrowIcon {
+    font-size: 16px;
+    float: left;
+    padding-top: 2px;
+}
+
+.SavePosititiongContainer {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-left: 17px;
+}
+
+.AddNewArticleText {
+    font-size: 12px;
+    float: left;
+    padding-left: 5px;
+    font-family: open_sansbold;
+    cursor: pointer;
+}
+
+.AddNewLocation {
+    width: 140px;
+    height: 35px;
+    margin-right: 3%;
+    float: right;
+    display: table;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.AddNewAccount {
+    width: 150px;
+    height: 35px;
+    margin-right: 2%;
+    float: right;
+    display: table;
+    cursor: pointer;
+}
+
+.ButtonPositioningAccount {
+    height: auto;
+    width: 150px;
+    margin: auto;
+    display: block;
+    background-color: none;
+}
+
+.ButtonPositioningLocation {
+    height: auto;
+    width: 123px;
+    margin: auto;
+    display: block;
+    background-color: none;
+}
+
+.DeleteEventContainer {
+    background-color: none;
+    margin-left: 5%;
+    height: 15px;
+    width: 105px;
+}
+
+#DeleteButton {
+    cursor: pointer;
+}
+
+.DeleteEventIcon {
+    font-size: 13px;
+    float: left;
+    width: auto;
+    height: 100%;
+    margin-top: 2px;
+}
+
+.DeleteEventText {
+    font-size: 11px;
+    padding-left: 5px;
+    font-family: open_sansbold;
+}
+
+.SortContainer {
+    background-color: none;
+    height: 15px;
+    width: 100px;
+    margin-left: 5%;
+}
+
+.TitleTextbox {
+    border: none;
+    width: 96%;
+    height: 74%;
+    padding-left: 3%;
+    padding-top: 6px;
+    font-size: 12px;
+    font-family: open_sansregular;
+    resize: none;
+}
+
+.BigSettingsContainer {
+    width: 100%;
+    height: 140px;
+    background-color: none;
+    float: left;
+    margin-top: 8px;
+}
+
+.BigTextboxHolder {
+    width: 100%;
+    height: 120px;
+    margin-top: 4px;
+    background-color: white;
+    box-sizing: border-box;
+    border: 2px solid #e2e2e2;
+    border-radius: 3px;
+    float: left;
+}
+
+.BigTextbox {
+    width: 94%;
+    height: 96%;
+    border: none;
+    padding-left: 3%;
+    font-size: 12px;
+    font-family: open_sansregular;
+    padding-top: 3%;
+    padding-right: 3%;
+    resize: none;
+}
+
+.Slash {
+    padding-left: 3px;
+    display: none;
+}
+
+.SecondLabelSize {
+    font-size: 13px;
+    padding-left: 4px;
+    display: none;
+}
+
+.DownArrowIcon {
+    font-size: 6px;
+    float: left;
+    padding-left: 5px;
+    width: auto;
+    height: 100%;
+    margin-top: 5px;
+}
+
+.SortText {
+    font-size: 12px;
+    float: left;
+    width: auto;
+    height: 100%;
+    font-family: open_sansregular;
+    cursor: pointer;
+}
+
+.CategoryIcon {
+    width: 35px;
+    font-size: 26px;
+    height: auto;
+    background-color: none;
+    margin: auto;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.CategoryText {
+    font-size: 6px;
+    font-family: open_sansregular;
+    display: none;
+    text-align: center;
+    margin: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.CategorySection {
+    width: 16.6%;
+    height: 100%;
+    float: left;
+    display: table;
+    cursor: pointer;
+}
+
+.ToggleIcon {
+    font-size: 32px;
+    margin-left: 10px;
+    background-color: none;
+    float: left;
+}
+
+.ToggleText {
+    font-size: 18px;
+    font-family: open_sansregular;
+    padding-left: 15px;
+    margin-top: 7px;
+    background-color: none;
+    float: left;
+}
+
+.TimePicker {
+    width: 97%;
+    height: 100%;
+    border: none;
+    padding-left: 3%;
+    font-size: 12px;
+    font-family: open_sansregular;
+}
+
+.Position1 {
+    margin-top: 25px;
+}
+
+.ButtonEvents {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.ButtonMap {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.Scroll {
+    overflow: auto;
+}
+
+.NoScroll {
+    overflow: hidden;
+}
+
+.BulkUpload {
+    width: 70px;
+    height: 35px;
+    margin-right: 7%;
+    float: right;
+    display: table;
+    cursor: pointer;
+}
+
+.ButtonPositioningUpload {
+    height: auto;
+    width: 50px;
+    margin: auto;
+    display: block;
+    background-color: none;
+}
+
+.spacer1 {
+    width: 7px;
+}
+
+.LoginBox {
+    width: 95%;
+    height: 425px;
+    margin: auto;
+}
+
+.LogoContainer {
+    width: 100%;
+    height: 30%;
+    float: left;
+    background-color: none;
+    display: table;
+}
+
+.PictureContainer {
+    width: 60%;
+    height: auto;
+    margin: auto;
+    display: block;
+    background-color: none;
+    padding-right: 45px;
+    padding-top: 6px;
+}
+
+.PictureContainer img {
+    width:100%;
+    height:100%;
+}
+
+.TextboxContainer {
+    width: 100%;
+    height: 19%;
+    float: left;
+    background-color: none;
+    display: table;
+}
+
+.LoginTextbox {
+    width: 85%;
+    height: 63px;
+    margin: auto;
+    display: block;
+    font-size: 20px;
+    padding-left: 10px;
+    border: none;
+    font-family: open_sansbold;
+    margin-bottom: 15px;
+}
+
+.LoginTextContainer {
+    width: 100%;
+    height: 21%;
+    float: left;
+    background-color: none;
+    display: table;
+}
+
+.LoginButton {
+    margin: auto;
+    display: block;
+    text-align: center;
+    width: 86%;
+    height: 69px;
+    cursor: pointer;
+    font-size: 28px;
+    border: 2px solid #e2e2e2;
+    font-family: open_sansbold;
+    border: none;
+    padding: 0;
+}
+
+.Hide {
+    display: none;
+}
+
+.AddNew {
+    width: 70px;
+    height: 35px;
+    margin-right: 7%;
+    float: right;
+    display: table;
+    cursor: pointer;
+}
+
+.AddNewPositioning {
+    height: auto;
+    width: 50px;
+    margin: auto;
+    display: block;
+    background-color: none;
+}
+
+.LoginBoxVA {
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-color: none;
+    display: table;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.OptionBackground {
+    width: 100%;
+    height: 50%;
+    z-index: 99999;
+    position: relative;
+    display: table;
+    background-color: none;
+    float: left;
+}
+
+.Option {
+    height: 215px;
+    width: 215px;
+    margin: auto;
+    display: block;
+    cursor: pointer;
+    display: table;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+
+.BigIcon {
+    width: 200px;
+    height: 150px;
+    background-color: none;
+    margin: auto;
+}
+
+.IconStyling {
+    font-size: 130px;
+    display: block;
+    text-align: center;
+}
+
+.OptionLabel {
+    font-size: 18px;
+    text-align: center;
+    display: block;
+    margin-top: 0px;
+    cursor: pointer;
+    font-family: open_sansbold;
+}
+
+.ButtonPositioningDepartment {
+    height: auto;
+    width: 146px;
+    margin: auto;
+    display: block;
+    background-color: none;
+}
+
+.AddNewDepartment {
+    width: 155px;
+    height: 35px;
+    margin-right: 3%;
+    float: right;
+    display: table;
+    cursor: pointer;
+}
+
+/***** TABLET *****/
+@media only screen and (min-width: 600px) {
+    .mobile {
+        display: block;
+    }
+
+    .Trigger {
+        display: none;
+    }
+
+    body {
+        background-color: #ececec;
+    }
+
+    .containersmall {
+        width: 100%;
+        height: 85%;
+        position: absolute;
+        z-index: 9998;
+        float: left;
+        box-sizing: border-box;
+        transition: all 0.3s ease-out;
+    }
+
+    .containersmall2 {
+        width: 100%;
+        height: 90%;
+        position: absolute;
+        z-index: 9998;
+        float: left;
+        box-sizing: border-box;
+        transition: all 0.3s ease-out;
+    }
+
+    .verticalalign {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .verticalalgin2 {
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+    .BigIconPositioning {
+        font-size: 36px;
+        text-align: right;
+        float: left;
+        box-sizing: border-box;
+        width: 35%;
+        position: relative;
+        z-index: 9999;
+        display: block;
+    }
+
+    .SmallIconPositioning {
+        font-size: 40px;
+        text-align: center;
+        float: left;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        z-index: 9999;
+        display: block;
+    }
+
+    .BarText {
+        float: left;
+        text-align: left;
+        font-size: 16px;
+        font-family: open_sansregular;
+        position: relative;
+        width: 65%;
+        z-index: 9999;
+        padding: 9px 0 0 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .BarContainer {
+        width: 100%;
+        height: 8%;
+        float: left;
+        display: table;
+        box-sizing: border-box;
+        border-bottom-style: solid;
+        border-bottom-color: #333333;
+        transition: all 0.7s ease-out;
+        cursor: pointer;
+    }
+
+    .TopAdminBar {
+        width: 100%;
+        height: 8%;
+        float: left;
+        background-color: none;
+        display: table;
+        min-height: 55px;
+    }
+
+    .TriggerIcon {
+        font-size: 25px;
+        margin-left: 25px;
+        cursor: pointer;
+    }
+
+    .AdminTextContainer {
+        float: right;
+        padding-right: 35px;
+    }
+
+    .IconBackgroundContainer {
+        width: 25px;
+        height: 25px;
+        border-radius: 25px;
+        float: left;
+        display: table;
+    }
+
+    .PersonIcon {
+        text-align: center;
+        display: block;
+        font-size: 18px;
+    }
+
+    .TopRightTextContainer {
+        float: left;
+        padding-left: 10px;
+        background-color: none;
+        height: 100%;
+        display: table;
+    }
+
+    .AdminText {
+        font-size: 19px;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .DividerText {
+        font-size: 19px;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .LogoutText {
+        font-size: 14px;
+        padding-top: 8%;
+        float: left;
+    font-family: open_sansbold;
+        cursor: pointer;
+    }
+
+    .HeadingBar {
+        height: 9%;
+        width: 100%;
+        float: left;
+        display: table;
+    }
+
+    .HeadingLabel {
+        padding-left: 25px;
+        font-size: 26px;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .HelpLabel {
+        float: right;
+        font-size: 12px;
+        padding-right: 35px;
+    font-family: open_sansbold;
+    }
+
+    .BigRightContainer {
+        height: 82%;
+        width: 100%;
+        float: left;
+        overflow-y: auto;
+    }
+
+    .BigRightContainerExtended {
+        height: 86%;
+    }
+
+    .WhiteBackgroundContainerMenu {
+        width: 96%;
+        overflow: auto;
+        padding-bottom: 15px;
+        height: auto;
+        margin: auto;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMenuFacts {
+        width: 96%;
+        height: auto;
+        margin: auto;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMenuPhotobooth {
+        width: 96%;
+        height: 157px;
+        margin: auto;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMap {
+        width: 48%;
+        height: 152px;
+        float: left;
+        margin-left: 1.35%;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMapBig {
+        width: 97.2%;
+        height: auto;
+        margin: auto;
+        margin-top: 195px;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .CustomSettingsContainer {
+        width: 100%;
+        height: 62px;
+        background-color: none;
+        display: table;
+    }
+
+    .CustomSettingsLabel {
+        font-size: 20px;
+        margin-left: 1%;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .HeadingTopLabel {
+        font-size: 20px;
+        margin-left: 2%;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .HeadingTopLabelMap {
+        font-size: 20px;
+        margin-left: 2%;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .EditSmallBar {
+        margin-left: 1.5%;
+        width: 97%;
+        height: 70px;
+        float: left;
+        margin-bottom: 10px;
+        background-color: none;
+        border-radius: 5px;
+        display: table;
+        border: 2pt solid #dbdbdb;
+        box-sizing: border-box;
+    }
+
+    .SearchBox {
+        margin-left: 1%;
+        width: 48.5%;
+        margin-bottom: 10px;
+    }
+
+    .EditSmallBarLong {
+        margin-left: 1.5%;
+        width: 97%;
+        height: 70px;
+        margin: auto;
+        margin-bottom: 10px;
+        background-color: none;
+        border-radius: 5px;
+        display: table;
+        border: 2pt solid #dbdbdb;
+        box-sizing: border-box;
+    }
+
+    .CategoryBar {
+        width: 96%;
+        height: 70px;
+        margin: auto;
+        margin-bottom: 10px;
+        background-color: none;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    .SmallBarDisplayBoxWidth {
+        width: 55px;
+    }
+
+    .SmallBarDisplayBox {
+        height: 86%;
+        width: 55px;
+        margin-left: 6px;
+        border-radius: 5px;
+        float: left;
+        border: 1px solid gray;
+        box-sizing: border-box;
+        display: table;
+    }
+
+    .SmallBarLabel {
+        font-size: 16px;
+        float: left;
+        padding-left: 3.5%;
+        font-family: open_sansregular;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .SmallBarLabelMapCenter {
+        font-size: 16px;
+        float: left;
+        padding-left: 3%;
+        font-family: open_sansregular;
+    }
+
+    .EditButton {
+        width: 70px;
+        height: 30px;
+        border: solid 2px #acacac;
+        font-size: 15px;
+    font-family: open_sansbold;
+        border-radius: 3px;
+        float: right;
+        margin-right: 15%;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .EditBigBar {
+        width: 48.5%;
+        margin-left: 1%;
+        margin-bottom: 0px;
+        height: 275px;
+        float: left;
+        border: 2pt solid #dbdbdb;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    .BigBarTopContainer {
+        width: 100%;
+        height: 65px;
+        float: left;
+        display: table;
+    }
+
+    .BigBarBottomContainer {
+        height: 205px;
+        width: 100%;
+        background-color: none;
+        float: left;
+        display: table;
+    }
+
+    .IconLogo {
+        margin: auto;
+        text-align: center;
+        display: block;
+        font-size: 28px;
+    }
+
+    .LogoPicture {
+        width: 220px;
+        height: 125px;
+        margin: auto;
+        display: block;
+    }
+
+    .CoverImagePicture {
+        width: 100px;
+        height: 175px;
+        margin: auto;
+        display: block;
+    }
+
+    .TopBarPopUpWindow {
+        width: 96%;
+        height: 65px;
+        float: left;
+        display: table;
+        margin-left: 2%;
+        margin-top: 2%;
+    }
+
+    .PopUpWindowHeading {
+        font-size: 18px;
+        margin-left: 5%;
+    font-family: open_sansbold;
+    }
+
+    .CancelLabel {
+        float: right;
+        margin-right: 25%;
+        cursor: pointer;
+        font-size: 14px;
+        font-family: open_sansregular;
+    }
+
+    .PopUpWindowLabel {
+        font-size: 13px;
+        float: left;
+        width: 100%;
+        margin-left: 3px;
+    font-family: open_sansregular;
+    }
+
+    .SmallSettingContainer {
+        width: 48.5%;
+        height: 53px;
+        background-color: none;
+        float: left;
+        margin-top: 8px;
+    }
+
+    .AllSettingsContainer {
+        width: 94%;
+        margin-left: 3%;
+        height: 298px;
+        background-color: none;
+        float: left;
+    }
+
+    .AllSettingsContainerSmall {
+        width: 94%;
+        margin-left: 3%;
+        height: 86px;
+        background-color: none;
+        float: left;
+    }
+
+    .AllSettingsContainerBig {
+        width: 94%;
+        margin-left: 3%;
+        height: 345px;
+        background-color: none;
+        float: left;
+    }
+
+    .PixelFontSize {
+        font-size: 11px;
+    }
+
+    .TransparentBackground {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 10001;
+        display: none;
+        margin-top: -70px;
+    }
+
+    .Transparency {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: .8;
+        background-color: black;
+    }
+
+    .PopUpDisplay {
+        width: 100%;
+        height: 100%;
+        z-index: 99999;
+        position: absolute;
+        display: table;
+    }
+
+    .PopUpWindow {
+        width: 600px;
+        height: 425px;
+        margin: auto;
+        display: block;
+    }
+
+    .PopUpWindowSmall {
+        width: 600px;
+        height: 213px;
+        margin: auto;
+        display: block;
+    }
+
+    .PopUpWindowBig {
+        width: 600px;
+        height: 470px;
+        margin: auto;
+        display: block;
+    }
+
+    .PictureNameLabel {
+        float: left;
+        padding-left: 8px;
+        font-size: 12px;
+        font-family: open_sansregular;
+    }
+
+    .BrowseButton {
+        font-size: 12px;
+        font-family: open_sansbold;
+        border: none;
+        float: right;
+        margin-right: 4%;
+        border-radius: 3px;
+        width: 60px;
+        height: 20px;
+        margin-top: 3px;
+        cursor: pointer;
+    }
+
+    .LogoContainer {
+        width: 47%;
+        height: 140px;
+        float: left;
+        margin-top: 8px;
+        margin-left: .75%;
+        display: block;
+    }
+
+    .CoverImageContainer {
+        width: 48%;
+        height: 140px;
+        float: right;
+        margin-top: 8px;
+        margin-right: 1px;
+    }
+
+    .LogoPopUpWindow {
+        height: 140px;
+        width: 100%;
+        display: block;
+    }
+
+    .CoverImageHolderPopUp {
+        width: 80px;
+        height: 140px;
+        margin: auto;
+        display: block;
+    }
+
+    .SaveButtonContainer {
+        height: 35px;
+        width: 94%;
+        margin-left: 3%;
+        background-color: none;
+        float: left;
+    }
+
+    .SaveButton {
+        width: 95px;
+        height: 34px;
+        border: none;
+        border-radius: 3px;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .SaveButtonIcon {
+        font-size: 17px;
+        float: left;
+        cursor: pointer;
+        padding-top: 1px;
+    }
+
+    .SaveButtonText {
+        font-size: 14px;
+        cursor: pointer;
+        float: left;
+        padding-left: 8px;
+        font-family: open_sansregular;
+    }
+
+    .ColorPicker {
+        width: 98%;
+        height: 94%;
+        margin: auto;
+        display: block;
+    }
+
+    .AddNewArticle {
+        width: 210px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ButtonPositioning {
+        height: auto;
+        width: 155px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .CrossArrowIcon {
+        font-size: 20px;
+        float: left;
+        padding-top: 2px;
+    }
+
+    .SavePosititiongContainer {
+        width: 80px;
+        height: auto;
+        display: block;
+        margin: auto;
+        margin-left: 17px;
+    }
+
+    .AddNewArticleText {
+        font-size: 17px;
+        float: left;
+        padding-left: 8px;
+    font-family: open_sansbold;
+        cursor: pointer;
+    }
+
+    .AddNewLocation {
+        width: 210px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .AddNewDepartment {
+        width: 225px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .AddNewAccount {
+        width: 210px;
+        height: 45px;
+        margin-right: 2%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ButtonPositioningAccount {
+        height: auto;
+        width: 180px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .ButtonPositioningLocation {
+        height: auto;
+        width: 172px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .DeleteEventContainer {
+        background-color: none;
+        margin-left: 5%;
+        height: 15px;
+        width: 105px;
+    }
+
+    .DeleteEventIcon {
+        font-size: 13px;
+        float: left;
+        width: auto;
+        height: 100%;
+        margin-top: 2px;
+    }
+
+    .DeleteEventText {
+        font-size: 11px;
+        padding: 5px;
+    font-family: open_sansbold;
+    }
+
+    .SortContainer {
+        background-color: none;
+        height: 15px;
+        width: 100px;
+        margin-left: 1.5%;
+    }
+
+    .TitleTextbox {
+        border: none;
+        width: 96%;
+        height: 74%;
+        padding-left: 3%;
+        padding-top: 6px;
+        font-size: 12px;
+        font-family: open_sansregular;
+        resize: none;
+    }
+
+    .BigSettingsContainer {
+        width: 48.5%;
+        height: 143px;
+        background-color: none;
+        float: left;
+        margin-top: 8px;
+    }
+
+    .BigTextboxHolder {
+        width: 100%;
+        height: 120px;
+        margin-top: 4px;
+        background-color: white;
+        box-sizing: border-box;
+        border: 2px solid #e2e2e2;
+        border-radius: 3px;
+        float: left;
+    }
+
+    .BigTextbox {
+        width: 94%;
+        height: 96%;
+        border: none;
+        padding-left: 3%;
+        font-size: 12px;
+        font-family: open_sansregular;
+        padding-top: 3%;
+        padding-right: 3%;
+        resize: none;
+    }
+
+    .Slash {
+        padding-left: 3px;
+    }
+
+    .SecondLabelSize {
+        font-size: 13px;
+        padding-left: 4px;
+    }
+
+    .DownArrowIcon {
+        font-size: 6px;
+        float: left;
+        padding-left: 5px;
+        width: auto;
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .SortText {
+        font-size: 12px;
+        float: left;
+        width: auto;
+        height: 100%;
+        font-family: open_sansregular;
+        cursor: pointer;
+    }
+
+    .CategoryIcon {
+        width: 35px;
+        font-size: 24px;
+        height: auto;
+        background-color: none;
+        margin: auto;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .CategoryText {
+        font-size: 8px;
+        font-family: open_sansregular;
+        display: block;
+        text-align: center;
+        margin: auto;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+
+    .CategorySection {
+        width: 16.6%;
+        height: 100%;
+        float: left;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ToggleIcon {
+        font-size: 32px;
+        margin-left: 10px;
+        background-color: none;
+        float: left;
+    }
+
+    .ToggleText {
+        font-size: 18px;
+        font-family: open_sansregular;
+        padding-left: 15px;
+        margin-top: 7px;
+        background-color: none;
+        float: left;
+    }
+
+    .TimePicker {
+        width: 97%;
+        height: 100%;
+        border: none;
+        padding-left: 3%;
+        font-size: 12px;
+        font-family: open_sansregular;
+    }
+
+    .Position1 {
+        margin-top: 0px;
+    }
+
+    .ButtonEvents {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .ButtonMap {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .Scroll {
+        overflow: auto;
+    }
+
+    .NoScroll {
+        overflow: hidden;
+    }
+
+    .ButtonPositioningDepartment {
+        height: auto;
+        width: 202px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .BulkUpload {
+        width: 165px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ButtonPositioningUpload {
+        height: auto;
+        width: 130px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .spacer1 {
+        width: 10px;
+    }
+
+    .LoginBox {
+        width: 600px;
+        height: 425px;
+        margin: auto;
+    }
+
+    .LogoContainer {
+        width: 100%;
+        height: 30%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .PictureContainer {
+        width: 60%;
+        height: auto;
+        margin: auto;
+        display: block;
+        background-color: none;
+        padding-right: 45px;
+        padding-top: 6px;
+    }
+
+    .TextboxContainer {
+        width: 100%;
+        height: 19%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .LoginTextContainer {
+        width: 100%;
+        height: 21%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .Hide {
+        display: inline;
+    }
+
+    .OptionBackground {
+        width: 100%;
+        height: 50%;
+        z-index: 99999;
+        position: relative;
+        display: table;
+        background-color: none;
+        float: left;
+    }
+
+    .Option {
+        height: 300px;
+        width: 300px;
+        margin: auto;
+        display: block;
+        cursor: pointer;
+        display: table;
+        border: 2px solid black;
+        box-sizing: border-box;
+    }
+
+    .BigIcon {
+        width: 200px;
+        height: 200px;
+        background-color: none;
+        margin: auto;
+    }
+
+    .IconStyling {
+        font-size: 150px;
+        display: block;
+        text-align: center;
+    }
+
+    .OptionLabel {
+        font-size: 22px;
+        text-align: center;
+        display: block;
+        margin-top: 0px;
+        cursor: pointer;
+    font-family: open_sansbold;
+    }
+
+    .AddNew {
+        width: 210px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .AddNewPositioning {
+        height: auto;
+        width: 172px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .LoginBoxVA {
+        width: 100%;
+        height: 100%;
+        float: left;
+        background-color: none;
+        display: table;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+}
+
+/***** DESKTOP *****/
+@media only screen and (min-width: 1021px) {
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
+
+    .Trigger {
+        display: block;
+    }
+
+    .navigation_menu_text {
+        height: 100%;
+        width: 300px;
+        float: left;
+        z-index: 9999;
+        position: relative;
+        transition: all 0.3s ease-out;
+        display: block;
+        overflow-y: auto;
+    }
+
+    .navigation_menu_icon {
+        width: 100px;
+        height: 100%;
+        float: left;
+        z-index: 9999;
+        position: relative;
+        transition: all 0.3s ease-out;
+    }
+
+    .navigation_menu_image {
+        height: 9%;
+        width: 200px;
+        float: left;
+        z-index: 9999;
+        position: relative;
+    }
+
+    .blacktext {
+        width: 200px;
+        height: 80px;
+    }
+
+    .buttonbig {
+        background-color: grey;
+        width: 50px;
+        height: 50px;
+        display: none;
+    }
+
+    .buttonsmall {
+        background-color: green;
+        width: 50px;
+        height: 50px;
+        display: block;
+    }
+
+    .containersmall {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 9998;
+        float: left;
+        padding-left: 300px;
+        box-sizing: border-box;
+        background-color: #67686c;
+        transition: all 0.3s ease-out;
+    }
+
+    .containerbig {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 9998;
+        float: left;
+        padding-left: 100px;
+        box-sizing: border-box;
+        background-color: #f7f9f7;
+        transition: all 0.3s ease-out;
+    }
+
+    .displayblock {
+        display: block;
+        padding: 13px 20px;
+        box-sizing: border-box;
+    }
+
+    .display {
+        display: block;
+        transition: all 0.9s ease-out;
+    }
+
+    .none {
+        display: none;
+        transition: all 0.9s ease-out;
+    }
+
+    .displaynone {
+        display: none;
+    }
+
+    .displaynone2 {
+        display: none;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .hide1 {
+        display: none;
+    }
+
+    .hide2 {
+        display: block;
+        padding: 20px 15px;
+        box-sizing: border-box;
+    }
+
+    .hide3 {
+        display: block;
+    }
+
+    .hide4 {
+        display: block;
+    }
+
+    .iconstxt {
+        display: block;
+        font-size: 40px;
+        text-align: center;
+        float: left;
+        margin-left: 10%;
+        box-sizing: border-box;
+        width: 40%;
+        position: relative;
+        z-index: 9999;
+    }
+
+    .icons {
+        display: none;
+        font-size: 40px;
+        text-align: center;
+        float: left;
+        margin-left: 10%;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        z-index: 9999;
+    }
+
+    #button3 {
+        transition: all 1.0s ease-out;
+    }
+
+    .verticalalign {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .verticalalgin2 {
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+    .BigIconPositioning {
+        font-size: 36px;
+        text-align: right;
+        float: left;
+        box-sizing: border-box;
+        width: 35%;
+        position: relative;
+        z-index: 9999;
+        display: block;
+    }
+
+    .SmallIconPositioning {
+        font-size: 40px;
+        text-align: center;
+        float: left;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        z-index: 9999;
+        display: block;
+    }
+
+    .BarText {
+        float: left;
+        text-align: left;
+        font-size: 16px;
+        font-family: open_sansregular;
+        position: relative;
+        width: 65%;
+        z-index: 9999;
+        padding: 9px 0 0 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .BarContainer {
+        width: 100%;
+        height: 9%;
+        min-height: 65px;
+        float: left;
+        display: table;
+        box-sizing: border-box;
+        border-bottom-style: solid;
+        border-bottom-color: #333333;
+        transition: all 0.7s ease-out;
+        cursor: pointer;
+    }
+
+    .TopAdminBar {
+        width: 100%;
+        height: 9%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .TriggerIcon {
+        font-size: 40px;
+        margin-left: 25px;
+        cursor: pointer;
+    }
+
+    .AdminTextContainer {
+        float: right;
+        padding-right: 35px;
+    }
+
+    .IconBackgroundContainer {
+        width: 25px;
+        height: 25px;
+        border-radius: 25px;
+        float: left;
+        display: table;
+    }
+
+    .PersonIcon {
+        text-align: center;
+        display: block;
+        font-size: 14px;
+    }
+
+    .TopRightTextContainer {
+        float: left;
+        padding-left: 10px;
+        background-color: none;
+        height: 100%;
+        display: table;
+    }
+
+    .AdminText {
+        font-size: 19px;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .DividerText {
+        font-size: 19px;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .LogoutText {
+        font-size: 14px;
+        padding-top: 8%;
+        float: left;
+    font-family: open_sansbold;
+        cursor: pointer;
+    }
+
+    .HeadingBar {
+        height: 9%;
+        width: 100%;
+        float: left;
+        display: table;
+    }
+
+    .HeadingLabel {
+        padding-left: 25px;
+        font-size: 26px;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .HelpLabel {
+        float: right;
+        font-size: 12px;
+        padding-right: 35px;
+    font-family: open_sansbold;
+    }
+
+    .BigRightContainer {
+        height: 82%;
+        width: 100%;
+        float: left;
+    }
+
+    .WhiteBackgroundContainerMenu {
+        width: 96%;
+        height: auto;
+        margin: auto;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMenuFacts {
+        width: 96%;
+        height: 315px;
+        margin: auto;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMenuPhotobooth {
+        width: 96%;
+        height: 157px;
+        margin: auto;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMap {
+        width: 48%;
+        height: 152px;
+        float: left;
+        margin-left: 1.35%;
+        margin-top: 1.5%;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .WhiteBackgroundContainerMapBig {
+        width: 97.2%;
+        height: auto;
+        margin: auto;
+        margin-top: 195px;
+        box-sizing: border-box;
+        border: 2pt solid #e2e2e2;
+    }
+
+    .CustomSettingsContainer {
+        width: 100%;
+        height: 62px;
+        background-color: none;
+        display: table;
+    }
+
+    .CustomSettingsLabel {
+        font-size: 20px;
+        margin-left: 1%;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .HeadingTopLabel {
+        font-size: 20px;
+        margin-left: 1.5%;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .HeadingTopLabelMap {
+        font-size: 20px;
+        margin-left: 2%;
+        float: left;
+    font-family: open_sansbold;
+    }
+
+    .EditSmallBar {
+        margin-left: 1%;
+        width: 48.5%;
+        height: 70px;
+        float: left;
+        margin-bottom: 10px;
+        background-color: none;
+        border-radius: 5px;
+        display: table;
+        border: 2pt solid #dbdbdb;
+        box-sizing: border-box;
+    }
+    
+    .SearchBox {
+        margin-left: 1%;
+        width: 48.5%;
+        margin-bottom: 10px;
+    }
+
+    .EditSmallBarLong {
+        margin-left: 1.5%;
+        width: 97%;
+        height: 70px;
+        margin: auto;
+        margin-bottom: 10px;
+        background-color: none;
+        border-radius: 5px;
+        display: table;
+        border: 2pt solid #dbdbdb;
+        box-sizing: border-box;
+    }
+
+    .CategoryBar {
+        width: 96%;
+        height: 70px;
+        margin: auto;
+        margin-bottom: 10px;
+        background-color: none;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    .SmallBarDisplayBoxWidth {
+        width: 55px;
+    }
+
+    .SmallBarDisplayBox {
+        height: 86%;
+        width: 55px;
+        margin-left: 6px;
+        border-radius: 5px;
+        float: left;
+        border: 1px solid gray;
+        box-sizing: border-box;
+        display: table;
+    }
+
+    .SmallBarLabel {
+        font-size: 16px;
+        float: left;
+        padding-left: 3.5%;
+        font-family: open_sansregular;
+    }
+
+    .SmallBarLabelMapCenter {
+        font-size: 16px;
+        float: left;
+        padding-left: 2%;
+        font-family: open_sansregular;
+    }
+
+    .EditButton {
+        width: 70px;
+        height: 30px;
+        border: solid 2px #acacac;
+        font-size: 15px;
+    font-family: open_sansbold;
+        border-radius: 3px;
+        float: right;
+        margin-right: 15%;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .EditBigBar {
+        width: 48.5%;
+        margin-left: 1%;
+        margin-bottom: 0px;
+        height: 275px;
+        float: left;
+        border: 2pt solid #dbdbdb;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    .BigBarTopContainer {
+        width: 100%;
+        height: 65px;
+        float: left;
+        display: table;
+    }
+
+    .BigBarBottomContainer {
+        height: 205px;
+        width: 100%;
+        background-color: none;
+        float: left;
+        display: table;
+    }
+
+    .IconLogo {
+        margin: auto;
+        text-align: center;
+        display: block;
+        font-size: 28px;
+    }
+
+    .LogoPicture {
+        width: 300px;
+        height: 175px;
+        margin: auto;
+        display: block;
+    }
+
+    .CoverImagePicture {
+        width: 100px;
+        height: 175px;
+        margin: auto;
+        display: block;
+    }
+
+    .TopBarPopUpWindow {
+        width: 96%;
+        height: 65px;
+        float: left;
+        display: table;
+        margin-left: 2%;
+        margin-top: 2%;
+    }
+
+    .PopUpWindowHeading {
+        font-size: 18px;
+        margin-left: 5%;
+    font-family: open_sansbold;
+    }
+
+    .CancelLabel {
+        float: right;
+        margin-right: 25%;
+        cursor: pointer;
+        font-size: 14px;
+        font-family: open_sansregular;
+    }
+
+    .PopUpWindowLabel {
+        font-size: 13px;
+        float: left;
+        width: 100%;
+        margin-left: 3px;
+    font-family: open_sansregular;
+    }
+
+    .SmallSettingContainer {
+        width: 48.5%;
+        height: 53px;
+        background-color: none;
+        float: left;
+        margin-top: 8px;
+    }
+
+    .AllSettingsContainer {
+        width: 94%;
+        margin-left: 3%;
+        height: 298px;
+        background-color: none;
+        float: left;
+    }
+
+    .AllSettingsContainerSmall {
+        width: 94%;
+        margin-left: 3%;
+        height: 86px;
+        background-color: none;
+        float: left;
+    }
+
+    .AllSettingsContainerBig {
+        width: 94%;
+        margin-left: 3%;
+        height: 345px;
+        background-color: none;
+        float: left;
+    }
+
+    .CheckBoxList {
+        width: 100%;
+        height: 100px;
+        margin-top: 2px;
+        background-color: white;
+        box-sizing: border-box;
+        border: 2px solid #e2e2e2;
+        border-radius: 3px;
+        float: left;
+        overflow-y: scroll;
+    }
+
+    .PixelFontSize {
+        font-size: 11px;
+    }
+
+    .TransparentBackground {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 10001;
+        display: none;
+        margin-top: 0px;
+    }
+
+    .Transparency {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: .8;
+        background-color: black;
+    }
+
+    .PopUpDisplay {
+        width: 100%;
+        height: 100%;
+        z-index: 99999;
+        position: absolute;
+        display: table;
+    }
+
+    .PopUpWindow {
+        width: 750px;
+        height: 600px;
+        margin: auto;
+        display: block;
+    }
+
+    .PopUpWindowSmall {
+        width: 600px;
+        height: 213px;
+        margin: auto;
+        display: block;
+    }
+
+    .PopUpWindowBig {
+        width: 600px;
+        height: 470px;
+        margin: auto;
+        display: block;
+    }
+
+    .PictureNameLabel {
+        float: left;
+        padding-left: 8px;
+        font-size: 12px;
+        font-family: open_sansregular;
+    }
+
+    .BrowseButton {
+        font-size: 12px;
+        font-family: open_sansbold;
+        border: none;
+        float: right;
+        margin-right: 4%;
+        border-radius: 3px;
+        width: 60px;
+        height: 20px;
+        margin-top: 3px;
+        cursor: pointer;
+    }
+
+    .LogoContainer {
+        width: 47%;
+        height: 140px;
+        float: left;
+        margin-top: 8px;
+        margin-left: .75%;
+        display: block;
+    }
+
+    .CoverImageContainer {
+        width: 48%;
+        height: 140px;
+        float: right;
+        margin-top: 8px;
+        margin-right: 1px;
+    }
+
+    .LogoPopUpWindow {
+        height: 140px;
+        width: 100%;
+        display: block;
+    }
+
+    .CoverImageHolderPopUp {
+        width: 80px;
+        height: 140px;
+        margin: auto;
+        display: block;
+    }
+
+    .SaveButtonContainer {
+        height: 35px;
+        width: 94%;
+        margin-left: 3%;
+        background-color: none;
+        float: left;
+    }
+
+    .SaveButton {
+        width: 95px;
+        height: 34px;
+        border: none;
+        border-radius: 3px;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .SaveButtonIcon {
+        font-size: 17px;
+        float: left;
+        cursor: pointer;
+        padding-top: 1px;
+    }
+
+    .SaveButtonText {
+        font-size: 14px;
+        cursor: pointer;
+        float: left;
+        padding-left: 8px;
+        font-family: open_sansregular;
+    }
+
+    .ColorPicker {
+        width: 98%;
+        height: 94%;
+        margin: auto;
+        display: block;
+    }
+
+    .AddNewArticle {
+        width: 210px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ButtonPositioning {
+        height: auto;
+        width: 170px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .CrossArrowIcon {
+        font-size: 22px;
+        float: left;
+        padding-top: 2px;
+    }
+
+    .SavePosititiongContainer {
+        width: 80px;
+        height: auto;
+        display: block;
+        margin: auto;
+        margin-left: 17px;
+    }
+
+    .AddNewArticleText {
+        font-size: 18px;
+        float: left;
+        padding-left: 8px;
+    font-family: open_sansbold;
+        cursor: pointer;
+    }
+
+    .AddNewLocation {
+        width: 230px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .AddNewDepartment {
+        width: 240px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .AddNewAccount {
+        width: 230px;
+        height: 45px;
+        margin-right: 2%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ButtonPositioningAccount {
+        height: auto;
+        width: 200px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .ButtonPositioningLocation {
+        height: auto;
+        width: 190px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .DeleteEventContainer {
+        background-color: none;
+        margin-left: 5%;
+        height: 15px;
+        width: 105px;
+    }
+
+    .DeleteEventIcon {
+        font-size: 13px;
+        float: left;
+        width: auto;
+        height: 100%;
+        margin-top: 2px;
+    }
+
+    .DeleteEventText {
+        font-size: 11px;
+        padding: 5px;
+    font-family: open_sansbold;
+    }
+
+    .SortContainer {
+        background-color: none;
+        height: 15px;
+        width: 100px;
+        margin-left: 1.5%;
+    }
+
+    .TitleTextbox {
+        border: none;
+        width: 96%;
+        height: 74%;
+        padding-left: 3%;
+        padding-top: 6px;
+        font-size: 12px;
+        font-family: open_sansregular;
+        resize: none;
+    }
+
+    .BigSettingsContainer {
+        width: 48.5%;
+        height: 143px;
+        background-color: none;
+        float: left;
+        margin-top: 8px;
+    }
+
+    .BigTextboxHolder {
+        width: 100%;
+        height: 120px;
+        margin-top: 4px;
+        background-color: white;
+        box-sizing: border-box;
+        border: 2px solid #e2e2e2;
+        border-radius: 3px;
+        float: left;
+    }
+
+    .BigTextbox {
+        width: 94%;
+        height: 96%;
+        border: none;
+        padding-left: 3%;
+        font-size: 12px;
+        font-family: open_sansregular;
+        padding-top: 3%;
+        padding-right: 3%;
+        resize: none;
+    }
+
+    .Slash {
+        padding-left: 3px;
+    }
+
+    .SecondLabelSize {
+        font-size: 13px;
+        padding-left: 4px;
+    }
+
+    .DownArrowIcon {
+        font-size: 6px;
+        float: left;
+        padding-left: 5px;
+        width: auto;
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .SortText {
+        font-size: 12px;
+        float: left;
+        width: auto;
+        height: 100%;
+        font-family: open_sansregular;
+        cursor: pointer;
+    }
+
+    .CategoryIcon {
+        width: 45px;
+        font-size: 24px;
+        height: auto;
+        background-color: none;
+        margin: auto;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .CategoryText {
+        font-size: 10px;
+        font-family: open_sansregular;
+        display: block;
+        text-align: center;
+        margin: auto;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+
+    .CategorySection {
+        width: 16.6%;
+        height: 100%;
+        float: left;
+        display: table;
+        cursor: pointer;
+    }
+
+    .TimePicker {
+        width: 97%;
+        height: 100%;
+        border: none;
+        padding-left: 3%;
+        font-size: 12px;
+        font-family: open_sansregular;
+    }
+
+    .Position1 {
+        margin-top: 0px;
+    }
+
+    .ButtonEvents {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .ButtonMap {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .Scroll {
+        overflow: auto;
+    }
+
+    .NoScroll {
+        overflow: hidden;
+    }
+
+    .BulkUpload {
+        width: 175px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .ButtonPositioningUpload {
+        height: auto;
+        width: 140px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .spacer1 {
+        width: 15px;
+    }
+
+    .LoginBox {
+        width: 600px;
+        height: 425px;
+        margin: auto;
+    }
+
+    .LogoContainer {
+        width: 100%;
+        height: 30%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .PictureContainer {
+        width: 60%;
+        height: auto;
+        margin: auto;
+        display: block;
+        background-color: none;
+        padding-right: 45px;
+        padding-top: 6px;
+    }
+
+    .TextboxContainer {
+        width: 100%;
+        height: 19%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .LoginTextContainer {
+        width: 100%;
+        height: 21%;
+        float: left;
+        background-color: none;
+        display: table;
+    }
+
+    .Hide {
+        display: inline;
+    }
+
+    .AddNew {
+        width: 230px;
+        height: 45px;
+        margin-right: 7%;
+        float: right;
+        display: table;
+        cursor: pointer;
+    }
+
+    .AddNewPositioning {
+        height: auto;
+        width: 190px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+
+    .LoginBoxVA {
+        width: 100%;
+        height: 100%;
+        float: left;
+        background-color: none;
+        display: table;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .OptionBackground {
+        width: 50%;
+        height: 100%;
+        z-index: 99999;
+        position: relative;
+        display: table;
+        background-color: none;
+        float: left;
+    }
+
+    .Option {
+        height: 400px;
+        width: 400px;
+        margin: auto;
+        display: block;
+        cursor: pointer;
+        display: table;
+        border: 2px solid black;
+        box-sizing: border-box;
+    }
+
+    .BigIcon {
+        width: 200px;
+        height: 200px;
+        background-color: none;
+        margin: auto;
+    }
+
+    .IconStyling {
+        font-size: 180px;
+        display: block;
+        text-align: center;
+    }
+
+    .OptionLabel {
+        font-size: 22px;
+        text-align: center;
+        display: block;
+        margin-top: 0px;
+        cursor: pointer;
+    font-family: open_sansbold;
+    }
+
+    .Checkbox {
+        height: 15px;
+        width: 15px;
+        margin-left: 10px;
+        margin-top: 6px;
+        float: left;
+    }
+
+    .CheckboxTitle {
+        font-size: 12px;
+        padding-left: 3px;
+        margin-top: 5px;
+        font-family: open_sansregular;
+        float: left;
+    }
+
+    .ButtonPositioningDepartment {
+        height: auto;
+        width: 215px;
+        margin: auto;
+        display: block;
+        background-color: none;
+    }
+}

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="iAspireApp">
+<head>
+    <title>iAspire</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' *; child-src 'self'  https://forms.zohopublic.com/ http://localhost:59795 ; img-src 'self' data: http://localhost:59795/ http://localhost:4976/; script-src 'self' http://localhost:59795 'unsafe-inline' 'unsafe-eval' https://www.google.com https://api.apptivo.com ; connect-src 'self' http://localhost:59795 api.apptivo.com; style-src 'self' 'unsafe-inline' https://www.google.com https://ajax.googleapis.com">
+	<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' *; child-src 'self' https://forms.zohopublic.com/; img-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://api.apptivo.com https://iAspire.azurewebsites.net; connect-src 'self' api.apptivo.com https://104.44.135.42 https://iAspire.azurewebsites.net; style-src 'self' 'unsafe-inline' https://www.google.com https://ajax.googleapis.com"> -->
+		
+	<link rel="shortcut icon" type="image/ico" sizes="16x16 32x32 48x48 192x192 256x256" href="images/iAspireLogo.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Style Sheets -->
+    <link href="css/component.css" rel="stylesheet" />
+    <link href="css/master.css" rel="stylesheet" />
+    <link href="css/colorClasses.css" rel="stylesheet" />
+    <link href="css/Font_Style.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/hover_effects.css" rel="stylesheet" />
+
+    <!-- Library Scripts -->
+    <script type="text/javascript" src="Scripts/es5-shim.js"></script>
+    <script type="text/javascript" src="Scripts/es6-shim.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="Scripts/modernizr-2.8.3.js"></script>
+    <script type="text/javascript" src="Scripts/moment.js"></script>
+
+    
+    <script type="text/javascript" src="Scripts/angular.js"></script>
+
+	<script type="text/javascript" src="Scripts/angular-route.js"></script>
+    <script type="text/javascript" src="Scripts/angular-animate.js"></script>
+
+    <link href="assets/css/SMAClient.Alerts.css" rel="stylesheet" />
+    <link href="assets/css/SMAClient.Alerts.Extras.css" rel="stylesheet" />
+
+	  <script src="Scripts/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="Scripts/xlsx.js"></script>
+    <script src="Scripts/jquery.dlmenu.js"></script>
+    <script src="Scripts/master.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/bulk_upload.js"></script>
+    <script src="Scripts/angular-upload.js"></script>
+    <script src="Scripts/angular-auto-complete.js"></script>
+    <!-- Application Script -->
+    <script type="text/javascript" src="app/iAspireApp.js"></script>
+	<script type="text/javascript" src="app/iAspireApp.routes.js"></script>
+    <script type="text/javascript" src="app/iAspireApp.config.js"></script>
+    <script type="text/javascript" src="app/iAspireApp.controller.js"></script>
+    <script type="text/javascript" src="app/iAspireApp.factory.js"></script>
+    <script type="text/javascript" src="app/iAspireApp.directives.js"></script>
+    <script type="text/javascript" src="app/iAspireApp.run.js"></script>
+    <script type="text/javascript" src="app/DataService.js"></script>
+    <script type="text/javascript" src="app/ProjectConstants.js"></script>
+
+    <!-- View Controllers -->
+    <script type="text/javascript" src="app/controllers/loginController.js"></script>
+    <script type="text/javascript" src="app/controllers/headerController.js"></script>
+    <script type="text/javascript" src="app/controllers/accountController.js"></script>
+    <script type="text/javascript" src="app/controllers/accountAdminController.js"></script>
+    <script type="text/javascript" src="app/controllers/siteController.js"></script>
+    <script type="text/javascript" src="app/controllers/roleController.js"></script>
+    <script type="text/javascript" src="app/controllers/userController.js"></script>
+    <script type="text/javascript" src="app/controllers/departmentController.js"></script>
+    <script type="text/javascript" src="app/controllers/formController.js"></script>
+    <script type="text/javascript" src="app/controllers/formEditorController.js"></script>
+	 <script src="app/controllers/archiveController.js"></script>
+    <script src="app/controllers/GradeController.js"></script>
+    <script src="app/controllers/SidebarController.js"></script>
+    <script src="app/controllers/FacultyController.js"></script>
+    <!-- Services -->
+    <script type="text/javascript" src="app/services/angular-upload.js"></script>
+    <script type="text/javascript" src="app/services/SMAClientAngularModules/SMAClient.Alert.Angular.min.js"></script><!-- min -->
+    <script type="text/javascript" src="app/services/SMAClientAngularModules/SMAClient.SQLite.Angular.min.js"></script><!-- min -->
+    <script type="text/javascript" src="app/services/SMAClientInstances/SMAClient.SQLite.AppDB.min.js"></script><!-- min -->
+    <script type="text/javascript" src="app/services/SMAClientInstances/SMAClient.SQLite.iAspireDB.min.js"></script><!-- min -->
+
+
+</head>
+<body data-ng-controller="AppController as AppC" class="Scroll">
+    <mobileheader ng-hide="AppC.ShowMobileHeader == false"></mobileheader>
+    <sidebar ng-hide="AppC.ShowSidebar == false"></sidebar>
+    <div data-ng-view class="pageTransitionAnimation ViewContainer" style="height:100%"></div>
+</body>
+</html>
