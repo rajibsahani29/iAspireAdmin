@@ -1791,6 +1791,7 @@
                     user.TeacherID = teacherID;
                 }
 
+                user.DomainName = document.location.origin;
                 DataService.CreateiAspireUserAccount(user)
                 .success(function (response1, status, header, config) {
                     $scope.spinner.resolve();
