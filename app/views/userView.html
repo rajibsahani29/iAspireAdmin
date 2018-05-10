@@ -349,6 +349,21 @@
                                 </div>
                                 <div ng-if="merchant.schoolList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no sites for this Merchant.</div>
                             </div>
+							 <!-------------------------------------Department------------------------------------------->
+                            <div id="classdivhide">
+                                <div ng-repeat="school in DeptList">
+                                    <div id="cls{{school.SchoolID}}" class="TeacherContainer allclasshide">
+                                        <div class="{{school.SchoolID}} FontColor4 PopUpWindowLabel"><br />{{school.Name}}<span class="selectAllButton FontColor2 RightRank13" ng-click="userC.selectAllDeptSchool(school.SchoolID)">Select All</span><span class="deselectAllButton FontColor2 RightRank13" ng-click="userC.deselectAllDeptSchool(school.SchoolID)">Deselect All</span></div>
+                                        <div ng-repeat="objclass in school.classList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                                            <input type="checkbox" class="teacherClassCheckbox schoolID{{objclass.SchoolID}} inputRightRank13" id="{{objclass.ClassID}}" value="{{objclass.ClassID}}" ng-model="objclass.selection" ng-click="userC.checkTeacherClassCheckboxes(objclass.ClassID)" />
+                                            <label for="{{objclass.ClassID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{objclass.Name}}</label>
+                                        </div>
+                                        <div ng-if="school.classList.length == 0" class='{{school.SchoolID}} FontColor4 PopUpWindowLabel'><br />{{school.Name}}</div>
+                                        <div ng-if="school.classList.length == 0" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; margin: 5px 0 5px 10px;"><label class="FontColor4 PopUpWindowLabel" style="float:none">No departments available for this site.</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!----------------------------------------------XX------------------------------------------>
                             <div ng-if="merchant.selection == true" id="TeacherContainerFor{{merchant.MerchantID}}" class="TeacherContainer">
                                 <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseTeachers{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseTeachers(merchant.MerchantID)"> - </span>Employees<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllTeachers(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllTeachers(merchant.MerchantID)">Deselect All</span></div>
                                 <div ng-if="merchant.teacherList.length > 0" ng-repeat="teacher in merchant.teacherList" class="SmallSettingContainer collapsibleTeacher" data-merchantid="{{teacher.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">
@@ -453,6 +468,21 @@
                                 </div>
                                 <div ng-if="merchant.schoolList.length == 0" class="PopUpWindowLabel collapsibleSchool" data-merchantid="' + merchantID + '" style="margin:8px 16px;font-weight:initial;">There are no sites for this Merchant.</div>
                             </div>
+							 <!-------------------------------------Department------------------------------------------->
+                            <div id="bulkclassdivhide">
+                                <div ng-repeat="school in DeptList">
+                                    <div id="bulkcls{{school.SchoolID}}" class="TeacherContainer allclasshide">
+                                        <div class="{{school.SchoolID}} FontColor4 PopUpWindowLabel"><br />{{school.Name}}<span class="selectAllButton FontColor2 RightRank13" ng-click="userC.selectAllDeptSchool(school.SchoolID)">Select All</span><span class="deselectAllButton FontColor2 RightRank13" ng-click="userC.deselectAllDeptSchool(school.SchoolID)">Deselect All</span></div>
+                                        <div ng-repeat="objclass in school.classList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                                            <input type="checkbox" class="teacherClassCheckbox schoolID{{objclass.SchoolID}} inputRightRank13" id="{{objclass.ClassID}}" value="{{objclass.ClassID}}" ng-model="objclass.selection" ng-click="userC.checkTeacherClassCheckboxes(objclass.ClassID)" />
+                                            <label for="{{objclass.ClassID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{objclass.Name}}</label>
+                                        </div>
+                                        <div ng-if="school.classList.length == 0" class='{{school.SchoolID}} FontColor4 PopUpWindowLabel'><br />{{school.Name}}</div>
+                                        <div ng-if="school.classList.length == 0" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; margin: 5px 0 5px 10px;"><label class="FontColor4 PopUpWindowLabel" style="float:none">No departments available for this site.</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!----------------------------------------------XX------------------------------------------>
                             <div ng-if="merchant.selection == true" id="BulkTeacherContainerFor{{merchant.MerchantID}}" class="TeacherContainer">
                                 <div class="FontColor4 PopUpWindowLabel ContainerHeader" id="collapseTeachers{{merchant.MerchantID}}"><span class="symbol" ng-click="userC.collapseTeachers(merchant.MerchantID)"> - </span>Employees<span class="selectAllButton FontColor2 RightRank7" ng-click="userC.selectAllTeachers(merchant.MerchantID)">Select All</span><span class="deselectAllButton FontColor2 RightRank7" ng-click="userC.deselectAllTeachers(merchant.MerchantID)">Deselect All</span></div>
                                 <div ng-if="merchant.teacherList.length > 0" ng-repeat="teacher in merchant.teacherList" class="SmallSettingContainer collapsibleTeacher" data-merchantid="{{teacher.MerchantID}}" style="height: 20px; min-height:20px; max-height: 20px;">

@@ -832,9 +832,14 @@
         }
 
         // Deletes a teacher class
-        function teacherClassDelete(teacherID, classID) {
-            var url = getBaseURL() + "TeacherClass?teacherID=" + teacherID + "&classID=" + classID;
-            return $http.delete(url);
+        function teacherClassDelete(teacherClasses) {
+            var url = getBaseURL() + "TeacherClass/BulkDelete";
+            //return $http.delete(url);
+            return $http({
+                method: "POST",
+                url: url,
+                data: teacherClasses
+            });
         }
 
 

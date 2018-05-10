@@ -11,7 +11,7 @@
             closeMenu: closeMenu,
             showBulkMenu: showBulkMenu1,
             closeBulkMenu: closeBulkMenu,
-            showDeptMenu: showDeptMenu,
+           // showDeptMenu: showDeptMenu,
             closeDeptMenu: closeDeptMenu,
             submitClicked: false,
             showDeleteButton: true,
@@ -19,6 +19,7 @@
             changePasswordText: "Change password?",
         }
 
+        $scope.SchoolIDCheck = null;
         $scope.MerchantUsers = [];
         $scope.userList = [];
         $scope.userInfo = getUserInfoObject();
@@ -58,13 +59,14 @@
         userC.selectAllDeptSchool = selectAllDeptSchool;
         userC.deselectAllDeptSchool = deselectAllDeptSchool;
         userC.checkTeacherClassCheckboxes = checkTeacherClassCheckboxes;
+        userC.AddClassByCheckboxes = AddClassByCheckboxes;
         userC.submitDepartmentForm = submitDepartmentForm;
-        userC.selectColorBlack = selectColorBlack1;
-        
+        userC.selectColorBlack = selectColorBlack1;        
         populateUsers();
         page_init();
         return userC;
 
+       
 
         function getUserInfoObject() {
             return {
@@ -266,6 +268,10 @@
             sessionStorage.setItem("ur_alreadySaved", "");
             sessionStorage.setItem("ur_toBeAdded", "");
             sessionStorage.setItem("ur_toBeDeleted", "");
+
+            sessionStorage.setItem("tc_alreadySaved", "");
+            sessionStorage.setItem("tc_toBeAdded", "");
+            sessionStorage.setItem("tc_toBeDeleted", "");
             // If a userID is passed, then populate the form
             if (userID) {
                 $scope.spinner = SMAAlert.CreateSpinnerAlert();
@@ -317,6 +323,7 @@
                 // Enters the psuedo loop for populating schools per merchant
 
                 populateSchoolsByMerchant(merchant_list, merchant_index, merchant_length, userID);
+                populateClassesByMerchant(user.merchantid);
 
             } else {
                 // Hides the Delete Button
@@ -329,6 +336,7 @@
                 $("#EditMenu").css("display", "block");
                 $("#UserName").focus();
                 $("#" + $scope.userInfo.merchantList[0].MerchantID).trigger("click");
+                populateClassesByMerchant($scope.userInfo.merchantList[0].MerchantID);
                 //loadMerchantInfo($scope.userInfo.merchantList[0].MerchantID)
             }
         }
@@ -349,7 +357,7 @@
                         for (var j = 0; j < $scope.userInfo.merchantList.length; j++) {
                             objSchools = $filter('filter')($scope.userInfo.merchantList[j].schoolList, { SchoolID: userSchools[i].SchoolID }, true);
                             if (objSchools != undefined && objSchools.length > 0) {
-                                objSchools[0].selection = true;
+                                objSchools[0].selection = true;                                
                                 break;
                             }
                         }
@@ -409,7 +417,7 @@
                             //    $("#TeacherSelect option[value='" + teacherID + "']").attr('selected', 'selected');
                             //}
 
-                            $scope.spinner.resolve();
+                           // $scope.spinner.resolve();
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
                             if (status !== 403) {
@@ -497,7 +505,7 @@
                                         return 1;
                                     } else {
                                         return 0;
-                                    }
+                                    }   
                                 });
 
                                 $scope.userInfo.merchantList[merchant_index].roleList = roles;
@@ -807,7 +815,12 @@
             
             if ($("#" + schoolID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
-                schoolID = schoolID.replace('bulk', '');
+                if (schoolID.indexOf('bulk') == 0) {
+                    schoolID = schoolID.replace('bulk', '');
+                    $('#bulkcls' + schoolID).show();                    
+                } else {
+                    $('#cls' + schoolID).show();
+                }
                 var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
                 var us_toBeAdded = sessionStorage.getItem("us_toBeAdded");
                 var us_toBeDeleted = sessionStorage.getItem("us_toBeDeleted");
@@ -891,11 +904,9 @@
                             SMAAlert.CreateInfoAlert("Failed to retrieve employees by site:<br><br>" + response);
                         }
                     });
-                }
-
-                //}
+                }                
             } else {// If it's unchecked
-
+                $('#cls' + schoolID).hide();
                 var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
                 us_alreadySaved = us_alreadySaved.split(",");
 
@@ -929,7 +940,14 @@
 
             }
         }
-
+        function populateClassesBySchool()
+        {
+            DataService.ClassGetListForSchool(schoolID)
+            .success(function (classes) {
+                $scope.userInfo.merchantList[0].Classlist = classes;
+            })
+        }
+        
         function checkUserTeacherAccessCheckboxes(teacherID) {
             if ($("#" + teacherID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
@@ -1137,13 +1155,11 @@
         function deselectAllDeptSchool(schoolID) {
             $("input.schoolID" + schoolID).each(function (i) {
                 if ($(this).prop("checked") == true) {
-                    $(this).click();
+                    $(this).prop("checked",false)
+                    checkTeacherClassCheckboxes(this.value)
                 }
             });
         }
-
-
-
         // Selects all schools under a merchant
         function selectAllTeachers(merchantID) {
             $("input.userTeacherCheckbox.merchantID" + merchantID).each(function (i) {
@@ -1213,8 +1229,6 @@
                         objMerchant.schoolList.forEach(function (obj) { obj.selection = false; });
                     }
 
-
-
                     DataService.TeacherGetListByMerchant(merchantID)
                     .success(function (response2, status, header, config) {
                         var teachers = response2;
@@ -1234,9 +1248,9 @@
                             objMerchant.teacherList.forEach(function (obj) { obj.selection = false; });
                         }
                         DataService.RolesGetListForMerchant(merchantID)
-                        .success(function (response3, status, header, config) {                                   
-                            var roles=[];
-							roles=response3;
+                        .success(function (response3, status, header, config) {
+                            var roles = [];
+                            roles = response3;
                             if (roles.length > 0) {
                                 roles.sort(function (a, b) {
                                     var nameA = a.RoleName.toLowerCase();
@@ -1254,7 +1268,7 @@
                             }
 
 
-                            $scope.spinner.resolve();
+                            //$scope.spinner.resolve();
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
                             if (status !== 403) {
@@ -1265,7 +1279,7 @@
 
 
                         checkMerchantUserCheckboxes(merchantID);
-                        $scope.spinner.resolve();
+                       // $scope.spinner.resolve();
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
                         if (status !== 403) {
@@ -1373,7 +1387,7 @@
                             }
 
                             checkBulkMerchantUserCheckboxes(merchantID);
-                            $scope.spinner.resolve();
+                           // $scope.spinner.resolve();
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
                             if (status !== 403) {
@@ -1483,6 +1497,16 @@
                     }
                 }
 
+                var userclases = sessionStorage.getItem("tc_toBeAdded");
+                userclases = userclases.split(",");
+                var class_length = roles.length;
+                for (var i = 0; i < class_length; i++) {
+                    if (userclases[i] == "" || userclases[i] == null || userclases[i] == undefined) {
+                        userclases.splice(i, 1);
+                    }
+                }
+                
+
                 for (var i = 0, len = tableData.length; i < len; i++) {
                     if (merchants.length > 0) {
                         tableData[i].Merchants = merchants;
@@ -1504,6 +1528,11 @@
                         tableData[i].Roles = roles;
                     } else {
                         tableData[i].Roles = [];
+                    }
+                    if (userclases.length > 0) {
+                        tableData[i].Classes = userclases;
+                    } else {
+                        tableData[i].Classes = [];
                     }
                     tableData[i].UserName = tableData[i].Email;
                 }
@@ -1786,12 +1815,15 @@
                 userRoles = userRoles.split(",");
                 user.Roles = userRoles;
 
+                var userclases = sessionStorage.getItem("tc_toBeAdded");
+                userclases = userclases.split(",");
+                user.Classes = userclases;
+
                 if (teacherID !== 0 && teacherID !== "" && teacherID !== null) {
                     user.IsTeacher = true;
                     user.TeacherID = teacherID;
                 }
-
-                user.DomainName = document.location.origin;
+				user.DomainName = document.location.origin;
                 DataService.CreateiAspireUserAccount(user)
                 .success(function (response1, status, header, config) {
                     $scope.spinner.resolve();
@@ -1965,6 +1997,44 @@
                     } else {
                         us_toBeDeleted_Done = true;
                         updatedObjects();
+                    }
+                }
+
+                //function to delete user Classes
+                function userClaseesDelete()
+                {
+                    var tc_toBeAdded = sessionStorage.getItem('tc_toBeAdded');
+                    if (tc_toBeAdded) {
+                        tc_toBeAdded = tc_toBeAdded.split(',');
+                        var tc_toBeAdded_length = tc_toBeAdded.length;
+                        for (var i = 0; i < tc_toBeAdded_length; i++) {
+                            if (tc_toBeAdded[i] == "" || tc_toBeAdded[i] == null || tc_toBeAdded[i] == undefined) {
+                                tc_toBeAdded.splice(i, 1);
+                            }
+                        }
+
+                        var teacherClasses = [];
+
+                        // Builds the teacher Object and pushes it to the teacherClasses array
+                        for (var i = 0, len = tc_toBeAdded.length; i < len; i++) {
+                            var teacherClass = {
+                                TeacherID: $scope.userInfo.userTeacher.TeacherID,
+                                ClassID: tc_toBeAdded[i]
+                            }
+                            teacherClasses.push(teacherClass);
+                        }
+                        DataService.TeacherClassAddNewBulk(teacherClasses)
+                            .success(function (response3, status, header, config) {
+                                // Checks for teacherClasses to be deleted
+                                check_tc_toBeDeleted(teacher.TeacherID);
+                            }).error(function (response, status, header, config) {
+                                $scope.spinner.resolve();
+                                if (response == null) { response = "" }
+                                SMAAlert.CreateInfoAlert("Failed to save new employee departments!<br><br>" + response);
+                            });
+                    }
+                    else {
+                        check_tc_toBeDeleted($scope.userInfo.userTeacher.TeacherID);
                     }
                 }
 
@@ -2213,6 +2283,7 @@
                     var us_toBeDeleted_Result = userSchoolsDelete(userSchoolsTBD, userSchoolsTBD.length, 0);
                 } else {
                     us_toBeDeleted_Done = true;
+                    userClaseesDelete();
                 }
 
                 // If user teacher access needs to be added
@@ -2439,51 +2510,56 @@
             sessionStorage.setItem("mu_alreadySaved", "");
             sessionStorage.setItem("mu_toBeAdded", "");
             sessionStorage.setItem("mu_toBeDeleted", "");
+
+            sessionStorage.setItem("tc_alreadySaved", "");
+            sessionStorage.setItem("tc_toBeAdded", "");
+            sessionStorage.setItem("tc_toBeDeleted", "");
             $("#bulk" + $scope.userInfo.merchantList[0].MerchantID).trigger("click");
             showBulkMenu();
+            populateClassesByMerchant($scope.userInfo.merchantList[0].MerchantID);
         }
 
 
 
 
         // Show Menu
-        function showDeptMenu(teacherID) {
-            sessionStorage.setItem("tc_alreadySaved", "");
-            sessionStorage.setItem("tc_toBeAdded", "");
-            sessionStorage.setItem("tc_toBeDeleted", "");
+        //function showDeptMenu(teacherID) {
+        //    sessionStorage.setItem("tc_alreadySaved", "");
+        //    sessionStorage.setItem("tc_toBeAdded", "");
+        //    sessionStorage.setItem("tc_toBeDeleted", "");
+        //    $scope.DeptSchoolList = [];
 
+        //    // If a teacherID is passed, then populate the form
+        //    if (teacherID) {
+        //       // $scope.spinner = SMAAlert.CreateSpinnerAlert();
+        //        // Gets the teacher object from the data-bindings
+        //        var teacher = $("#teacher_" + teacherID).data();
+        //        $scope.userInfo.UserID = teacher.userid;
+        //        $scope.userInfo.UserName = teacher.usernamel;
+        //        $scope.userInfo.FirstName = teacher.firstname;
+        //        $scope.userInfo.LastName = teacher.lastname;
+        //        $scope.userInfo.Email = teacher.email;
+        //        $scope.userInfo.MerchantID = teacher.merchantid;
+        //        $scope.userInfo.userTeacher.TeacherID = teacherID;
+        //        $scope.popup.title = "User - Information";
+        //        console.log(teacher);
 
-            // If a teacherID is passed, then populate the form
-            if (teacherID) {
-               // $scope.spinner = SMAAlert.CreateSpinnerAlert();
-                // Gets the teacher object from the data-bindings
-                var teacher = $("#teacher_" + teacherID).data();
-                $scope.userInfo.UserID = teacher.userid;
-                $scope.userInfo.UserName = teacher.usernamel;
-                $scope.userInfo.FirstName = teacher.firstname;
-                $scope.userInfo.LastName = teacher.lastname;
-                $scope.userInfo.Email = teacher.email;
-                $scope.userInfo.MerchantID = teacher.merchantid;
-                $scope.userInfo.userTeacher.TeacherID = teacherID;
-                $scope.popup.title = "User - Information";
-                console.log(teacher);
+        //        // Change the color so it's not placeholder grey
+        //        selectColorBlack('DeptMerchantSelect');
 
-                // Change the color so it's not placeholder grey
-                selectColorBlack('DeptMerchantSelect');
+        //        // Populates the classes checkboxes
+        //        populateClasses(teacher.merchantid);
 
-                // Populates the classes checkboxes
-                populateClasses(teacher.merchantid);
+        //    } else {
+        //        // Hides the Delete Button
+        //        $("#DeleteButton").hide();
 
-            } else {
-                // Hides the Delete Button
-                $("#DeleteButton").hide();
-
-                // Changes the form's header and sets the teacherID to -1(this tells the db that it's new)
-                $scope.userInfo.userTeacher.TeacherID = -1;
-                $("#TeacherIDHidden").val(-1);
-                $("#DeptMenu").css("display", "block");
-            }
-        }
+        //        // Changes the form's header and sets the teacherID to -1(this tells the db that it's new)
+        //        $scope.userInfo.userTeacher.TeacherID = -1;
+        //        $("#TeacherIDHidden").val(-1);
+        //        $("#DeptMenu").css("display", "block");
+        //    }
+        //}
         // Close Dept Menu
         function closeDeptMenu() {
 
@@ -2616,10 +2692,10 @@
                         tc_alreadySaved = tc_alreadySaved.join(",");
                         sessionStorage.setItem("tc_alreadySaved", tc_alreadySaved);
 
-                        $scope.spinner.resolve();
+                       // $scope.spinner.resolve();
                         $("#DeptMenu").css("display", "block");
                     }).error(function (response, status, header, config) {
-                        $scope.spinner.resolve();
+                        //$scope.spinner.resolve();
                         if (status !== 403) {
                             SMAAlert.CreateInfoAlert("Failed to retrieve employee departments!<br><br>" + response);
                         } else {
@@ -2631,6 +2707,131 @@
                     $("#DeptMenu").css("display", "block");
                 }
             }
+        }
+
+        function populateClassesByMerchant(merchantID) {
+            //$scope.spinner = SMAAlert.CreateSpinnerAlert();
+            //setTimeout(function () {
+            //    $scope.spinner.resolve();
+            //}, 50000);
+            // Clears the checkboxes           
+            $('#classdivhide').hide();
+            $('#bulkclassdivhide').hide();
+            $scope.DeptList = [];
+            if (merchantID) {
+                DataService.SchoolGetListForMerchant(merchantID)
+                .success(function (response1, status, header, config) {
+                    var schools = response1;
+                    var index = 0;
+                    var length = schools.length;
+
+                    if (schools !== "") {
+                        schools.sort(function (a, b) {
+                            var nameA = a.Name.toLowerCase();
+                            var nameB = b.Name.toLowerCase();
+                            if (nameA < nameB) {
+                                return -1;
+                            } else if (nameA > nameB) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        });
+                        $scope.DeptList = schools;
+                        $scope.DeptList.forEach(function (obj) { obj.selection = false; });
+
+                        populateClassesLoopByMerchant(schools, index, length, []);
+                    } else {
+                        $scope.spinner.resolve();
+                    }
+
+                }).error(function (response, status, header, config) {
+                    $scope.spinner.resolve();
+                    SMAAlert.CreateInfoAlert("Failed to retrieve sites!<br><br>" + response);
+                });
+            }
+        }
+        function populateClassesLoopByMerchant(schools, index, length, schoolHeaders) { 
+            if (index < length) {                
+                $scope.DeptList[index].classList = [];
+                DataService.ClassGetListForSchool(schools[index].SchoolID)
+                .success(function (response1, status, header, config) {
+                    var classes = response1;
+                    if (classes != "" && classes.length > 0) {
+                        classes.sort(function (a, b) {
+                            var nameA = a.Name.toLowerCase();
+                            var nameB = b.Name.toLowerCase();
+                            if (nameA < nameB) {
+                                return -1;
+                            } else if (nameA > nameB) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        });
+
+                        for (var i = 0, len = classes.length; i < len; i++) {
+                            classes[i].SchoolName = schools[index].Name;
+                        }
+                        $scope.DeptList[index].classList = classes;
+                        $scope.DeptList[index].classList.forEach(function (obj) { obj.selection = false; });
+                    }
+                    schoolHeaders.push(schools[index].SchoolID);
+                    index++;
+                    populateClassesLoopByMerchant(schools, index, length, schoolHeaders);
+                }).error(function (response, status, header, config) {
+                    if (status !== 403) {
+                        $scope.spinner.resolve();
+                        SMAAlert.CreateInfoAlert("Failed to retrieve Departments!<br><br>" + response);
+                    } else {
+                        console.log("Forbidden: Classes.ClassGetListForSchool(" + schools[index].SchoolID + ")");
+                        index++;
+                        populateClassesLoopByMerchant(schools, index, length, schoolHeaders);
+                    }
+                });
+            }
+            else {                
+                
+                $('.allclasshide').hide();
+                $('#classdivhide').show();
+                $('#bulkclassdivhide').show();
+                
+                if ($scope.userInfo.userTeacher.TeacherID) {
+                    DataService.TeacherClassGetListByTeacher($scope.userInfo.userTeacher.TeacherID)
+                        .success(function (response2, status, header, config) {
+                            var teacherClasses = response2;
+                            var tc_alreadySaved = sessionStorage.getItem("tc_alreadySaved");
+                            tc_alreadySaved = tc_alreadySaved.split(",");
+
+                            for (var j = 0, lenj = teacherClasses.length; j < lenj; j++) {
+                                //$("#" + teacherClasses[j].ClassID).prop('checked', true);
+
+                                for (var k = 0; k < $scope.DeptList.length; k++) {
+                                    var foundItem = $filter('filter')($scope.DeptList[k].classList, { ClassID: teacherClasses[j].ClassID }, true);
+                                    if (foundItem != undefined && foundItem.length > 0) {
+                                        foundItem[0].selection = true;
+                                        $('#cls' + $scope.DeptList[k].SchoolID).show();
+                                        $('#bulk' + $scope.DeptList[k].SchoolID).show();
+                                    }
+                                }
+                                tc_alreadySaved.push(teacherClasses[j].ClassID);
+                            }
+                            tc_alreadySaved = tc_alreadySaved.join(",");
+                            sessionStorage.setItem("tc_alreadySaved", tc_alreadySaved);
+                            $scope.spinner.resolve();                          
+                        }).error(function (response, status, header, config) {
+                            $scope.spinner.resolve();
+                            if (status !== 403) {
+                                SMAAlert.CreateInfoAlert("Failed to retrieve employee departments!<br><br>" + response);
+                            } else {
+                                console.log("Forbidden: Teachers.TeacherClassGetListByTeacher(" + teacherID + ")");
+                            }
+                        });
+                } else {
+                    $scope.spinner.resolve();
+                }
+               // $scope.spinner.resolve();
+            }          
         }
 
         function checkTeacherClassCheckboxes(classID) {
@@ -2695,6 +2896,54 @@
                 tc_alreadySaved = tc_alreadySaved.split(",");
 
                 var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
+                tc_toBeAdded = tc_toBeAdded.split(",");               
+                var temporary_tc_toBeAdded = tc_toBeAdded;
+
+                var tc_toBeDeleted = sessionStorage.getItem("tc_toBeDeleted");
+                tc_toBeDeleted = tc_toBeDeleted.split(",");     
+                var temporary_tc_toBeDeleted = tc_toBeDeleted;
+                // If it was already checked(i.e. already in the DB), then add it to the unchecked list(i.e. to be deleted)
+                for (var i = 0, len = tc_alreadySaved.length; i < len; i++) {
+                    if (tc_alreadySaved[i] == classID) {
+                        temporary_tc_toBeDeleted.push(classID);
+                    }
+                }
+
+                // If it was checked(i.e. to be added to DB), then splice it from that list
+                for (var i = 0, len = tc_toBeAdded.length; i < len; i++) {
+                    if (tc_toBeAdded[i] == classID) {
+                        temporary_tc_toBeAdded.splice(i, 1);
+                    }
+                }
+
+                // Resets the session storage variables
+                temporary_tc_toBeDeleted.join(",");
+                temporary_tc_toBeAdded.join(",");
+                sessionStorage.setItem("tc_toBeDeleted", temporary_tc_toBeDeleted)
+                sessionStorage.setItem("tc_toBeAdded", temporary_tc_toBeAdded);
+
+            }
+        }
+
+        function AddClassByCheckboxes(classID) {
+            if ($("#" + classID).is(':checked')) {
+
+                
+                var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
+                if (tc_toBeAdded)
+                    tc_toBeAdded = tc_toBeAdded.split(",");
+                else
+                    tc_toBeAdded = [];
+                tc_toBeAdded.push(classID);
+                tc_toBeAdded = tc_toBeAdded.join(",");
+                sessionStorage.setItem("tc_toBeAdded", tc_toBeAdded);
+
+            } else {// If it's unchecked
+
+                var tc_alreadySaved = sessionStorage.getItem("tc_alreadySaved");
+                tc_alreadySaved = tc_alreadySaved.split(",");
+
+                var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
                 tc_toBeAdded = tc_toBeAdded.split(",");
                 var temporary_tc_toBeAdded = tc_toBeAdded;
 
@@ -2728,7 +2977,6 @@
         // Save Form
         function submitDepartmentForm() {
             $scope.spinner = SMAAlert.CreateSpinnerAlert();
-
             // Creates the teacher object from the inputs
             var teacher = {
                 TeacherID: $scope.userInfo.userTeacher.TeacherID,
@@ -2846,7 +3094,33 @@
 
             // If their are teacher classes to be deleted
             if (tc_toBeDeleted.length > 0) {
-                deleteTeacherClassesLoop(0, tc_toBeDeleted.length, tc_toBeDeleted, teacherID, []);
+                //deleteTeacherClassesLoop(0, tc_toBeDeleted.length, tc_toBeDeleted, teacherID, []);
+                var teacherClassesDelete = [];
+
+                // Builds the teacher Object and pushes it to the teacherClasses array
+                for (var i = 0, len = tc_toBeDeleted.length; i < len; i++) {
+                    var teacherClass = {
+                        TeacherID: $scope.userInfo.userTeacher.TeacherID,
+                        ClassID: tc_toBeDeleted[i]
+                    }
+                    teacherClassesDelete.push(teacherClass);
+                }
+                DataService.TeacherClassDelete(teacherClassesDelete)
+               .success(function (response1, status, header, config) {
+                   var v = response1;
+               }).error(function (response, status, header, config) {
+                   if (status !== 403) {
+                       $scope.spinner.resolve();
+                       if (response == null) { response = "" }
+                       SMAAlert.CreateInfoAlert("Failed to delete employee department!<br><br>" + response);
+                   } else {
+                       forbiddenErrors.push(classes[index]);
+                       // Recalls the psuedo loop
+                       index++;
+                       deleteTeacherClassesLoop(index, length, classes, teacherID, forbiddenErrors);
+                   }
+               });
+
             } else {
                 // Repopulates the teacher list, closes the menu, and shows a success pop-up
                 $scope.spinner.resolve();
@@ -2925,7 +3199,6 @@
                 var name = f.name;
                 reader.onload = function (e) {
                     var data = e.target.result;
-
                     var arr = String.fromCharCode.apply(null, new Uint8Array(data));
                     var wb = XLSX.read(btoa(arr), { type: 'base64' });
                     process_wb(wb);
@@ -2944,7 +3217,7 @@
             // THIS FUNCTION SHOULD BE ON THE UNIQUE PAGE TO WHICH THIS WAS ORIGINALLY CALLED
             //saveBulkData(tableData.Sheet1);// THIS FUNCTION SHOULD BE ON THE UNIQUE PAGE TO WHICH THIS WAS ORIGINALLY CALLED
             // THIS FUNCTION SHOULD BE ON THE UNIQUE PAGE TO WHICH THIS WAS ORIGINALLY CALLED
-            saveMassBulkData(tableData.Sheet1)
+            saveBulkData(tableData.Sheet1)
         }
 
         // To JSON
