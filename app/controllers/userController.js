@@ -11,7 +11,7 @@
             closeMenu: closeMenu,
             showBulkMenu: showBulkMenu1,
             closeBulkMenu: closeBulkMenu,
-           // showDeptMenu: showDeptMenu,
+            // showDeptMenu: showDeptMenu,
             closeDeptMenu: closeDeptMenu,
             submitClicked: false,
             showDeleteButton: true,
@@ -19,9 +19,11 @@
             changePasswordText: "Change password?",
         }
 
+        
         $scope.SchoolIDCheck = null;
         $scope.MerchantUsers = [];
         $scope.userList = [];
+        $scope.ArchivedUsers = [];
         $scope.userInfo = getUserInfoObject();
         $scope.DeptSchoolList = [];
         $scope.spinnerArr = [];
@@ -33,6 +35,7 @@
 
 
         var userC = this;
+        userC.ArchivedUser = false;
         userC.deactivateUser = deactivateUser;
         userC.loadMerchantInfo = loadMerchantInfo;
         userC.loadBulkMerchantInfo = loadBulkMerchantInfo;
@@ -61,12 +64,13 @@
         userC.checkTeacherClassCheckboxes = checkTeacherClassCheckboxes;
         userC.AddClassByCheckboxes = AddClassByCheckboxes;
         userC.submitDepartmentForm = submitDepartmentForm;
-        userC.selectColorBlack = selectColorBlack1;        
+        userC.selectColorBlack = selectColorBlack1;
+        userC.ActivateUser = ActivateUser;
         populateUsers();
         page_init();
         return userC;
 
-       
+
 
         function getUserInfoObject() {
             return {
@@ -145,7 +149,6 @@
                 DataService.UserGetListForMerchant(merchants[merchants_index].MerchantID)
                 .success(function (response1, status, header, config) {
                     var new_users = response1;
-
                     var merchantUsers = [];
 
                     function addUserIfNotAlreadyExists(userList, newUser) {
@@ -235,8 +238,14 @@
                             }
                         });
                     }
-                    $scope.userList = users;
-                }
+                    $scope.userList = users.filter(function (e) {
+                        return e.Email.substring(0, 9) == "INACTIVE-" == false;
+                    });
+                    
+                    $scope.ArchivedUsers = users.filter(function (e) {
+                        return e.Email.substring(0, 9) == "INACTIVE-" == true;
+                    });
+                  }
 
                 // Resolves the spinner once our psuedo loop finishes
                 $scope.spinner.resolve();
@@ -252,7 +261,7 @@
 
         // Show Menu
         function showMenu(userID) {
-            clearUserInfo();            
+            clearUserInfo();
             sessionStorage.setItem("mu_alreadySaved", "");
             sessionStorage.setItem("mu_toBeAdded", "");
             sessionStorage.setItem("mu_toBeDeleted", "");
@@ -357,7 +366,7 @@
                         for (var j = 0; j < $scope.userInfo.merchantList.length; j++) {
                             objSchools = $filter('filter')($scope.userInfo.merchantList[j].schoolList, { SchoolID: userSchools[i].SchoolID }, true);
                             if (objSchools != undefined && objSchools.length > 0) {
-                                objSchools[0].selection = true;                                
+                                objSchools[0].selection = true;
                                 break;
                             }
                         }
@@ -417,7 +426,7 @@
                             //    $("#TeacherSelect option[value='" + teacherID + "']").attr('selected', 'selected');
                             //}
 
-                           // $scope.spinner.resolve();
+                            // $scope.spinner.resolve();
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
                             if (status !== 403) {
@@ -470,7 +479,9 @@
                     $scope.userInfo.merchantList[merchant_index].teacherList = [];
                     DataService.TeacherGetListByMerchant(merchant_list[merchant_index])
                     .success(function (response2, status, header, config) {
-                        var teachers = response2;
+                        var teachers = response2.filter(function (e) {
+                            return e.Email.substring(0, 9) == "INACTIVE-" == false;
+                        });;
                         if (teachers.length > 0) {
                             teachers.sort(function (a, b) {
                                 var nameA = a.LastName.toLowerCase();
@@ -490,10 +501,10 @@
 
                         $scope.userInfo.merchantList[merchant_index].roleList = [];
                         DataService.RolesGetListForMerchant(merchant_list[merchant_index])
-                        .success(function (response3, status, header, config) {                            
+                        .success(function (response3, status, header, config) {
                             var roles = [];
                             if (response3.length > 0) {
-                                 roles = response3.filter(function (e) {
+                                roles = response3.filter(function (e) {
                                     return e.RoleName != "Auditor" && e.RoleName != "Audit-Viewer"
                                 });
                                 roles.sort(function (a, b) {
@@ -505,7 +516,7 @@
                                         return 1;
                                     } else {
                                         return 0;
-                                    }   
+                                    }
                                 });
 
                                 $scope.userInfo.merchantList[merchant_index].roleList = roles;
@@ -811,13 +822,13 @@
         }
 
         // When a user school checkbox is selected
-        function checkUserSchoolCheckboxes(schoolID) {           
-            
+        function checkUserSchoolCheckboxes(schoolID) {
+
             if ($("#" + schoolID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
                 if (schoolID.indexOf('bulk') == 0) {
                     schoolID = schoolID.replace('bulk', '');
-                    $('#bulkcls' + schoolID).show();                    
+                    $('#bulkcls' + schoolID).show();
                 } else {
                     $('#cls' + schoolID).show();
                 }
@@ -904,7 +915,7 @@
                             SMAAlert.CreateInfoAlert("Failed to retrieve employees by site:<br><br>" + response);
                         }
                     });
-                }                
+                }
             } else {// If it's unchecked
                 $('#cls' + schoolID).hide();
                 var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
@@ -940,14 +951,13 @@
 
             }
         }
-        function populateClassesBySchool()
-        {
+        function populateClassesBySchool() {
             DataService.ClassGetListForSchool(schoolID)
             .success(function (classes) {
                 $scope.userInfo.merchantList[0].Classlist = classes;
             })
         }
-        
+
         function checkUserTeacherAccessCheckboxes(teacherID) {
             if ($("#" + teacherID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
@@ -1040,7 +1050,7 @@
         function checkUserRoleCheckboxes(roleID) {
             if ($("#" + roleID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
-                roleID = roleID.replace('bulk','')
+                roleID = roleID.replace('bulk', '')
                 var ur_alreadySaved = sessionStorage.getItem("ur_alreadySaved");
                 var ur_toBeAdded = sessionStorage.getItem("ur_toBeAdded");
                 var ur_toBeDeleted = sessionStorage.getItem("ur_toBeDeleted");
@@ -1155,7 +1165,7 @@
         function deselectAllDeptSchool(schoolID) {
             $("input.schoolID" + schoolID).each(function (i) {
                 if ($(this).prop("checked") == true) {
-                    $(this).prop("checked",false)
+                    $(this).prop("checked", false)
                     checkTeacherClassCheckboxes(this.value)
                 }
             });
@@ -1199,24 +1209,43 @@
         // Load/Deload Merchant Info
         function loadMerchantInfo(merchantID) {
             //if ($("#" + merchantID).prop("checked") == true) {
-                $scope.spinner = SMAAlert.CreateSpinnerAlert();
+            $scope.spinner = SMAAlert.CreateSpinnerAlert();
 
-                var objMerchant = $filter('filter')($scope.userInfo.merchantList, { MerchantID: merchantID }, true)[0];
-                if (objMerchant == undefined)
-                    return;
-                $scope.userInfo.MerchantID = merchantID;
-                objMerchant.schoolList = [];
-                objMerchant.teacherList = [];
-                objMerchant.roleList = [];
+            var objMerchant = $filter('filter')($scope.userInfo.merchantList, { MerchantID: merchantID }, true)[0];
+            if (objMerchant == undefined)
+                return;
+            $scope.userInfo.MerchantID = merchantID;
+            objMerchant.schoolList = [];
+            objMerchant.teacherList = [];
+            objMerchant.roleList = [];
 
-                DataService.SchoolGetListForMerchant(merchantID)
-                .success(function (response1, status, header, config) {
-                    var schools = response1;
+            DataService.SchoolGetListForMerchant(merchantID)
+            .success(function (response1, status, header, config) {
+                var schools = response1;
 
-                    if (schools.length > 0) {
-                        schools.sort(function (a, b) {
-                            var nameA = a.Name.toLowerCase();
-                            var nameB = b.Name.toLowerCase();
+                if (schools.length > 0) {
+                    schools.sort(function (a, b) {
+                        var nameA = a.Name.toLowerCase();
+                        var nameB = b.Name.toLowerCase();
+                        if (nameA < nameB) {
+                            return -1;
+                        } else if (nameA > nameB) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
+                    objMerchant.schoolList = schools;
+                    objMerchant.schoolList.forEach(function (obj) { obj.selection = false; });
+                }
+
+                DataService.TeacherGetListByMerchant(merchantID)
+                .success(function (response2, status, header, config) {
+                    var teachers = response2
+                    if (teachers.length > 0) {
+                        teachers.sort(function (a, b) {
+                            var nameA = a.LastName.toLowerCase();
+                            var nameB = b.LastName.toLowerCase();
                             if (nameA < nameB) {
                                 return -1;
                             } else if (nameA > nameB) {
@@ -1225,17 +1254,17 @@
                                 return 0;
                             }
                         });
-                        objMerchant.schoolList = schools;
-                        objMerchant.schoolList.forEach(function (obj) { obj.selection = false; });
+                        objMerchant.teacherList = teachers;
+                        objMerchant.teacherList.forEach(function (obj) { obj.selection = false; });
                     }
-
-                    DataService.TeacherGetListByMerchant(merchantID)
-                    .success(function (response2, status, header, config) {
-                        var teachers = response2;
-                        if (teachers.length > 0) {
-                            teachers.sort(function (a, b) {
-                                var nameA = a.LastName.toLowerCase();
-                                var nameB = b.LastName.toLowerCase();
+                    DataService.RolesGetListForMerchant(merchantID)
+                    .success(function (response3, status, header, config) {
+                        var roles = [];
+                        roles = response3;
+                        if (roles.length > 0) {
+                            roles.sort(function (a, b) {
+                                var nameA = a.RoleName.toLowerCase();
+                                var nameB = b.RoleName.toLowerCase();
                                 if (nameA < nameB) {
                                     return -1;
                                 } else if (nameA > nameB) {
@@ -1244,57 +1273,38 @@
                                     return 0;
                                 }
                             });
-                            objMerchant.teacherList = teachers;
-                            objMerchant.teacherList.forEach(function (obj) { obj.selection = false; });
+                            objMerchant.roleList = roles;
+                            objMerchant.roleList.forEach(function (obj) { obj.selection = false; });
                         }
-                        DataService.RolesGetListForMerchant(merchantID)
-                        .success(function (response3, status, header, config) {
-                            var roles = [];
-                            roles = response3;
-                            if (roles.length > 0) {
-                                roles.sort(function (a, b) {
-                                    var nameA = a.RoleName.toLowerCase();
-                                    var nameB = b.RoleName.toLowerCase();
-                                    if (nameA < nameB) {
-                                        return -1;
-                                    } else if (nameA > nameB) {
-                                        return 1;
-                                    } else {
-                                        return 0;
-                                    }
-                                });
-                                objMerchant.roleList = roles;
-                                objMerchant.roleList.forEach(function (obj) { obj.selection = false; });
-                            }
 
 
-                            //$scope.spinner.resolve();
-                        }).error(function (response, status, header, config) {
-                            $scope.spinner.resolve();
-                            if (status !== 403) {
-                                if (response == null) { response = "" }
-                                SMAAlert.CreateInfoAlert("Failed to retrieve roles:<br><br>" + response);
-                            }
-                        });
-
-
-                        checkMerchantUserCheckboxes(merchantID);
-                       // $scope.spinner.resolve();
+                        //$scope.spinner.resolve();
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
                         if (status !== 403) {
                             if (response == null) { response = "" }
-                            SMAAlert.CreateInfoAlert("Failed to retrieve employees:<br><br>" + response);
+                            SMAAlert.CreateInfoAlert("Failed to retrieve roles:<br><br>" + response);
                         }
                     });
 
+
+                    checkMerchantUserCheckboxes(merchantID);
+                    // $scope.spinner.resolve();
                 }).error(function (response, status, header, config) {
                     $scope.spinner.resolve();
                     if (status !== 403) {
                         if (response == null) { response = "" }
-                        SMAAlert.CreateInfoAlert("Failed to retrieve sites:<br><br>" + response);
+                        SMAAlert.CreateInfoAlert("Failed to retrieve employees:<br><br>" + response);
                     }
                 });
+
+            }).error(function (response, status, header, config) {
+                $scope.spinner.resolve();
+                if (status !== 403) {
+                    if (response == null) { response = "" }
+                    SMAAlert.CreateInfoAlert("Failed to retrieve sites:<br><br>" + response);
+                }
+            });
 
             //} else {// If they deselect the merchant
             //    deselectAllSchools(merchantID);
@@ -1387,7 +1397,7 @@
                             }
 
                             checkBulkMerchantUserCheckboxes(merchantID);
-                           // $scope.spinner.resolve();
+                            // $scope.spinner.resolve();
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
                             if (status !== 403) {
@@ -1430,11 +1440,10 @@
         function saveBulkData(table) {
             // Data Validations
             var tableData = [];
-            for (var i in table)
-            {
+            for (var i in table) {
                 var tbdata = {
                     Email: table[i].Email,
-                    Password: table[i].Password,
+                   // Password: table[i].Password,
                     FirstName: table[i].FirstName,
                     LastName: table[i].LastName
                 }
@@ -1445,13 +1454,15 @@
                 if (tableData[i].Email == undefined || tableData[i].Email == "" || tableData[i].Email == null) {
                     error = "Email is missing on row " + i + ".";
                     break;
-                } else if (tableData[i].Password == undefined || tableData[i].Password == "" || tableData[i].Password == null) {
-                    error = "Password is missing on row " + i + ".";
-                    break;
-                } else if (tableData[i].Password.length < 6) {
-                    error = "Password on row " + i + " is less than 6 characters.";
-                    break;
-                } else if (tableData[i].FirstName == undefined || tableData[i].FirstName == "" || tableData[i].FirstName == null) {
+                } //else if (tableData[i].Password == undefined || tableData[i].Password == "" || tableData[i].Password == null) {
+                //    error = "Password is missing on row " + i + ".";
+                //    break;
+                    //} 
+                //else if (tableData[i].Password.length < 5) {
+                //    error = "Password on row " + i + " is less than 6 characters.";
+                //    break;
+                    //} 
+                else if (tableData[i].FirstName == undefined || tableData[i].FirstName == "" || tableData[i].FirstName == null) {
                     error = "FirstName is missing on row " + i + ".";
                     break;
                 } else if (tableData[i].LastName == undefined || tableData[i].LastName == "" || tableData[i].LastName == null) {
@@ -1505,7 +1516,7 @@
                         userclases.splice(i, 1);
                     }
                 }
-                
+
 
                 for (var i = 0, len = tableData.length; i < len; i++) {
                     if (merchants.length > 0) {
@@ -1563,7 +1574,7 @@
 
                                         SMAAlert.CreateInfoAlert("While creating users the following errors occurred:<br><br>" + errorsList);
                                     } else {
-                                        SMAAlert.CreateInfoAlert("Users were successfully saved."); 
+                                        SMAAlert.CreateInfoAlert("Users were successfully saved.");
                                     }
                                 }
                             }
@@ -1669,7 +1680,7 @@
                                 .success(function (response, status, header, config) {
                                     usersDone++;
                                     whenUsersDone();
-                                }).error(function (response, status, header, config) {                                    
+                                }).error(function (response, status, header, config) {
                                     usersErrors.push(response + " : " + user.UserName);
                                     usersDone++;
                                     whenUsersDone();
@@ -1768,7 +1779,7 @@
                     $(this).triggerHandler('click');
                 });
 
-            }, 0);           
+            }, 0);
         }
 
         // Saves the form
@@ -1785,8 +1796,7 @@
 
             var oldTeacherID = $scope.userInfo.userTeacher.TeacherID;//$("#TeacherIDHidden").val();
             var teacherID = $scope.userInfo.userTeacher.TeacherID; //$("#TeacherSelectContainer").val();
-            if (teacherID != undefined && teacherID != "" && teacherID != -1)
-            {
+            if (teacherID != undefined && teacherID != "" && teacherID != -1) {
                 user.TeacherID = teacherID;
                 user.IsTeacher = true;
             }
@@ -1823,7 +1833,7 @@
                     user.IsTeacher = true;
                     user.TeacherID = teacherID;
                 }
-				user.DomainName = document.location.origin;
+                user.DomainName = document.location.origin;
                 DataService.CreateiAspireUserAccount(user)
                 .success(function (response1, status, header, config) {
                     $scope.spinner.resolve();
@@ -1863,7 +1873,7 @@
                             SMAAlert.CreateInfoAlert("User has been updated but errors occurred:<br><br><ul>" + errors + "<ul>");
                         } else {
                             SMAAlert.CreateInfoAlert("User has been successfully updated!");
-                            CheckGroupAdmin();
+                            
                         }
                     }
                 }
@@ -2001,8 +2011,7 @@
                 }
 
                 //function to delete user Classes
-                function userClaseesDelete()
-                {
+                function userClaseesDelete() {
                     var tc_toBeAdded = sessionStorage.getItem('tc_toBeAdded');
                     if (tc_toBeAdded) {
                         tc_toBeAdded = tc_toBeAdded.split(',');
@@ -2318,7 +2327,7 @@
                 updatedObjects();
 
                 // Updated objects check, in case nothing is changed
-                updatedObjects();                
+                updatedObjects();
                 if (uta_toBeAdded_Result == true || uta_toBeAdded_Result == undefined) {
                     uta_toBeAdded_Done = true;
                     updatedObjects();
@@ -2367,9 +2376,9 @@
         }
 
         // Doesn't delete a user, simply deactivates them by changing the password and appending the user name
-        function deactivateUser() {
-            var userID = $scope.userInfo.UserID;
-            SMAAlert.CreateConfirmAlert("Are you sure you would like<br>to delete this user?", null, null, null,confirmCallback);
+        function deactivateUser(userInfo) {
+            var userID = userInfo.UserID;
+            SMAAlert.CreateConfirmAlert("Are you sure you want<br>to archive this user?", null, null, null, confirmCallback);
             function confirmCallback(val) {
                 if (val == true) {
                     $scope.spinner = SMAAlert.CreateSpinnerAlert();
@@ -2377,20 +2386,22 @@
                     var randomPassword = generateRanomString(10);
 
                     var user = {
-                        UserID: $scope.userInfo.UserID,
-                        UserName: "INACTIVE-" + $scope.userInfo.Email,
-                        UserEmail: "INACTIVE-" + $scope.userInfo.Email,
+                        UserID: userInfo.UserID,
+                        UserName: "INACTIVE-" + userInfo.Email,
+                        UserEmail: "INACTIVE-" + userInfo.Email,
                         Password: randomPassword,
-                        FirstName: $scope.userInfo.FirstName,
-                        LastName: $scope.userInfo.LastName,
-                        merchantID: $scope.userInfo.merchantList[0].MerchantID
+                        FirstName: userInfo.FirstName,
+                        LastName: userInfo.LastName,
+                        merchantID: userInfo.MerchantID,
+                        TeacherID: userInfo.userTeacher.TeacherID
                     }
 
                     DataService.UpdateUserAccount(user)
                     .success(function (response, status, header, config) {
                         $scope.spinner.resolve();
 
-                        SMAAlert.CreateInfoAlert("User was successfully deactivated.");
+                        SMAAlert.CreateInfoAlert("User was successfully archived.");
+                       // userC.ArchivedUser = true;
                         closeMenu();
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
@@ -2398,7 +2409,7 @@
                     });
                 }
             }
-           
+
         }
 
         // Generates a random password (pass in a number(the length of the string to be made))
@@ -2585,7 +2596,7 @@
         function populateClasses(merchantID) {
             // Clears the checkboxes
             $scope.DeptSchoolList = [];
-            
+
             if (merchantID) {
                 DataService.SchoolGetListForMerchant(merchantID)
                 .success(function (response1, status, header, config) {
@@ -2645,7 +2656,7 @@
                         }
                         $scope.DeptSchoolList[index].classList = classes;
                         $scope.DeptSchoolList[index].classList.forEach(function (obj) { obj.selection = false; });
-                    } 
+                    }
                     schoolHeaders.push(schools[index].SchoolID);
                     index++;
                     populateClassesLoop(schools, index, length, schoolHeaders);
@@ -2679,7 +2690,7 @@
 
                         for (var j = 0, lenj = teacherClasses.length; j < lenj; j++) {
                             //$("#" + teacherClasses[j].ClassID).prop('checked', true);
-                            
+
                             for (var k = 0; k < $scope.DeptSchoolList.length; k++) {
                                 var foundItem = $filter('filter')($scope.DeptSchoolList[k].classList, { ClassID: teacherClasses[j].ClassID }, true);
                                 if (foundItem != undefined && foundItem.length > 0) {
@@ -2692,7 +2703,7 @@
                         tc_alreadySaved = tc_alreadySaved.join(",");
                         sessionStorage.setItem("tc_alreadySaved", tc_alreadySaved);
 
-                       // $scope.spinner.resolve();
+                        // $scope.spinner.resolve();
                         $("#DeptMenu").css("display", "block");
                     }).error(function (response, status, header, config) {
                         //$scope.spinner.resolve();
@@ -2751,8 +2762,8 @@
                 });
             }
         }
-        function populateClassesLoopByMerchant(schools, index, length, schoolHeaders) { 
-            if (index < length) {                
+        function populateClassesLoopByMerchant(schools, index, length, schoolHeaders) {
+            if (index < length) {
                 $scope.DeptList[index].classList = [];
                 DataService.ClassGetListForSchool(schools[index].SchoolID)
                 .success(function (response1, status, header, config) {
@@ -2790,12 +2801,12 @@
                     }
                 });
             }
-            else {                
-                
+            else {
+
                 $('.allclasshide').hide();
                 $('#classdivhide').show();
                 $('#bulkclassdivhide').show();
-                
+
                 if ($scope.userInfo.userTeacher.TeacherID) {
                     DataService.TeacherClassGetListByTeacher($scope.userInfo.userTeacher.TeacherID)
                         .success(function (response2, status, header, config) {
@@ -2818,7 +2829,7 @@
                             }
                             tc_alreadySaved = tc_alreadySaved.join(",");
                             sessionStorage.setItem("tc_alreadySaved", tc_alreadySaved);
-                            $scope.spinner.resolve();                          
+                            $scope.spinner.resolve();
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
                             if (status !== 403) {
@@ -2830,8 +2841,8 @@
                 } else {
                     $scope.spinner.resolve();
                 }
-               // $scope.spinner.resolve();
-            }          
+                // $scope.spinner.resolve();
+            }
         }
 
         function checkTeacherClassCheckboxes(classID) {
@@ -2896,11 +2907,11 @@
                 tc_alreadySaved = tc_alreadySaved.split(",");
 
                 var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                tc_toBeAdded = tc_toBeAdded.split(",");               
+                tc_toBeAdded = tc_toBeAdded.split(",");
                 var temporary_tc_toBeAdded = tc_toBeAdded;
 
                 var tc_toBeDeleted = sessionStorage.getItem("tc_toBeDeleted");
-                tc_toBeDeleted = tc_toBeDeleted.split(",");     
+                tc_toBeDeleted = tc_toBeDeleted.split(",");
                 var temporary_tc_toBeDeleted = tc_toBeDeleted;
                 // If it was already checked(i.e. already in the DB), then add it to the unchecked list(i.e. to be deleted)
                 for (var i = 0, len = tc_alreadySaved.length; i < len; i++) {
@@ -2928,7 +2939,7 @@
         function AddClassByCheckboxes(classID) {
             if ($("#" + classID).is(':checked')) {
 
-                
+
                 var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
                 if (tc_toBeAdded)
                     tc_toBeAdded = tc_toBeAdded.split(",");
@@ -3232,7 +3243,7 @@
             return result;
         }
         //----------------------------------XX---------------------------------
-       
+
         function saveMassBulkData(table) {
             var tableData = [];
             for (var i in table) {
@@ -3243,34 +3254,41 @@
                     LastName: table[i].LastName
                 }
                 tableData.push(tbdata);
-            }            
+            }
         }
-        function CheckGroupAdmin() {
-            var id = localStorage.getItem("id");
-            if (id) {
-                DataService.RolesGetListForUser(id)
-                         .success(function (response3, status, header, config) {
-                             var userRoles = response3;
-                             let chk = userRoles.some(v=>v["RoleName"] == "GlobalAdmin")
-                             if (chk == true) {
-                                 //if ($rootScope.acntadmin == true) {
-                                 //$scope.my.message = false;
-                                 $rootScope.acntadmin = true
-                                 $window.location.reload();
-                             }
-                             else {
-                                 //$scope.my.message = false;
-                                 $rootScope.acntadmin = false
-                                 $window.location.reload();
-                             }
-                             //}
-                         }).error(function (err) {
-                             var v = err;
-                             $rootScope.acntadmin = true;
-                             //$scope.my.message = true;
-                             //$scope.$apply();
+        
 
-                         })
+        function ActivateUser(TeacherID, UserID) {
+            SMAAlert.CreateConfirmAlert("Are you sure you want<br>to activate this user?", null, null, null, confirmCallback);
+            function confirmCallback(val) {
+                TeacherID = "";
+                if (val == true && UserID) {
+                    $scope.spinner = SMAAlert.CreateSpinnerAlert();
+                    var user = $scope.ArchivedUsers.filter(function (e) {
+                        return e.UserID==UserID;
+                    })
+                    var user = {
+                        UserID: user[0].UserID,
+                        UserName: user[0].Email.replace('INACTIVE-', ''),
+                        UserEmail: user[0].Email.replace('INACTIVE-', ''),
+                        FirstName: user[0].FirstName,
+                        LastName: user[0].LastName,
+                        merchantID: user[0].MerchantID,
+                        TeacherID:user[0].userTeacher.TeacherID
+                    }
+
+                    DataService.UpdateUserAccount(user)
+                    .success(function (response, status, header, config) {
+                        $scope.spinner.resolve();
+
+                        SMAAlert.CreateInfoAlert("User was successfully activated.");
+                        userC.ArchivedUser = false;
+                        closeMenu();
+                    }).error(function (response, status, header, config) {
+                        $scope.spinner.resolve();
+                        SMAAlert.CreateInfoAlert("Failed to deactivate user:<br />" + response);
+                    });
+                }
             }
         }
     }

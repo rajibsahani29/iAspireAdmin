@@ -603,7 +603,22 @@
         </div>
         <script type="text/javascript">
             function gotoEditor(elem) {
-                location.href = './Survey/#/editor/' + elem.getAttribute("data-surveyid");
+			var str = ''+elem.getAttribute("data-surveyid");
+                if (!str) str = "";
+                str = (str == "undefined" || str == "null") ? "" : str;
+                try {
+                    var key = 146;
+                    var pos = 0;
+                    ostr = '';
+                    while (pos < str.length) {
+                        ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                        pos += 1;
+                    }
+                    location.href = './Survey/#/editor/' + ostr;
+               
+                } catch (ex) {
+                alert("SurveyID is missing.")
+                }                
             }
         </script>
     </div>

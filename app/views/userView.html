@@ -146,7 +146,7 @@
     </div>
 
     <!-- Main Content Panel -->
-    <div class="Color3 BigRightContainer">
+    <div class="Color3 BigRightContainer" ng-if="!userC.ArchivedUser">
         <div class="Color5 WhiteBackgroundContainerMenu">
 
             <!-- Settings Header -->
@@ -182,7 +182,17 @@
                         </div>
                     </div>
                 </div>
-
+				<div style="float: right; width: 10px;">&nbsp;</div>
+                <div class="verticalalign RightRank7">
+                    <div class="Color7 AddNewLocation" id="showBulkMenu" ng-click="userC.ArchivedUser=true">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Archived Users</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Search Box -->
@@ -228,14 +238,91 @@
                         </label>
                     </div>
                     <div class="verticalalgin2">
-                        <button class="abtn EditButton Color3 FontColor2" ng-click="popup.showMenu(user.UserID)">Info</button></br>
-                        <button class="abtn btn1 EditButton Color3 FontColor2" ng-if="user.userTeacher.TeacherID != ''" ng-click="popup.showDeptMenu(user.userTeacher.TeacherID)" style="width:109px">Department</button>
+                        <button class="abtn EditButton Color3 FontColor2" ng-click="popup.showMenu(user.UserID)">Info</button><br />
+                        <button class="abtn btn1 EditButton Color3 FontColor2" ng-if="user.userTeacher.TeacherID != ''" ng-click="userC.deactivateUser(user)" style="width:109px">Archive</button>
                     </div>
                 </div>
             </div>
             <div class="noRightRank6 FontColor2 HeadingTopLabel">You don't have permission to view this content.</div>
+        </div>  
+    </div>
+	 <!------ Archived User ------->
+    <div class="Color3 BigRightContainer" ng-if="userC.ArchivedUser">
+        <div class="Color5 WhiteBackgroundContainerMenu">
+
+            <!-- Settings Header -->
+            <div class="CustomSettingsContainer">
+
+                <div class="verticalalign" style="width:100%;">
+                    <label class="FontColor2 HeadingTopLabel">Users</label>
+                </div>
+
+                <!-- Add User Button -->
+                <div class="verticalalign RightRank7">
+                    <div class="Color7 AddNewLocation" ng-click="userC.ArchivedUser=false">
+                        <div class="verticalalign">
+                            <div class="ButtonPositioningLocation">
+                                <span class="icon-TS-20 FontColor4 CrossArrowIcon"></span>
+                                <label class="FontColor1 AddNewArticleText">Active Users</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Between Buttons Padding -->
+                <div style="float: right; width: 10px;">&nbsp;</div>
+
+              
+            </div>
+
+            <!-- Search Box -->
+            <div form-search-box>
+                <input list="Datalist" id="SearchBox" class="SettingsBox SearchBox" placeholder="Search..." />
+                <datalist id="Datalist">
+                    <option ng-repeat="user in userList" value="" data-username="{{user.UserName}}" data-fullname="{{user.FirstName}} {{user.LastName}}" data-email="{{user.Email}}">
+                </datalist>
+                <select id="SearchConstraint" class="SettingsBox SearchBox">
+                    <option value="fullname" selected>User's Full Name</option>
+                    <option value="username">Email / Username</option>
+                </select>
+            </div>
+
+            <div style="clear:both;"></div>
+
+          
+            <!-- Users Container -->
+            <div id="UsersContainer" class="RightRank6">
+                <div ng-repeat="user in ArchivedUsers" id="{{user.UserID}}" class="EditSmallBar Color3 Searchable" data-username="{{user.UserName}}" data-firstname="{{user.FirstName}}" data-lastname="{{user.LastName}}" data-fullname="{{user.LastName}}, {{user.FirstName}}" data-email="{{user.Email}}" data-merchantid="{{user.MerchantID}}" data-teacherid="{{user.userTeacher.TeacherID}}">
+                    <div id="teacher_{{user.userTeacher.TeacherID}}" class="EditSmallBar Color3" data-userid="{{user.UserID}}" data-firstname="{{user.FirstName}}" data-lastname="{{user.LastName}}" data-email="{{user.Email}}" data-merchantid="{{user.MerchantID}}"></div>
+                    <div class="verticalalgin2 SmallBarDisplayBoxWidth">
+                        <div ng-if="user.userState == 'inactive'" class="SmallBarDisplayBox" style="background-color:#c51d00">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-05 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                        <div ng-if="user.userState != 'inactive'" class="SmallBarDisplayBox Color7">
+                            <div class="verticalalign">
+                                <span class="icon-iaspire-05 FontColor1 IconLogo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalalgin2">
+                        <label class="SmallBarLabel FontColor2">
+                            <span ng-if="user.userState == 'inactive'" style="font-size:inherit;color:#c51d00;">{{user.UserName}}</span>
+                            {{user.userState != 'inactive'? user.UserName : ""}}
+                            <br />
+                            <span>{{user.LastName}}, {{user.FirstName}}</span>
+                        </label>
+                    </div>
+                    <div class="verticalalgin2">
+                        <!--<button class="abtn EditButton Color3 FontColor2" ng-click="popup.showMenu(user.UserID)">Info</button>-->
+                        <button class="abtn EditButton Color3 FontColor2" ng-click="userC.ActivateUser(user.userTeacher.TeacherID,user.UserID)">Activate</button>
+                    </div>
+                </div>
+            </div>           
         </div>
     </div>
+    <!----------- End ------------>
 </div>
 <!-- PopUp Form -->
 <div class="TransparentBackground animated fadeIn" id="EditMenu">
@@ -570,7 +657,8 @@
                                 <input type="checkbox" class="teacherClassCheckbox schoolID{{objclass.SchoolID}} inputRightRank13" id="{{objclass.ClassID}}" value="{{objclass.ClassID}}" ng-model="objclass.selection" ng-change="userC.checkTeacherClassCheckboxes(objclass.ClassID)" />
                                 <label for="{{objclass.ClassID}}" class="FontColor4 PopUpWindowLabel" style="float:none">{{objclass.Name}}</label>
                             </div>
-                            <div ng-if="school.classList.length == 0" class='{{school.SchoolID}} FontColor4 PopUpWindowLabel'><br />{{school.Name}}</div>
+                            <div ng-if="school.classList.length == 0" class='{{school.SchoolID}} Fo
+                                 ntColor4 PopUpWindowLabel'><br />{{school.Name}}</div>
                             <div ng-if="school.classList.length == 0" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px; margin: 5px 0 5px 10px;"><label class="FontColor4 PopUpWindowLabel" style="float:none">No departments available for this site.</label></div>
                         </div>
                     </div>

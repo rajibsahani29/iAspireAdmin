@@ -61,10 +61,15 @@
                     DataService.validateUserLogin(userLoginObject)
                     .success(function (data, status, headers, config) {
                         window.spinner.resolve();
+						if (data.isAdmin == true) {
                         $scope.AppC.ActiveUser = data;
 						localStorage.setItem("IBSUserData", JSON.stringify(data));
                         localStorage.setItem("id", data.UserID);
                         $location.path("account");
+						} else {
+                            
+                            SMAAlertFactory.CreateInfoAlert("Permission denied.<br/> Please contact with admin.");
+                        }
                     })
                     .error(function (data, status, headers, config) {
                         window.spinner.resolve();
