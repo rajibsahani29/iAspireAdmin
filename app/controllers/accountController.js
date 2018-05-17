@@ -700,16 +700,16 @@
                     image.onload = function () {
                         var height = this.height;
                         var width = this.width;
-                        if ((height > 200 || width > 200) || (height < 50 || width < 50)) {
-                            if (height < 50 || width < 50) {
-                                alert("Height and Width should be greater than 50px.");
-                            }
-                            else {
-                                alert("Height and Width must not exceed 200px.");
-                            }
-                            e.preventDefault();
-                        }
-                        else {
+                        //if ((height > 200 || width > 200) || (height < 50 || width < 50)) {
+                        //    if (height < 50 || width < 50) {
+                        //        alert("Height and Width should be greater than 50px.");
+                        //    }
+                        //    else {
+                        //        alert("Height and Width must not exceed 200px.");
+                        //    }
+                        //    e.preventDefault();
+                        //}
+                        //else {
                             var spinner = SMAAlert.CreateSpinnerAlert();
                             var merchantid = localStorage.getItem("merchantid");
                             var path = DataService.getIP() + DataService.getPath() + "Home/Upload";
@@ -733,7 +733,7 @@
                                   console.error(err);
                               }
                             );
-                        }
+                        //}
                         return true;
                     };
                 }

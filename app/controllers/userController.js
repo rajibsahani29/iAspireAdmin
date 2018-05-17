@@ -3282,7 +3282,7 @@
                         $scope.spinner.resolve();
 
                         SMAAlert.CreateInfoAlert("User was successfully activated.");
-                        userC.ArchivedUser = false;
+                        //userC.ArchivedUser = false;
                         closeMenu();
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
