@@ -1241,7 +1241,10 @@
 
                 DataService.TeacherGetListByMerchant(merchantID)
                 .success(function (response2, status, header, config) {
-                    var teachers = response2
+                    if (response2!=''){
+                    var teachers = response2.filter(function (e) {
+                        return e.Email.substring(0, 9) == "INACTIVE-" == false;
+                    });
                     if (teachers.length > 0) {
                         teachers.sort(function (a, b) {
                             var nameA = a.LastName.toLowerCase();
@@ -1289,6 +1292,7 @@
 
 
                     checkMerchantUserCheckboxes(merchantID);
+					}
                     // $scope.spinner.resolve();
                 }).error(function (response, status, header, config) {
                     $scope.spinner.resolve();
