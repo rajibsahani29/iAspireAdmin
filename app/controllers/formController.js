@@ -1276,8 +1276,22 @@
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
-                            var url = window.location.href.split("#")[0] + "Survey/#/editor/" + response;
-                            window.open(url, '_blank');
+                            var str = '' + response;
+                            if (!str) str = "";
+                            str = (str == "undefined" || str == "null") ? "" : str;
+                            try {
+                                var key = 146;
+                                var pos = 0;
+                                var ostr = '';
+                                while (pos < str.length) {
+                                    ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                                    pos += 1;
+                                }
+                                var url = window.location.href.split("#")[0] + "Survey/#/editor/" + ostr;
+                                window.open(url, '_blank');
+                            } catch (ex) {
+                                alert(ex)
+                            }
                         }
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
@@ -1293,8 +1307,22 @@
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
-                            var url = window.location.href.split("#")[0] + "Survey/#/editor/" + response;
-                            window.open(url, '_blank');
+                            var str = '' + response;
+                            if (!str) str = "";
+                            str = (str == "undefined" || str == "null") ? "" : str;
+                            try {
+                                var key = 146;
+                                var pos = 0;
+                                var ostr = '';
+                                while (pos < str.length) {
+                                    ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                                    pos += 1;
+                                }
+                                var url = window.location.href.split("#")[0] + "Survey/#/editor/" + ostr;
+                                window.open(url, '_blank');
+                            } catch (ex) {
+                                alert(ex)
+                            }   
                         }
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
@@ -1321,8 +1349,22 @@
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
-                            var url = window.location.href.split("#")[0] + "Survey/#/editor/" + response;
-                            window.open(url, '_blank');
+                            var str = '' + response;
+                            if (!str) str = "";
+                            str = (str == "undefined" || str == "null") ? "" : str;
+                            try {
+                                var key = 146;
+                                var pos = 0;
+                                var ostr = '';
+                                while (pos < str.length) {
+                                    ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                                    pos += 1;
+                                }
+                                var url = window.location.href.split("#")[0] + "Survey/#/editor/" + ostr;
+                                window.open(url, '_blank');
+                            } catch (ex) {
+                                alert(ex)
+                            }  
                         }
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
@@ -1338,8 +1380,22 @@
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
-                            var url = window.location.href.split("#")[0] + "Survey/#/editor/" + response;
-                            window.open(url, '_blank');
+                            var str = '' + response;
+                            if (!str) str = "";
+                            str = (str == "undefined" || str == "null") ? "" : str;
+                            try {
+                                var key = 146;
+                                var pos = 0;
+                                var ostr = '';
+                                while (pos < str.length) {
+                                    ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                                    pos += 1;
+                                }
+                                var url = window.location.href.split("#")[0] + "Survey/#/editor/" + ostr;
+                                window.open(url, '_blank');
+                            } catch (ex) {
+                                alert(ex)
+                            } 
                         }
                     }).error(function (response, status, header, config) {
                         $scope.spinner.resolve();
@@ -1376,8 +1432,22 @@
             DataService.UploadXMLSurvey(fd, merchantid, Surveytype)
             .success(function (data, status, headers, config) {
                 if (data) {
-                    var url = window.location.href.split("#")[0] + "Survey/#/editor/" + data;
-                    window.open(url, '_blank');
+                    var str = '' + data;
+                    if (!str) str = "";
+                    str = (str == "undefined" || str == "null") ? "" : str;
+                    try {
+                        var key = 146;
+                        var pos = 0;
+                        var ostr = '';
+                        while (pos < str.length) {
+                            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                            pos += 1;
+                        }
+                        var url = window.location.href.split("#")[0] + "Survey/#/editor/" + ostr;
+                        window.open(url, '_blank');
+                    } catch (ex) {
+                        alert(ex)
+                    }
                 }
                 $scope.spinner.resolve();
                 SMAAlert.CreateInfoAlert("xml has been successfully imported!");
