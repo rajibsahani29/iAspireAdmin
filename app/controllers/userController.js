@@ -262,6 +262,7 @@
         // Show Menu
         function showMenu(userID) {
             clearUserInfo();
+			$scope.DeptList = [];
             sessionStorage.setItem("mu_alreadySaved", "");
             sessionStorage.setItem("mu_toBeAdded", "");
             sessionStorage.setItem("mu_toBeDeleted", "");
@@ -615,6 +616,7 @@
             // Clears all html element values
 
             clearUserInfo();
+			$scope.DeptList = [];
             $scope.popup.showChangePassword = true;
 
             // Chages the select back to placeholder grey
@@ -1051,6 +1053,14 @@
             if ($("#" + roleID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
                 roleID = roleID.replace('bulk', '')
+				var RoleName = $("#" + roleID).data("rolename");
+				if (RoleName == "Viewer" && $scope.userInfo.UserID==-1) {
+                    var MerchantID = $("#" + roleID).data("merchantid");
+                    $('#TeacherContainerFor' + MerchantID).hide();
+                }
+                if (RoleName == "Observer"&& $scope.userInfo.UserID==-1) {
+                    $('#classdivhide').hide();
+                }
                 var ur_alreadySaved = sessionStorage.getItem("ur_alreadySaved");
                 var ur_toBeAdded = sessionStorage.getItem("ur_toBeAdded");
                 var ur_toBeDeleted = sessionStorage.getItem("ur_toBeDeleted");
@@ -1103,6 +1113,14 @@
                 sessionStorage.setItem("ur_toBeAdded", ur_toBeAdded);
             } else {// If it's unchecked
 
+				var RoleName = $("#" + roleID).data("rolename");                
+                if (RoleName == "Viewer") {
+                    var MerchantID = $("#" + roleID).data("merchantid");
+                    $('#TeacherContainerFor' + MerchantID).show();
+                }
+                if (RoleName == "Observer") {
+                    $('#classdivhide').show();
+                }
                 var ur_alreadySaved = sessionStorage.getItem("ur_alreadySaved");
                 ur_alreadySaved = ur_alreadySaved.split(",");
 
@@ -2817,7 +2835,7 @@
                             var teacherClasses = response2;
                             var tc_alreadySaved = sessionStorage.getItem("tc_alreadySaved");
                             tc_alreadySaved = tc_alreadySaved.split(",");
-
+							if ($scope.userInfo.UserID!=-1) {
                             for (var j = 0, lenj = teacherClasses.length; j < lenj; j++) {
                                 //$("#" + teacherClasses[j].ClassID).prop('checked', true);
 
@@ -2831,6 +2849,7 @@
                                 }
                                 tc_alreadySaved.push(teacherClasses[j].ClassID);
                             }
+							}
                             tc_alreadySaved = tc_alreadySaved.join(",");
                             sessionStorage.setItem("tc_alreadySaved", tc_alreadySaved);
                             $scope.spinner.resolve();
