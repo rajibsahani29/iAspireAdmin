@@ -35,6 +35,7 @@
 
 
         var userC = this;
+		userC.RoleNames = [];
         userC.ArchivedUser = false;
         userC.deactivateUser = deactivateUser;
         userC.loadMerchantInfo = loadMerchantInfo;
@@ -1052,15 +1053,7 @@
         function checkUserRoleCheckboxes(roleID) {
             if ($("#" + roleID).is(":checked")) {// If it's checked
                 // Gets the session variables and splits them into arrays
-                roleID = roleID.replace('bulk', '')
-				var RoleName = $("#" + roleID).data("rolename");
-				if (RoleName == "Viewer" && $scope.userInfo.UserID==-1) {
-                    var MerchantID = $("#" + roleID).data("merchantid");
-                    $('#TeacherContainerFor' + MerchantID).hide();
-                }
-                if (RoleName == "Observer"&& $scope.userInfo.UserID==-1) {
-                    $('#classdivhide').hide();
-                }
+                roleID = roleID.replace('bulk', '')				
                 var ur_alreadySaved = sessionStorage.getItem("ur_alreadySaved");
                 var ur_toBeAdded = sessionStorage.getItem("ur_toBeAdded");
                 var ur_toBeDeleted = sessionStorage.getItem("ur_toBeDeleted");
@@ -1111,15 +1104,55 @@
                 ur_toBeAdded = ur_toBeAdded.join(",");
                 sessionStorage.setItem("ur_toBeDeleted", ur_toBeDeleted);
                 sessionStorage.setItem("ur_toBeAdded", ur_toBeAdded);
+				
+				var RoleData = $("#" + roleID).data();
+                $('#RoleContainerFor' + RoleData.merchantid + ' input:checked').each(function () {
+                    userC.RoleNames.push($(this).data('rolename'));
+                });
+               
+                if (userC.RoleNames.includes("Observer") == false && userC.RoleNames.includes("Viewer") == true) {
+                    deselectAllTeachers(RoleData.merchantid)
+                    $('#TeacherContainerFor' + RoleData.merchantid).hide();
+                }
+                if (userC.RoleNames.includes("Observer") == true && userC.RoleNames.includes("Viewer") == false) {
+                    $('#classdivhide').hide();
+                    var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
+                    us_alreadySaved = us_alreadySaved.split(",");
+                    if (us_alreadySaved.length > 0) {
+                        us_alreadySaved.splice(0, 1);
+                    }
+                    for (var i in us_alreadySaved) {
+                        deselectAllDeptSchool(us_alreadySaved[i]);
+                    }
+                }
+                if (userC.RoleNames.length >= 2 && userC.RoleNames.includes("Observer") == true && userC.RoleNames.includes("Viewer") == true) {
+                    if ($("#classdivhide").is(':hidden')) {
+                        $('#classdivhide').show();
+                    }
+                    if ($('#TeacherContainerFor' + RoleData.merchantid).is(':hidden')) {
+                        $('#TeacherContainerFor' + RoleData.merchantid).show();
+                    }
+                }
             } else {// If it's unchecked
 
-				var RoleName = $("#" + roleID).data("rolename");                
+                userC.RoleNames = userC.RoleNames.filter(function (item, pos, self) {
+                    return self.indexOf(item) == pos;
+                })
+                var RoleName = $("#" + roleID).data("rolename");                
                 if (RoleName == "Viewer") {
                     var MerchantID = $("#" + roleID).data("merchantid");
                     $('#TeacherContainerFor' + MerchantID).show();
+                    var index = userC.RoleNames.indexOf("Viewer");
+                    if (index > -1) {
+                        userC.RoleNames.splice(index, 1);
+                    }
                 }
                 if (RoleName == "Observer") {
                     $('#classdivhide').show();
+                    var index = userC.RoleNames.indexOf("Observer");
+                    if (index > -1) {
+                        userC.RoleNames.splice(index, 1);
+                    }
                 }
                 var ur_alreadySaved = sessionStorage.getItem("ur_alreadySaved");
                 ur_alreadySaved = ur_alreadySaved.split(",");
