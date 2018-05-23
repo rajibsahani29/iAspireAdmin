@@ -892,11 +892,13 @@
                 var merchantID = $("#" + schoolID).data("merchantid");
 
                 var isObserver = false;
+                var isEvaluator = false;
 
                 $(".userRoleCheckbox").each(function (i) {
                     //console.log($(this).data("merchantid") + "   " + $(this).prop("checked") + "   " + $(this).data("rolename"));
-                    if ($(this).data("merchantid") == merchantID && $(this).prop("checked") == true && $(this).data("rolename") == "Observer") {
+                    if ($(this).data("merchantid") == merchantID && $(this).prop("checked") == true && ($(this).data("rolename") == "Observer" || $(this).data("rolename") == "Peer Evaluator")) {
                         isObserver = true;
+                        isEvaluator = true;
                     }
                 })
 
@@ -1125,7 +1127,7 @@
                     $('#classdivhide').hide();
                     $('#bulkclassdivhide').hide();
                 }
-                if (userC.RoleNames.includes("Observer") == true && userC.RoleNames.length == 1) {
+                if ((userC.RoleNames.includes("Observer") == true || userC.RoleNames.includes("Peer Evaluator")) && userC.RoleNames.length == 1) {
                     $('#classdivhide').hide();
                     $('#bulkclassdivhide').hide();
                     var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
@@ -1147,7 +1149,7 @@
                         $('#BulkTeacherContainerFor' + RoleData.merchantid).show();
                     }
                 }
-                if (userC.RoleNames.includes("Observer") == true || userC.RoleNames.includes("AccountAdmin") == true || userC.RoleNames.includes("GlobalAdmin") == true || userC.RoleNames.includes("AccountManager") == true) {
+                if (userC.RoleNames.includes("Observer") == true || userC.RoleNames.includes("Peer Evaluator") || userC.RoleNames.includes("AccountAdmin") == true || userC.RoleNames.includes("GlobalAdmin") == true || userC.RoleNames.includes("AccountManager") == true) {
                     $('#TeacherContainerFor' + RoleData.merchantid).show();
                     $('#BulkTeacherContainerFor' + RoleData.merchantid).show();
                 }
@@ -1161,18 +1163,19 @@
                     return self.indexOf(item) == pos;
                 })
                 var RoleName = $("#" + roleID).data("rolename");
+                var MerchantID = $("#" + roleID).data("merchantid");
                 var index = userC.RoleNames.indexOf(RoleName);
                 if (index > -1) {
                     userC.RoleNames.splice(index, 1);
                 }
-                if (RoleName == "Viewer") {
-                    var MerchantID = $("#" + roleID).data("merchantid");
+                if (RoleName == "Viewer") {                    
                     $('#TeacherContainerFor' + MerchantID).show();
                     $('#BulkTeacherContainerFor' + MerchantID).show();
                 }
-                if (RoleName == "Observer") {
+                if (RoleName == "Observer" || RoleName == "Peer Evaluator") {
                     $('#classdivhide').show();
                     $('#bulkclassdivhide').show();
+                    deselectAllTeachers(MerchantID)
                 }
                 if (userC.RoleNames.length == 0)
                     $('#TeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
@@ -1434,7 +1437,7 @@
                                 return 0;
                             }
                         });
-                        
+
                         objMerchant.schoolList = schools;
                         objMerchant.schoolList.forEach(function (obj) { obj.selection = false; });
                     }
@@ -1456,7 +1459,7 @@
                                     return 0;
                                 }
                             });
-                            
+
                             objMerchant.teacherList = teachers;
                             objMerchant.teacherList.forEach(function (obj) { obj.selection = false; });
                         }
