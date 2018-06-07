@@ -1273,6 +1273,7 @@
                     DataService.CreateSurveyForm($scope.SurveyTitle, merchantid, "business")
                     .success(function (response, status, header, config) {
                         getListByName();
+						closeAddFormMenu();
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
@@ -1304,6 +1305,7 @@
                     DataService.CreateSurveyForm($scope.SurveyTitle, merchantid, "education")
                     .success(function (response, status, header, config) {
                         getListByName();
+						closeAddFormMenu();
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
@@ -1346,6 +1348,7 @@
                     DataService.CloneSurveyByName(merchantid, formC.SurveyForm, $scope.FixedSurveyTitle, "business")
                     .success(function (response, status, header, config) {
                         getListByName();
+						closeAddFormMenu();
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
@@ -1376,7 +1379,8 @@
                 else {
                     DataService.CloneSurveyByName(merchantid, formC.SurveyForm, $scope.FixedSurveyTitle, "education")
                     .success(function (response, status, header, config) {
-                        getTESurveyListForUser();
+                        getListByName();
+						closeAddFormMenu();
                         $scope.spinner.resolve();
                         SMAAlert.CreateInfoAlert("Form has been successfully created!");
                         if (response) {
