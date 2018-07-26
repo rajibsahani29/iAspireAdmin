@@ -389,7 +389,11 @@
                         <label class="FontColor4 PopUpWindowLabel">Last Name</label>
                         <input type="text" name="UserLastName" ng-model="userInfo.LastName" id="UserLastName" placeholder="Last Name" class="SettingsBox inputRightRank7" />
                     </div>
-
+					<!-- START NILESH-TSK79 -->
+                    <div class="SmallSettingContainer" ng-if="popup.showSendPasswordResetMail == true">
+                        <label class="FontColor4 PopUpWindowLabel"><input type="checkbox" name="chkSendPasswordResetMail" ng-model="userInfo.SendPasswordResetMail" id="chkSendPasswordResetMail" placeholder="Email" class="inputRightRank7" /> Invite User to iAspire?</label>
+                    </div>
+					<!-- END NILESH-TSK79 -->
                     <!--<div class="SmallSettingContainer">
                         <label class="FontColor4 PopUpWindowLabel">Account</label>                       
                         <select class="FontColor3 EditDropdownBar SettingsBox inputRightRank13" name="MerchantSelect" id="MerchantSelect"

@@ -17,6 +17,9 @@
             showDeleteButton: true,
             showChangePassword: false,
             changePasswordText: "Change password?",
+			//START NILESH-TSK79
+            showSendPasswordResetMail: true,
+			//END NILESH-TSK79
         }
 
 
@@ -84,6 +87,9 @@
                 MerchantID: '',
                 userTeacher: { TeacherID: '' },
                 userState: '',
+				//START NILESH-TSK79
+                SendPasswordResetMail: true
+				//END NILESH-TSK79
             };
         }
         function clearUserInfo() {
@@ -93,7 +99,10 @@
             $scope.userInfo.FirstName = '';
             $scope.userInfo.LastName = '';
             $scope.userInfo.Email = '';
-            $scope.userInfo.MerchantID = ''
+            $scope.userInfo.MerchantID = '';
+			//START NILESH-TSK79
+            $scope.userInfo.SendPasswordResetMail = false;
+			//END NILESH-TSK79
         }
         // Populate Users
         function populateUsers() {
@@ -297,7 +306,9 @@
                 $scope.userInfo.userTeacher.TeacherID = user.teacherid;
                 $scope.popup.showChangePassword = false;
                 $scope.popup.changePasswordText = "Change Password?";
-
+				//START NILESH-TSK79
+                $scope.popup.showSendPasswordResetMail = false;
+				//END NILESH-TSK79
                 $scope.popup.title = "User - Information";
 
                 //$("#UserName").val(user.username);
@@ -337,6 +348,9 @@
                 populateClassesByMerchant(user.merchantid);
 
             } else {
+				//START NILESH-TSK79
+                $scope.popup.showSendPasswordResetMail = true;
+				//END NILESH-TSK79
                 // Hides the Delete Button
                 $scope.popup.showDeleteButton = false;
                 $scope.popup.showChangePassword = true;
@@ -1880,6 +1894,9 @@
                 FirstName: $scope.userInfo.FirstName,
                 LastName: $scope.userInfo.LastName,
                 MerchantID: $scope.userInfo.MerchantID,
+				//START NILESH-TSK79
+                SendPasswordResetMail: $scope.userInfo.SendPasswordResetMail,
+				//END NILESH-TSK79
             }
 
             var oldTeacherID = $scope.userInfo.userTeacher.TeacherID;//$("#TeacherIDHidden").val();
