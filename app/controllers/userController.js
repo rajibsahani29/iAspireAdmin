@@ -350,6 +350,7 @@
             } else {
 				//START NILESH-TSK79
                 $scope.popup.showSendPasswordResetMail = true;
+                $scope.userInfo.SendPasswordResetMail = true;
 				//END NILESH-TSK79
                 // Hides the Delete Button
                 $scope.popup.showDeleteButton = false;
