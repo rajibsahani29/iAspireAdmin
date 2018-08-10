@@ -751,7 +751,10 @@
                         keyword = "subject";
                         break;
                 }
-
+				$scope.pssqInfo.DisplayText = keyword.charAt(0).toUpperCase() + keyword.slice(1);
+                $scope.pssqInfo.ValueVariableName = keyword + "id"
+                $scope.pssqInfo.PlaceholderVariableName = keyword + "name"
+				
                 $("#nPSSQdisplayText").val(keyword.charAt(0).toUpperCase() + keyword.slice(1));
                 $("#nPSSQvalueVariableName").val(keyword + "id");
                 $("#nPSSQplaceholderVariableName").val(keyword + "name");
