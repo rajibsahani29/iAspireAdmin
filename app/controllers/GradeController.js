@@ -392,10 +392,9 @@
             clearUserInfo();
             $scope.popup.showChangePassword = true;
             $scope.GradeID = -1;
-
             // Chages the select back to placeholder grey
             //selectColorGrey('MerchantSelect');
-
+            $('input:checkbox').removeAttr('checked');
             // Clears all sessionStorage
             sessionStorage.setItem("mu_alreadySaved", "");
             sessionStorage.setItem("mu_toBeAdded", "");
