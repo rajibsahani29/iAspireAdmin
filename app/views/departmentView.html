@@ -254,14 +254,14 @@
                         </div>
                     </div>
                     <br style="clear:both;" />
-                    <hr />
+                   
                      <!-- Header / Select All -->
                     <!--<div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="businessrpt == true">Groups<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>-->
-                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="eductnrpt == true">Grades<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="Showgrade == true">Grades<span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.selectAllGrades()"></span><span class="selectAllButton FontColor2 RightRank17" ng-click="deptC.deselectAllGrades()"></span></div>
 
                     <!-- Grades Checkbox Container -->
-                    <div id="GradesCheckboxContainer" ng-if="eductnrpt == true">
-                        <div ng-repeat="grade in objGradeList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                    <div id="GradesCheckboxContainer" ng-if="Showgrade == true">
+                        <div ng-repeat="grade in objGradeList track by $index" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
                             <input type="checkbox" class="classGradeCheckbox inputRightRank17" id="{{grade.GradeID}}" value="{{grade.GradeID}}" ng-model="grade.selection" ng-change="deptC.checkClassGradeCheckboxes(grade.GradeID,'single')" disabled="disabled"/>
                             <label class="FontColor4 PopUpWindowLabel" style="float:none">{{grade.Name}}</label>
                         </div>
@@ -359,10 +359,10 @@
                     <div style="clear:both;"></div>
                     <hr />
                     <!-- Header / Select All -->
-                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="eductnrpt == true"  >Grades<span class="selectAllButton FontColor2" ng-click="deptC.selectAllGradesBulk()"></span><span class="selectAllButton FontColor2" ng-click="deptC.deselectAllGradesBulk()"></span></div>
+                    <div class="FontColor4 PopUpWindowLabel" style="font-size:16px;" ng-if="Showgrade == true"  >Grades<span class="selectAllButton FontColor2" ng-click="deptC.selectAllGradesBulk()"></span><span class="selectAllButton FontColor2" ng-click="deptC.deselectAllGradesBulk()"></span></div>
                     <!-- Grades Checkbox Container -->
-                    <div id="BulkGradesCheckboxContainer" ng-if="eductnrpt == true">
-                        <div ng-repeat="grade in objGradeList" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
+                    <div id="BulkGradesCheckboxContainer" ng-if="Showgrade == true">
+                        <div ng-repeat="grade in objGradeList track by $index" class="SmallSettingContainer" style="height: 20px; min-height:20px; max-height: 20px;">
                             <input type="checkbox" class="classGradeCheckbox inputRightRank17" id="{{grade.GradeID}}1" value="{{grade.GradeID}}" ng-model="grade.selection" ng-change="deptC.checkClassGradeCheckboxes(grade.GradeID,'bulk')" disabled="disabled"/>
                             <label class="FontColor4 PopUpWindowLabel" style="float:none" disabled="disabled">{{grade.Name}}</label>
                         </div>
