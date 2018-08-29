@@ -471,6 +471,7 @@
 
         // Populates schools by Merchant
         function populateSchoolsByMerchant(merchant_list, merchant_index, merchant_length, userID) {
+            merchant_length = $scope.userInfo.merchantList.length;//M0055 
             if (merchant_index < merchant_length) {
                 $scope.userInfo.merchantList[merchant_index].schoolList = [];
 
@@ -1881,7 +1882,6 @@
                 angular.element('#MerchantsContainer .symbol').each(function (i) {
                     $(this).triggerHandler('click');
                 });
-
             }, 0);
         }
 
