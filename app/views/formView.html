@@ -549,7 +549,7 @@
                         <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
                     </form>
                     <form>
-                        <div class="AllSettingsContainer" id="FormInputs" novalidate="novalidate" style="max-height:150px;">
+                        <div class="AllSettingsContainer" id="FormInputs" novalidate="novalidate" style="max-height:210px;">
                             <hr size=2 noshade>
                             <center><u>Create a Survey Using a Base</u></center>
                             <div class="SmallSettingContainer" style="width:100%;">
@@ -564,7 +564,11 @@
                             <input type="radio" ng-show="formC.showFormTitle" ng-model="formC.SurveyForm" name="SpecialSurveyForm" value="iAspire - Short Observation Form" />
                             <label>iAspire - Short Observation Form</label><br />
                             <input type="radio" ng-show="formC.showFormTitle" ng-model="formC.SurveyForm" name="SpecialSurveyForm" value="iAspire - Teacher Walkthrough Form" />
-                            <label>iAspire - Teacher Walkthrough Form</label>
+                            <label>iAspire - Teacher Walkthrough Form</label><br />
+
+                            <input type="radio" ng-show="formC.showFormTitle" ng-model="formC.SurveyForm" name="SpecialSurveyForm" value="IEP Compliance Audit Form" />
+                            <label>IEP Compliance Audit Form</label>
+                            <div class="clearfix"></div>
                             <input type="button" value="Create Survey!" id="submitButton" class="Color7 FontColor1" style="width: 153px;" ng-click="formC.CreateFixedSurveyForm()" />
                             <!-- Save Button -->
                             <div class="SaveButtonContainer RightRank19 RightRank33">
@@ -580,7 +584,7 @@
                         <div class="noRightRank19 noRightRank33" style="clear:both;height:30px;"></div>
                     </form><br>
                     <form class="AllSettingsContainer" id="FormInputs" ng-submit="formC.ImportXmlSurvey();" novalidate="novalidate" style="max-height:150px;">
-                        <br /><br />
+                         
                         <hr size=2 noshade>
                         <center><u>Create Survey by importing Form</u></center>
                         <div class="SmallSettingContainer" style="width:100%;">
@@ -617,8 +621,9 @@
                         ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
                         pos += 1;
                     }
-                   // location.href = './Survey/#/editor/' + ostr;
-                    window.open('./Survey/#/editor/' + ostr, '_blank');
+                    // location.href = './Survey/#/editor/' + ostr;
+                    window.open('http://localhost:4200/#/editor/' + ostr, '_blank');
+                    //window.open('./Survey/#/editor/' + ostr, '_blank');
                
                 } catch (ex) {
                     alert("SurveyID is missing.")
