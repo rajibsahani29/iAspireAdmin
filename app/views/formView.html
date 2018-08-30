@@ -621,8 +621,8 @@
                         ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
                         pos += 1;
                     }
-                    // location.href = './Survey/#/editor/' + ostr;
-                    window.open('http://localhost:4200/#/editor/' + ostr, '_blank');
+                    location.href = './Survey/#/editor/' + ostr;
+                    //window.open('http://localhost:4200/#/editor/' + ostr, '_blank');
                     //window.open('./Survey/#/editor/' + ostr, '_blank');
                
                 } catch (ex) {
