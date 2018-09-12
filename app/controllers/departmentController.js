@@ -1082,87 +1082,100 @@
                     var classes = response1;
                     for (var i in schools) {
                         var cg_toBeAdded = sessionStorage.getItem("" + schools[i]);
-                        var gradessplc = cg_toBeAdded;
-                        if (gradessplc) {
-                            var grades_length = gradessplc.length;
-                            for (var i = 0; i < grades_length; i++) {
-                                if (gradessplc[i] == "" || gradessplc[i] == null || gradessplc[i] == undefined) {
-                                    gradessplc.splice(i, 1);
+                        if (cg_toBeAdded != null) {
+                            cg_toBeAdded = cg_toBeAdded.split(',');
+                            var cg_toBeAdded_length = cg_toBeAdded.length;
+                            for (var i = 0; i < cg_toBeAdded_length; i++) {
+                                if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
+                                    cg_toBeAdded.splice(i, 1);
                                 }
                             }
-                            grades = gradessplc;
+                        }
+                        else {
+                            cg_toBeAdded = "";
                         }
                     }
-                    if (grades.length > 0) {                        
+                    if (cg_toBeAdded.length > 0) {
                         var classGrades = []
-                        for (var i = 0, leni = classes.length; i < leni; i++) {
-                            for (var j = 0, lenj = grades.length; j < lenj; j++) {
-                                var classGrade = {
-                                    ClassID: classes[i].ClassID,
-                                    GradeID: grades[j]
-                                }
-                                classGrades.push(classGrade);
-                            }
-                            var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                            var teachers = tc_toBeAdded.split(",");
-                            var teachers_length = teachers.length;
-                            for (var i = 0; i < teachers_length; i++) {
-                                if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
-                                    teachers.splice(i, 1);
-                                }
-                            }
-                            if (teachers.length <= 0) {
-                                index++;
-                                BulkAddClass(index);
-                            }
-                            if (teachers.length > 0) {
-                                var teacherClasses = []
-                                for (var i = 0, leni = classes.length; i < leni; i++) {
-                                    for (var j = 0, lenj = teachers.length; j < lenj; j++) {
-                                        var teacherClass = {
-                                            ClassID: classes[i].ClassID,
-                                            TeacherID: teachers[j]
-                                        }
-                                        teacherClasses.push(teacherClass);
+                        var grdindex=0;
+                        var maxlen = classes.length;
+                        //function Addclassgrade() {
+                            //if (grdindex <= classes.length) {
+                                for (var j = 0, lenj = cg_toBeAdded.length; j < lenj; j++) {
+                                    var classGrade = {
+                                        ClassID: classes[index].ClassID,
+                                        GradeID: cg_toBeAdded[j]
                                     }
+                                    classGrades.push(classGrade);
                                 }
 
-                                DataService.TeacherClassAddNewBulk(teacherClasses)
-                                .success(function (response3, status, header, config) {
-                                    index++;
-                                    BulkAddClass(index);
-                                    // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                    $scope.spinner.resolve();
-                                    populateClasses();
-                                    closeBulkMenu();
-                                    SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
-                                }).error(function (response, status, header, config) {
-                                    // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                    $scope.spinner.resolve();
-                                    if (response == null) { response = "" }
-                                    //SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
-                                });
+                                DataService.ClassGradeAddNewBulk(classGrades)
+                                  .success(function (response, status, header, config) {
+                                      alert("grade added")
+                                      var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
+                                      var teachers = tc_toBeAdded.split(",");
+                                      var teachers_length = teachers.length;
+                                      for (var i = 0; i < teachers_length; i++) {
+                                          if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
+                                              teachers.splice(i, 1);
+                                          }
+                                      }
+                                      if (teachers.length <= 0) {
+                                          index++;
+                                          BulkAddClass(index);
+                                      }
+                                      if (teachers.length > 0) {
+                                          var teacherClasses = []
+                                          for (var i = 0, leni = classes.length; i < leni; i++) {
+                                              for (var j = 0, lenj = teachers.length; j < lenj; j++) {
+                                                  var teacherClass = {
+                                                      ClassID: classes[i].ClassID,
+                                                      TeacherID: teachers[j]
+                                                  }
+                                                  teacherClasses.push(teacherClass);
+                                              }
+                                          }
 
-                            } else {
-                                // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                $scope.spinner.resolve();
-                                populateClasses();
-                                closeBulkMenu();
-                                SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
-                            }
-                        }
+                                          DataService.TeacherClassAddNewBulk(teacherClasses)
+                                          .success(function (response3, status, header, config) {
+                                              index++;
+                                              BulkAddClass(index);
+                                              // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                              if (index == schools.length) {
+                                                  $scope.spinner.resolve();
+                                                  populateClasses();
+                                                  closeBulkMenu();
+                                                  SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                                              }
+                                          }).error(function (response, status, header, config) {
+                                              // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                              $scope.spinner.resolve();
+                                              if (response == null) { response = "" }
+                                              //SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
+                                          });
 
-                        DataService.ClassGradeAddNewBulk(classGrades)
-                        .success(function (response, status, header, config) {
-                        
-                        }).error(function (response, status, header, config) {
-                            // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                            $scope.spinner.resolve();
-                            if (response == null) { response = "" }
-                           // SMAAlert.CreateInfoAlert("Failed to upload departments:<br><br>" + response);
-                        });
+                                      } else {
+                                          // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                          $scope.spinner.resolve();
+                                          populateClasses();
+                                          closeBulkMenu();
+                                          SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                                      }
+                                     // grdindex++;
+                                      //classGrades = [];
+                                      //Addclassgrade();
+                                  }).error(function (response, status, header, config) {
+                                      // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                      $scope.spinner.resolve();
+                                      if (response == null) { response = "" }
+                                      // SMAAlert.CreateInfoAlert("Failed to upload departments:<br><br>" + response);
+                                  });
 
-
+                                
+                              
+                           // }
+                        //}
+                        //Addclassgrade()
                     } else {
                         var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
                         var teachers = tc_toBeAdded.split(",");
@@ -1193,10 +1206,12 @@
                                 index++;
                                 BulkAddClass(index);
                                 // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                $scope.spinner.resolve();
-                                populateClasses();
-                                closeBulkMenu();
-                                SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                                if (index == schools.length) {
+                                    $scope.spinner.resolve();
+                                    populateClasses();
+                                    closeBulkMenu();
+                                    SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                                }
                             }).error(function (response, status, header, config) {
                                 // Repopulates the teacher list, closes the menu, and shows a success pop-up
                                 $scope.spinner.resolve();
@@ -1204,12 +1219,14 @@
                                 SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
                             });
 
-                        } 
-                        // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                        $scope.spinner.resolve();
-                        populateClasses();
-                        closeBulkMenu();
-                        SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                        }
+                        else {
+                            // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                            $scope.spinner.resolve();
+                            populateClasses();
+                            closeBulkMenu();
+                            SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                        }
                     }
                 }).error(function (response, status, header, config) {
                     $scope.spinner.resolve();
