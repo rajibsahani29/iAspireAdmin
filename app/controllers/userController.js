@@ -497,6 +497,7 @@
                     $scope.userInfo.merchantList[merchant_index].teacherList = [];
                     DataService.TeacherGetListByMerchant(merchant_list[merchant_index])
                     .success(function (response2, status, header, config) {
+                        if (response2 == "") { response2 = []; }
                         var teachers = response2.filter(function (e) {
                             return e.Email.substring(0, 9) == "INACTIVE-" == false;
                         });;
@@ -1337,7 +1338,8 @@
 
                 DataService.TeacherGetListByMerchant(merchantID)
                 .success(function (response2, status, header, config) {
-                    if (response2 != '') {
+                    //if (response2 != '') {
+                        if (response2 == "") { response2 = []; }
                         var teachers = response2.filter(function (e) {
                             return e.Email.substring(0, 9) == "INACTIVE-" == false;
                         });
@@ -1390,7 +1392,7 @@
 
 
                         checkMerchantUserCheckboxes(merchantID);
-                    }
+                    //}
                     // $scope.spinner.resolve();
                 }).error(function (response, status, header, config) {
                     $scope.spinner.resolve();
