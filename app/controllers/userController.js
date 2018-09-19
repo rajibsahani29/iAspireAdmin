@@ -1549,9 +1549,14 @@
             for (var i in table) {
                 var tbdata = {
                     Email: table[i].Email,
-                    // Password: table[i].Password,
+                    //START NILESH-TSK94
+                    Password: table[i].Password,
+                    //END NILESH-TSK94
                     FirstName: table[i].FirstName,
-                    LastName: table[i].LastName
+                    LastName: table[i].LastName,
+                    //START NILESH-TSK94
+                    InviteUser: table[i].InviteUser
+                    //END NILESH-TSK94
                 }
                 tableData.push(tbdata);
             }
@@ -1560,14 +1565,28 @@
                 if (tableData[i].Email == undefined || tableData[i].Email == "" || tableData[i].Email == null) {
                     error = "Email is missing on row " + i + ".";
                     break;
-                } //else if (tableData[i].Password == undefined || tableData[i].Password == "" || tableData[i].Password == null) {
-                    //    error = "Password is missing on row " + i + ".";
-                    //    break;
-                    //} 
-                    //else if (tableData[i].Password.length < 5) {
-                    //    error = "Password on row " + i + " is less than 6 characters.";
-                    //    break;
-                    //} 
+                }
+                //START NILESH-TSK94
+                else if (tableData[i].InviteUser != undefined && tableData[i].InviteUser != null && tableData[i].InviteUser != "") {
+                    if (tableData[i].InviteUser.toLowerCase() == "yes") {
+                        if (tableData[i].Password == undefined || tableData[i].Password == "" || tableData[i].Password == null) {
+                            error = "Password is missing on row " + i + ".";
+                            break;
+                        }
+                        else if (tableData[i].Password.length < 5) {
+                            error = "Password on row " + i + " is less than 6 characters.";
+                            break;
+                        }
+                        else {
+                            tableData[i].SendPasswordResetMail = true;
+                        }
+                    }
+                    else {
+                        tableData[i].Password = undefined;
+                    }
+                    
+                }
+                //END NILESH-TSK94
                 else if (tableData[i].FirstName == undefined || tableData[i].FirstName == "" || tableData[i].FirstName == null) {
                     error = "FirstName is missing on row " + i + ".";
                     break;
@@ -1575,6 +1594,7 @@
                     error = "LastName is missing on row " + i + ".";
                     break;
                 }
+                //tableData[i].InviteUser = undefined;
             }
 
             if (error !== "") {
