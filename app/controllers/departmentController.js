@@ -527,7 +527,7 @@
             cnt3++
             var cg_toBeAdded = sessionStorage.getItem('' + subject.SchoolID);
             if (cg_toBeAdded != null) {
-                cg_toBeAdded = cg_toBeAdded.split(',');            
+                cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;           
                 var cg_toBeAdded_length = cg_toBeAdded.length;
                 for (var i = 0; i < cg_toBeAdded_length; i++) {
                     if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
@@ -540,8 +540,8 @@
             }
             var tc_toBeAdded = sessionStorage.getItem('tc_toBeAdded');
             if (tc_toBeAdded != null) {
-                tc_toBeAdded = tc_toBeAdded.split(',');            
-            var tc_toBeAdded_length = tc_toBeAdded.length;
+                tc_toBeAdded = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;            
+                var tc_toBeAdded_length = tc_toBeAdded != null ? tc_toBeAdded.length : 0;
             for (var i = 0; i < tc_toBeAdded_length; i++) {
                 if (tc_toBeAdded[i] == "" || tc_toBeAdded[i] == null || tc_toBeAdded[i] == undefined) {
                     tc_toBeAdded.splice(i, 1);
@@ -720,8 +720,8 @@
             
             // Grabs the session variables(i.e. Class Grades), splits them into arrays, and removes any null or empty values
             var cg_toBeDeleted = sessionStorage.getItem('cg_toBeDeleted');
-            cg_toBeDeleted = cg_toBeDeleted.split(',');
-            var cg_toBeDeleted_length = cg_toBeDeleted.length;
+            cg_toBeDeleted = cg_toBeDeleted != null ? cg_toBeDeleted.split(',') : null;
+            var cg_toBeDeleted_length = cg_toBeDeleted != null ? cg_toBeDeleted.length : 0;
             for (var i = 0; i < cg_toBeDeleted_length; i++) {
                 if (cg_toBeDeleted[i] == "" || cg_toBeDeleted[i] == null || cg_toBeDeleted[i] == undefined) {
                     cg_toBeDeleted.splice(i, 1);
@@ -729,7 +729,8 @@
             }
 
             // If their are class grades to be deleted
-            if (cg_toBeDeleted.length > 0) {
+            var cg_toBeDeleted_leng= cg_toBeDeleted != null ? cg_toBeDeleted.length : 0;
+            if (cg_toBeDeleted_leng > 0) {
                 populateClasses();
                 closeMenu();
                 SMAAlert.CreateInfoAlert("Department has been updated.");
@@ -774,16 +775,17 @@
         function check_tc_toBeDeleted(classID) {
             // Grabs the session variables(i.e. Teacher Classes), splits them into arrays, and removes any null or empty values
             var tc_toBeDeleted = sessionStorage.getItem('tc_toBeDeleted');
-            tc_toBeDeleted = tc_toBeDeleted.split(',');
-            var tc_toBeDeleted_length = tc_toBeDeleted.length;
+            tc_toBeDeleted = tc_toBeDeleted != null ? tc_toBeDeleted.split(',') : null;
+            var tc_toBeDeleted_length = tc_toBeDeleted !== null ? tc_toBeDeleted.length : 0;
             for (var i = 0; i < tc_toBeDeleted_length; i++) {
                 if (tc_toBeDeleted[i] == "" || tc_toBeDeleted[i] == null || tc_toBeDeleted[i] == undefined) {
                     tc_toBeDeleted.splice(i, 1);
                 }
             }
-            // If their are teacher classes to be deleted           
-            if (tc_toBeDeleted.length > 0) {
-                deleteTeacherClassesLoop(0, tc_toBeDeleted.length, tc_toBeDeleted, classID);
+            // If their are teacher classes to be deleted  
+            var tc_toBeDeleted_len = tc_toBeDeleted != null ? tc_toBeDeleted.length : 0;
+            if (tc_toBeDeleted_len> 0) {
+                deleteTeacherClassesLoop(0, tc_toBeDeleted_len, tc_toBeDeleted, classID);
             } else {
                 // After the class is posted, recall the populate function
                 $scope.spinner.resolve();
@@ -798,8 +800,10 @@
         function deleteTeacherClassesLoop(index, length, teachers, classID) {
             if (index < length) {
                 // Deletes the class grade
-
-                DataService.TeacherClassDelete(teachers[index], classID)
+                var TeacherClasses = [];
+                var TeacherClass = { TeacherID: teachers[index], ClassID: classID };
+                TeacherClasses.push(TeacherClass);
+                DataService.TeacherClassDelete(TeacherClasses)
                 .success(function (response1, status, header, config) {
                     index++;
                     // Recalls the loop
@@ -831,13 +835,13 @@
             if ($("#" + id).is(':checked')) {// If it's checked
 
                 var cg_alreadySaved = sessionStorage.getItem("cg_alreadySaved");
-                cg_alreadySaved = cg_alreadySaved.split(",");
+                cg_alreadySaved = cg_alreadySaved != null ? cg_alreadySaved.split(',') : null;
 
                 var cg_toBeAdded = sessionStorage.getItem("cg_toBeAdded");
-                cg_toBeAdded = cg_toBeAdded.split(",");
+                cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;
 
                 var cg_toBeDeleted = sessionStorage.getItem("cg_toBeDeleted");
-                cg_toBeDeleted = cg_toBeDeleted.split(",");
+                cg_toBeDeleted = cg_toBeDeleted != null ? cg_toBeDeleted.split(',') : null;
                 var temporary_cg_toBeDeleted = cg_toBeDeleted;
 
                 // Loops through to check if it's already in the DB
@@ -850,7 +854,7 @@
 
                 // Check if it's in the unchecked list
                 var toBeDeleted = false;
-                for (var i = 0, len = cg_toBeDeleted.length; i < len; i++) {
+                for (var i = 0, len = cg_toBeDeleted != null ? cg_toBeDeleted.length : 0; i < len; i++) {
                     if (cg_toBeDeleted[i] == gradeID) {
                         toBeDeleted = true;
                     }
@@ -886,14 +890,14 @@
             } else {// If it's unchecked
 
                 var cg_alreadySaved = sessionStorage.getItem("cg_alreadySaved");
-                cg_alreadySaved = cg_alreadySaved.split(",");
+                cg_alreadySaved = cg_alreadySaved != null ? cg_alreadySaved.split(',') : null;
 
                 var cg_toBeAdded = sessionStorage.getItem("cg_toBeAdded");
-                cg_toBeAdded = cg_toBeAdded.split(",");
+                cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;
                 var temporary_cg_toBeAdded = cg_toBeAdded;
 
                 var cg_toBeDeleted = sessionStorage.getItem("cg_toBeDeleted");
-                cg_toBeDeleted = cg_toBeDeleted.split(",");
+                cg_toBeDeleted = cg_toBeDeleted != null ? cg_toBeDeleted.split(',') : null;
                 var temporary_cg_toBeDeleted = cg_toBeDeleted;
 
                 // If it was already checked(i.e. already in the DB), then add it to the unchecked list(i.e. to be deleted)
@@ -931,13 +935,13 @@
             if ($("#" + id).is(':checked')) {// If it's checked
 
                 var tc_alreadySaved = sessionStorage.getItem("tc_alreadySaved");
-                tc_alreadySaved = tc_alreadySaved.split(",");
+                tc_alreadySaved = tc_alreadySaved != null ? tc_alreadySaved.split(',') : null;
 
                 var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded"); 
-                tc_toBeAdded = tc_toBeAdded.split(",");
+                tc_toBeAdded = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
 
                 var tc_toBeDeleted = sessionStorage.getItem("tc_toBeDeleted");
-                tc_toBeDeleted = tc_toBeDeleted.split(",");
+                tc_toBeDeleted = tc_toBeDeleted != null ? tc_toBeDeleted.split(',') : null;
                 var temporary_tc_toBeDeleted = tc_toBeDeleted;
 
                 // Loops through to check if it's already in the DB
@@ -950,7 +954,7 @@
 
                 // Check if it's in the unchecked list
                 var toBeDeleted = false;
-                for (var i = 0, len = tc_toBeDeleted.length; i < len; i++) {
+                for (var i = 0, len = tc_toBeDeleted!=null?tc_toBeDeleted.length:0; i < len; i++) {
                     if (tc_toBeDeleted[i] == teacherID) {
                         toBeDeleted = true;
                     }
@@ -986,25 +990,25 @@
             } else {// If it's unchecked
 
                 var tc_alreadySaved = sessionStorage.getItem("tc_alreadySaved");
-                tc_alreadySaved = tc_alreadySaved.split(",");
+                tc_alreadySaved = tc_alreadySaved != null ? tc_alreadySaved.split(',') : null;
 
                 var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                tc_toBeAdded = tc_toBeAdded.split(",");
+                tc_toBeAdded = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
                 var temporary_tc_toBeAdded = tc_toBeAdded;
 
                 var tc_toBeDeleted = sessionStorage.getItem("tc_toBeDeleted");
-                tc_toBeDeleted = tc_toBeDeleted.split(",");
+                tc_toBeDeleted = tc_toBeDeleted != null ? tc_toBeDeleted.split(',') : null;
                 var temporary_tc_toBeDeleted = tc_toBeDeleted;
 
                 // If it was already checked(i.e. already in the DB), then add it to the unchecked list(i.e. to be deleted)
-                for (var i = 0, len = tc_alreadySaved.length; i < len; i++) {
+                for (var i = 0, len = tc_alreadySaved != null ? tc_alreadySaved.length :0; i < len; i++) {
                     if (tc_alreadySaved[i] == teacherID) {
                         temporary_tc_toBeDeleted.push(teacherID);
                     }
                 }
 
                 // If it was checked(i.e. to be added to DB), then splice it from that list
-                for (var i = 0, len = tc_toBeAdded.length; i < len; i++) {
+                for (var i = 0, len = tc_toBeAdded != null ? tc_toBeAdded.length : 0; i < len; i++) {
                     if (tc_toBeAdded[i] == teacherID) {
                         temporary_tc_toBeAdded.splice(i, 1);
                     }
@@ -1057,7 +1061,7 @@
             // Gets the merchantID from the select
             var schoolID = $("#SchoolBulkSelect").val();
             var cg_toBeAdded = sessionStorage.getItem('us_toBeAdded');
-            cg_toBeAdded = cg_toBeAdded.split(',');            
+            cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;            
             var cg_toBeAdded_length = cg_toBeAdded.length;
             for (var i = 0; i < cg_toBeAdded_length; i++) {
                 if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
@@ -1083,7 +1087,7 @@
                     for (var i in schools) {
                         var cg_toBeAdded = sessionStorage.getItem("" + schools[i]);
                         if (cg_toBeAdded != null) {
-                            cg_toBeAdded = cg_toBeAdded.split(',');
+                            cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;;
                             var cg_toBeAdded_length = cg_toBeAdded.length;
                             for (var i = 0; i < cg_toBeAdded_length; i++) {
                                 if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
@@ -1109,8 +1113,8 @@
                                     classGrades.push(classGrade);
                                 }
                                 var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                                var teachers = tc_toBeAdded.split(",");
-                                var teachers_length = teachers.length;
+                                var teachers = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
+                                var teachers_length = teachers != null ? teachers.length : 0;
                                 for (var i = 0; i < teachers_length; i++) {
                                     if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
                                         teachers.splice(i, 1);
@@ -1172,8 +1176,8 @@
                         Addclassgrade()
                     } else {
                         var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                        var teachers = tc_toBeAdded.split(",");
-                        var teachers_length = teachers.length;
+                        var teachers = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
+                        var teachers_length = teachers != null ? teachers.length : 0;
                         for (var i = 0; i < teachers_length; i++) {
                             if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
                                 teachers.splice(i, 1);
@@ -1604,25 +1608,25 @@
             } else {// If it's unchecked
 
                 var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
-                us_alreadySaved = us_alreadySaved.split(",");
+                us_alreadySaved = us_alreadySaved != null ? us_alreadySaved.split(",") : null;
 
                 var us_toBeAdded = sessionStorage.getItem("us_toBeAdded");
-                us_toBeAdded = us_toBeAdded.split(",");
+                us_toBeAdded = us_toBeAdded != null ? us_toBeAdded.split(",") : null;
                 var temporary_us_toBeAdded = us_toBeAdded;
 
                 var us_toBeDeleted = sessionStorage.getItem("us_toBeDeleted");
-                us_toBeDeleted = us_toBeDeleted.split(",");
+                us_toBeDeleted = us_toBeDeleted != null ? us_toBeDeleted.split(",") : null;
                 var temporary_us_toBeDeleted = us_toBeDeleted;
 
                 // If it was already checked(i.e. already in the DB), then add it to the unchecked list(i.e. to be deleted)
-                for (var i = 0, len = us_alreadySaved.length; i < len; i++) {
+                for (var i = 0, len = us_alreadySaved != null ? us_alreadySaved.length : 0; i < len; i++) {
                     if (us_alreadySaved[i] == schoolID) {
                         temporary_us_toBeDeleted.push(schoolID);
                     }
                 }
 
                 // If it was checked(i.e. to be added to DB), then splice it from that list
-                for (var i = 0, len = us_toBeAdded.length; i < len; i++) {
+                for (var i = 0, len = us_toBeAdded != null ? us_toBeAdded.length : 0; i < len; i++) {
                     if (us_toBeAdded[i] == schoolID) {
                         temporary_us_toBeAdded.splice(i, 1);
                     }
@@ -1639,8 +1643,8 @@
         function AddBulkSchool()
         {            
             var cg_toBeAdded = sessionStorage.getItem('us_toBeAdded');
-            cg_toBeAdded = cg_toBeAdded.split(',');
-            var cg_toBeAdded_length = cg_toBeAdded.length;
+            cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;
+            var cg_toBeAdded_length = cg_toBeAdded != null ? cg_toBeAdded.length : 0;
             for (var i = 0; i < cg_toBeAdded_length; i++) {
                 if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
                     cg_toBeAdded.splice(i, 1);
@@ -1648,7 +1652,7 @@
             }
             if ($scope.sumbit_type == "create") {               
                 var index = 0;
-                var len = cg_toBeAdded.length;
+                var len = cg_toBeAdded != null ? cg_toBeAdded.length : 0;
                 $scope.lenth = len;
                 function AddschoolinBulk(index) {
                     if (index < len) {
