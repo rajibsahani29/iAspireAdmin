@@ -370,6 +370,13 @@
                             DataService.TeacherGetListByMerchant(merchants[index].MerchantID)
                             .success(function (response2, status, header, config) {
                                 var tempTeachers = response2;
+
+                                if (tempTeachers != "") {
+                                    tempTeachers = tempTeachers.filter(function (e) {
+                                        return e.Email.substring(0, 9) == "INACTIVE-" == false;
+                                    });
+                                }
+
                                 for (var i = 0, len = tempTeachers.length; i < len; i++) {
                                     teachers.push(tempTeachers[i]);
                                 }
