@@ -2,7 +2,7 @@
     "use strict";
     angular
         .module("iAspireApp")
-        .controller("DepartmentController", ["$scope", "$rootScope","$window", "DataService", "SMAAlertFactory", "ProjectConstants", "$filter", departmentController]);
+        .controller("DepartmentController", ["$scope", "$rootScope", "$window", "DataService", "SMAAlertFactory", "ProjectConstants", "$filter", departmentController]);
 
     function departmentController($scope, $rootScope, $window, DataService, SMAAlert, ProjectConstants, $filter) {
         $scope.popup = {
@@ -76,9 +76,9 @@
             sessionStorage.setItem("tc_alreadySaved", "");
             sessionStorage.setItem("tc_toBeAdded", "");
             sessionStorage.setItem("tc_toBeDeleted", "");
-            sessionStorage.setItem("us_alreadySaved","");
-            sessionStorage.setItem("us_toBeAdded","");
-            sessionStorage.setItem("us_toBeDeleted","");
+            sessionStorage.setItem("us_alreadySaved", "");
+            sessionStorage.setItem("us_toBeAdded", "");
+            sessionStorage.setItem("us_toBeDeleted", "");
             // Form Validation Rules
             $scope.validator = $("#FormInputs").validate({
                 rules: {
@@ -133,7 +133,7 @@
                             return 0;
                         }
                     });
-                    $scope.merchantList = merchants;                    
+                    $scope.merchantList = merchants;
                     getSchools(merchants, merchants_length, merchants_index);
                 } else {
                     $scope.spinner.resolve();
@@ -169,8 +169,8 @@
                             } else {
                                 return 0;
                             }
-                        });                        
-                            $scope.merchantList[(merchants_index - 1)].schoolList = schools;
+                        });
+                        $scope.merchantList[(merchants_index - 1)].schoolList = schools;
                         // Populates the school dropdown and bulk menu's dropdown
                         $scope.spinner.resolve();
                         populateSchoolsDropdown(schools);
@@ -200,45 +200,45 @@
                 if (schools_index == 0) {
                     $scope.spinner = SMAAlert.CreateSpinnerAlert();
                 }
-            $scope.merchantList[(merchants_index - 1)].schoolList[schools_index].classList = [];
-            DataService.ClassGetListForSchool(schools[schools_index].SchoolID)
-                .success(function (response1, status, header, config) {
-                    var classes = response1;
-                    for (var i = 0, len = classes.length; i < len; i++) {
-                        classes[i].SchoolName = schools[schools_index].Name;
-                    }
-                    if (classes.length > 0) {
-                        classes.sort(function (a, b) {
-                            var nameA = a.Name.toLowerCase();
-                            var nameB = b.Name.toLowerCase();
-                            if (nameA < nameB) {
-                                return -1;
-                            } else if (nameA > nameB) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        });                        
+                $scope.merchantList[(merchants_index - 1)].schoolList[schools_index].classList = [];
+                DataService.ClassGetListForSchool(schools[schools_index].SchoolID)
+                    .success(function (response1, status, header, config) {
+                        var classes = response1;
+                        for (var i = 0, len = classes.length; i < len; i++) {
+                            classes[i].SchoolName = schools[schools_index].Name;
+                        }
+                        if (classes.length > 0) {
+                            classes.sort(function (a, b) {
+                                var nameA = a.Name.toLowerCase();
+                                var nameB = b.Name.toLowerCase();
+                                if (nameA < nameB) {
+                                    return -1;
+                                } else if (nameA > nameB) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
+                            });
                             $scope.merchantList[(merchants_index - 1)].schoolList[schools_index].classList = classes;
-                          $scope.ddlClassList = $scope.ddlClassList.concat(classes);
-                    }
-                    schools_index++;
-                    getClasses(merchants, merchants_length, merchants_index, schools, schools_length, schools_index);
-                   // if ((schools_index - 1) == schools_length) {
-                        $scope.spinner.resolve();
-                   // }
-                }).error(function (response, status, header, config) {
-                    if (status !== 403) {
-                        $scope.spinner.resolve();
-                        if (response == null) { response = "" }
-                        SMAAlert.CreateInfoAlert("Failed to retrieve departments:<br><br>" + response);
-                    } else {
-                        $scope.spinner.resolve();
-                        console.log("Forbidden: Classes.ClassGetListForSchool(" + schools[schools_index].SchoolID + ")");
+                            $scope.ddlClassList = $scope.ddlClassList.concat(classes);
+                        }
                         schools_index++;
                         getClasses(merchants, merchants_length, merchants_index, schools, schools_length, schools_index);
-                    }
-                });
+                        // if ((schools_index - 1) == schools_length) {
+                        $scope.spinner.resolve();
+                        // }
+                    }).error(function (response, status, header, config) {
+                        if (status !== 403) {
+                            $scope.spinner.resolve();
+                            if (response == null) { response = "" }
+                            SMAAlert.CreateInfoAlert("Failed to retrieve departments:<br><br>" + response);
+                        } else {
+                            $scope.spinner.resolve();
+                            console.log("Forbidden: Classes.ClassGetListForSchool(" + schools[schools_index].SchoolID + ")");
+                            schools_index++;
+                            getClasses(merchants, merchants_length, merchants_index, schools, schools_length, schools_index);
+                        }
+                    });
             } else {
                 getSchools(merchants, merchants_length, merchants_index);
             }
@@ -262,9 +262,9 @@
         }
 
         // Populates the grades checkboxes
-        function populateGrades(classID,schoolID,check) {
+        function populateGrades(classID, schoolID, check) {
             // Clears the container
-          // $scope.spinner = SMAAlert.CreateSpinnerAlert();
+            // $scope.spinner = SMAAlert.CreateSpinnerAlert();
             if (classID) {
                 $scope.objGradeList = [];
                 DataService.GradeGetAll()
@@ -291,7 +291,7 @@
                                 cg_alreadySaved = cg_alreadySaved.join(",");
                                 sessionStorage.setItem("cg_alreadySaved", cg_alreadySaved);
                             }
-                           // $scope.spinner.resolve();
+                            // $scope.spinner.resolve();
                             populateTeachers(classID);
                         }).error(function (response, status, header, config) {
                             $scope.spinner.resolve();
@@ -325,18 +325,18 @@
                         sessionStorage.setItem('cg_toBeDeleted', tobedelete);
                         $scope.objGradeList = [];
                     }
-                    $scope.objGrdListSubmit = [];                    
+                    $scope.objGrdListSubmit = [];
                     for (var i = 0; i < schoolID.length; i++) {
                         var foundItem = $filter('filter')($scope.objFilterdGrdList, { GradeID: schoolID[i].GradeID }, true)[0];
                         if (foundItem != undefined) {
                             foundItem.selection = true;
                             $scope.objGrdListSubmit.push(schoolID[i].GradeID);
-                            var value=$scope.objGradeList;
+                            var value = $scope.objGradeList;
                             let chk = value.some(value=>value["GradeID"] === schoolID[i].GradeID);
                             if (chk == false) {
-                                $scope.objGradeList.push(foundItem);                                
+                                $scope.objGradeList.push(foundItem);
                             }
-                        }                        
+                        }
                     }
                     $scope.objGrdListSubmit = $scope.objGrdListSubmit.join(",");
                     sessionStorage.setItem("" + schoolID[0].SchoolID, $scope.objGrdListSubmit);
@@ -351,8 +351,8 @@
                     cg_alreadySaved = cg_alreadySaved.join(",");
                     sessionStorage.setItem("cg_alreadySaved", cg_alreadySaved);
                     $scope.success = check;
-                   // $scope.spinner.resolve();
-                })                
+                    // $scope.spinner.resolve();
+                })
             }
         }
 
@@ -409,7 +409,7 @@
 
                                         for (var i = 0, len = teacherClasses.length; i < len; i++) {
                                             $("#" + teacherClasses[i].TeacherID).prop("checked", true);
-                                            
+
                                             var foundItem = $filter('filter')($scope.objTeacherList, { TeacherID: teacherClasses[i].TeacherID }, true)[0];
                                             if (foundItem != undefined) {
                                                 foundItem.selection = true;
@@ -459,11 +459,11 @@
         function showMenu(classID) {
             $scope.spinner = SMAAlert.CreateSpinnerAlert();
             if (classID) {
-               // $scope.spinner = SMAAlert.CreateSpinnerAlert();
+                // $scope.spinner = SMAAlert.CreateSpinnerAlert();
                 // Gets the teacher object from the data-bindings
                 var class_data = $("#" + classID).data();
                 $scope.classInfo.ClassID = classID;
-                $scope.classInfo.Name= class_data.name;
+                $scope.classInfo.Name = class_data.name;
                 $scope.classInfo.Description = class_data.description;
                 $scope.classInfo.SchoolID = class_data.schoolid;
                 $scope.classInfo.SchoolName = class_data.schoolname;
@@ -476,13 +476,13 @@
                 $("#DeleteButton").show();
                 $("#BulkSchoolsCheckboxContainer").hide();
                 $('#SchoolSelectDiv').show();
-                $('#SiteSchoolDiv').hide();                
+                $('#SiteSchoolDiv').hide();
                 $scope.sumbit_type = "update";
                 // Change the color so it's not placeholder grey
                 selectColorBlack("SchoolSelect");
 
                 // Populates the grades checkboxes
-                populateGrades(classID);                
+                populateGrades(classID);
             } else {
                 // Changes the form's header and sets the teacherID to -1(this tells the db that it's new)+
                 $scope.popup.title = "New Department - Information";
@@ -497,8 +497,8 @@
                 //sessionStorage.setItem("tc_toBeAdded", "");
                 //sessionStorage.setItem("tc_toBeDeleted", "");
                 // Populates the grades checkboxes
-                populateGrades(-1); 
-            }          
+                populateGrades(-1);
+            }
         }
 
         // Closes the form/menu
@@ -507,7 +507,7 @@
 
             // Clears all html element values
             $scope.classInfo = getClassInfo();
-            
+
             // Clears session variables for the form
             sessionStorage.setItem("cg_alreadySaved", "");
             sessionStorage.setItem("cg_toBeAdded", "");
@@ -526,7 +526,7 @@
         }
 
         // Save Form
-        
+
         function submitForm(subject) {
             if (cnt3 < 1) {
                 $scope.spinner = SMAAlert.CreateSpinnerAlert();
@@ -534,7 +534,7 @@
             cnt3++
             var cg_toBeAdded = sessionStorage.getItem('' + subject.SchoolID);
             if (cg_toBeAdded != null) {
-                cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;           
+                cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;
                 var cg_toBeAdded_length = cg_toBeAdded.length;
                 for (var i = 0; i < cg_toBeAdded_length; i++) {
                     if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
@@ -547,42 +547,42 @@
             }
             var tc_toBeAdded = sessionStorage.getItem('tc_toBeAdded');
             if (tc_toBeAdded != null) {
-                tc_toBeAdded = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;            
+                tc_toBeAdded = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
                 var tc_toBeAdded_length = tc_toBeAdded != null ? tc_toBeAdded.length : 0;
-            for (var i = 0; i < tc_toBeAdded_length; i++) {
-                if (tc_toBeAdded[i] == "" || tc_toBeAdded[i] == null || tc_toBeAdded[i] == undefined) {
-                    tc_toBeAdded.splice(i, 1);
+                for (var i = 0; i < tc_toBeAdded_length; i++) {
+                    if (tc_toBeAdded[i] == "" || tc_toBeAdded[i] == null || tc_toBeAdded[i] == undefined) {
+                        tc_toBeAdded.splice(i, 1);
+                    }
                 }
-            }
             }
             else {
                 tc_toBeAdded = "";
             }
             // If it's a new subject
             if (subject.ClassID == -1) {
-               
+
                 DataService.ClassAddNew(subject)
-                .success(function (response1, status, header, config)   {
+                .success(function (response1, status, header, config) {
                     var subjectID = response1;
-                    populateGrades("",subject.SchoolID,"submit") 
-                        $scope.success = false;                        
-                            var classGrades = [];
-                            // Builds the Class Grade objects and pushes it to the array
-                            for (var i = 0, len = cg_toBeAdded.length; i < len; i++) {
-                                var classGrade = {
-                                    ClassID: subjectID,
-                                    GradeID: cg_toBeAdded[i]
-                                }
-                                classGrades.push(classGrade);
-                            }
-                            DataService.ClassGradeAddNewBulk(classGrades)
-                            .success(function (response3, status, header, config) {
-                                //$scope.spinner.resolve();
-                            }).error(function (response, status, header, config) {                                
-                                if (response == null) { response = "" }
-                                //SMAAlert.CreateInfoAlert("Failed to save department groups:<br><br>" + response);
-                               // $scope.spinner.resolve();
-                            });
+                    populateGrades("", subject.SchoolID, "submit")
+                    $scope.success = false;
+                    var classGrades = [];
+                    // Builds the Class Grade objects and pushes it to the array
+                    for (var i = 0, len = cg_toBeAdded.length; i < len; i++) {
+                        var classGrade = {
+                            ClassID: subjectID,
+                            GradeID: cg_toBeAdded[i]
+                        }
+                        classGrades.push(classGrade);
+                    }
+                    DataService.ClassGradeAddNewBulk(classGrades)
+                    .success(function (response3, status, header, config) {
+                        //$scope.spinner.resolve();
+                    }).error(function (response, status, header, config) {
+                        if (response == null) { response = "" }
+                        //SMAAlert.CreateInfoAlert("Failed to save department groups:<br><br>" + response);
+                        // $scope.spinner.resolve();
+                    });
                     if (tc_toBeAdded.length > 0) {
 
                         var teacherClasses = [];
@@ -607,12 +607,12 @@
                                 closeMenu()
                                 SMAAlert.CreateInfoAlert("New Department has been saved.");
                             }
-                           // $scope.message = "New Department has been saved.";
+                            // $scope.message = "New Department has been saved.";
                             //SMAAlert.CreateInfoAlert("New Department has been saved.");
-                          // $scope.spinner.resolve();
-                        }).error(function (response, status, header, config) {                            
+                            // $scope.spinner.resolve();
+                        }).error(function (response, status, header, config) {
                             if (response == null) { response = "" }
-                           // SMAAlert.CreateInfoAlert("Failed to save employee departments:<br><br>" + response);
+                            // SMAAlert.CreateInfoAlert("Failed to save employee departments:<br><br>" + response);
                             //$scope.spinner.resolve();
                         });
                     } else {
@@ -622,7 +622,7 @@
                         //SMAAlert.CreateInfoAlert("New Department has been saved.");
                         $scope.spinner.resolve();
                     }
-                   
+
                 }).error(function (response, status, header, config) {
                     $scope.spinner.resolve();
                     if (response == null) { response = "" }
@@ -644,7 +644,7 @@
                         AddGrade_Teacher();
                     }
                     function AddGrade_Teacher() {
-                        if (cg_toBeAdded.length > 0 ) {
+                        if (cg_toBeAdded.length > 0) {
                             var classGrades = [];
                             // Builds the ClassGrade objects and pushes it to the array
                             for (var i = 0, len = cg_toBeAdded.length; i < len; i++) {
@@ -721,10 +721,10 @@
                 });
             }
         }
-                
+
         // Checks for ClassGrades to be deleted, and then deletes them
         function check_cg_toBeDeleted(classID) {
-            
+
             // Grabs the session variables(i.e. Class Grades), splits them into arrays, and removes any null or empty values
             var cg_toBeDeleted = sessionStorage.getItem('cg_toBeDeleted');
             cg_toBeDeleted = cg_toBeDeleted != null ? cg_toBeDeleted.split(',') : null;
@@ -736,12 +736,12 @@
             }
 
             // If their are class grades to be deleted
-            var cg_toBeDeleted_leng= cg_toBeDeleted != null ? cg_toBeDeleted.length : 0;
+            var cg_toBeDeleted_leng = cg_toBeDeleted != null ? cg_toBeDeleted.length : 0;
             if (cg_toBeDeleted_leng > 0) {
                 populateClasses();
                 closeMenu();
                 SMAAlert.CreateInfoAlert("Department has been updated.");
-               // deleteClassGradesLoop(0, cg_toBeDeleted.length, cg_toBeDeleted, classID);
+                // deleteClassGradesLoop(0, cg_toBeDeleted.length, cg_toBeDeleted, classID);
             } else {
                 // After the class is posted, recall the populate function
                 //$scope.spinner.resolve();
@@ -791,7 +791,7 @@
             }
             // If their are teacher classes to be deleted  
             var tc_toBeDeleted_len = tc_toBeDeleted != null ? tc_toBeDeleted.length : 0;
-            if (tc_toBeDeleted_len> 0) {
+            if (tc_toBeDeleted_len > 0) {
                 deleteTeacherClassesLoop(0, tc_toBeDeleted_len, tc_toBeDeleted, classID);
             } else {
                 // After the class is posted, recall the populate function
@@ -832,7 +832,7 @@
 
         // Checks for ClassGrade checkboxes
         function checkClassGradeCheckboxes(gradeID, type) {
-            var id='';
+            var id = '';
             if (type == "bulk") {
                 id = gradeID + "1";
             }
@@ -944,7 +944,7 @@
                 var tc_alreadySaved = sessionStorage.getItem("tc_alreadySaved");
                 tc_alreadySaved = tc_alreadySaved != null ? tc_alreadySaved.split(',') : null;
 
-                var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded"); 
+                var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
                 tc_toBeAdded = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
 
                 var tc_toBeDeleted = sessionStorage.getItem("tc_toBeDeleted");
@@ -961,7 +961,7 @@
 
                 // Check if it's in the unchecked list
                 var toBeDeleted = false;
-                for (var i = 0, len = tc_toBeDeleted!=null?tc_toBeDeleted.length:0; i < len; i++) {
+                for (var i = 0, len = tc_toBeDeleted != null ? tc_toBeDeleted.length : 0; i < len; i++) {
                     if (tc_toBeDeleted[i] == teacherID) {
                         toBeDeleted = true;
                     }
@@ -1008,7 +1008,7 @@
                 var temporary_tc_toBeDeleted = tc_toBeDeleted;
 
                 // If it was already checked(i.e. already in the DB), then add it to the unchecked list(i.e. to be deleted)
-                for (var i = 0, len = tc_alreadySaved != null ? tc_alreadySaved.length :0; i < len; i++) {
+                for (var i = 0, len = tc_alreadySaved != null ? tc_alreadySaved.length : 0; i < len; i++) {
                     if (tc_alreadySaved[i] == teacherID) {
                         temporary_tc_toBeDeleted.push(teacherID);
                     }
@@ -1060,7 +1060,7 @@
         function submitBulkForm() {
             $scope.spinner = SMAAlert.CreateSpinnerAlert();
             processFile();
-            return false;            
+            return false;
         }
 
         // Save Bulk Data
@@ -1068,11 +1068,11 @@
             // Gets the merchantID from the select
             var schoolID = $("#SchoolBulkSelect").val();
             var cg_toBeAdded = sessionStorage.getItem('us_toBeAdded');
-            cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;            
+            cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;
             var cg_toBeAdded_length = cg_toBeAdded.length;
             for (var i = 0; i < cg_toBeAdded_length; i++) {
                 if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
-                    cg_toBeAdded.splice(i, 1);                    
+                    cg_toBeAdded.splice(i, 1);
                 }
             }
             schools = cg_toBeAdded;
@@ -1085,162 +1085,162 @@
                     for (var i = 0, len = tableData.length; i < len; i++) {
                         tableData[i].ClassID = -1;
                         tableData[i].SchoolID = cg_toBeAdded[index];
-                    }            
-                DataService.ClassAddNewBulk(tableData)
-                .success(function (response1, status, header, config) {
-                    // $scope.spinner= SMAAlert.CreateSpinnerAlert();
-                    var grades = [];
-                    var classes = response1;
-                    for (var i in schools) {
-                        var cg_toBeAdded = sessionStorage.getItem("" + schools[i]);
-                        if (cg_toBeAdded != null) {
-                            cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;;
-                            var cg_toBeAdded_length = cg_toBeAdded.length;
-                            for (var i = 0; i < cg_toBeAdded_length; i++) {
-                                if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
-                                    cg_toBeAdded.splice(i, 1);
+                    }
+                    DataService.ClassAddNewBulk(tableData)
+                    .success(function (response1, status, header, config) {
+                        // $scope.spinner= SMAAlert.CreateSpinnerAlert();
+                        var grades = [];
+                        var classes = response1;
+                        for (var i in schools) {
+                            var cg_toBeAdded = sessionStorage.getItem("" + schools[i]);
+                            if (cg_toBeAdded != null) {
+                                cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;;
+                                var cg_toBeAdded_length = cg_toBeAdded.length;
+                                for (var i = 0; i < cg_toBeAdded_length; i++) {
+                                    if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
+                                        cg_toBeAdded.splice(i, 1);
+                                    }
                                 }
                             }
+                            else {
+                                cg_toBeAdded = "";
+                            }
                         }
-                        else {
-                            cg_toBeAdded = "";
-                        }
-                    }
-                    if (cg_toBeAdded.length > 0) {
-                        var classGrades = []
-                        var grdindex=0;
-                        var maxlen = classes.length;
-                        function Addclassgrade() {
-                            if (grdindex <= classes.length) {
-                                for (var j = 0, lenj = cg_toBeAdded.length; j < lenj; j++) {
-                                    var classGrade = {
-                                        ClassID: classes[grdindex].ClassID,
-                                        GradeID: cg_toBeAdded[j]
+                        if (cg_toBeAdded.length > 0) {
+                            var classGrades = []
+                            var grdindex = 0;
+                            var maxlen = classes.length;
+                            function Addclassgrade() {
+                                if (grdindex <= classes.length) {
+                                    for (var j = 0, lenj = cg_toBeAdded.length; j < lenj; j++) {
+                                        var classGrade = {
+                                            ClassID: classes[grdindex].ClassID,
+                                            GradeID: cg_toBeAdded[j]
+                                        }
+                                        classGrades.push(classGrade);
                                     }
-                                    classGrades.push(classGrade);
-                                }
-                                var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                                var teachers = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
-                                var teachers_length = teachers != null ? teachers.length : 0;
-                                for (var i = 0; i < teachers_length; i++) {
-                                    if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
-                                        teachers.splice(i, 1);
-                                    }
-                                }
-                                if (teachers.length <= 0) {
-                                    index++;
-                                    BulkAddClass(index);
-                                }
-                                if (teachers.length > 0) {
-                                    var teacherClasses = []
-                                    for (var i = 0, leni = classes.length; i < leni; i++) {
-                                        for (var j = 0, lenj = teachers.length; j < lenj; j++) {
-                                            var teacherClass = {
-                                                ClassID: classes[i].ClassID,
-                                                TeacherID: teachers[j]
-                                            }
-                                            teacherClasses.push(teacherClass);
+                                    var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
+                                    var teachers = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
+                                    var teachers_length = teachers != null ? teachers.length : 0;
+                                    for (var i = 0; i < teachers_length; i++) {
+                                        if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
+                                            teachers.splice(i, 1);
                                         }
                                     }
-
-                                    DataService.TeacherClassAddNewBulk(teacherClasses)
-                                    .success(function (response3, status, header, config) {
+                                    if (teachers.length <= 0) {
                                         index++;
                                         BulkAddClass(index);
+                                    }
+                                    if (teachers.length > 0) {
+                                        var teacherClasses = []
+                                        for (var i = 0, leni = classes.length; i < leni; i++) {
+                                            for (var j = 0, lenj = teachers.length; j < lenj; j++) {
+                                                var teacherClass = {
+                                                    ClassID: classes[i].ClassID,
+                                                    TeacherID: teachers[j]
+                                                }
+                                                teacherClasses.push(teacherClass);
+                                            }
+                                        }
+
+                                        DataService.TeacherClassAddNewBulk(teacherClasses)
+                                        .success(function (response3, status, header, config) {
+                                            index++;
+                                            BulkAddClass(index);
+                                            // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                            $scope.spinner.resolve();
+                                            populateClasses();
+                                            closeBulkMenu();
+                                            SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                                        }).error(function (response, status, header, config) {
+                                            // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                            $scope.spinner.resolve();
+                                            if (response == null) { response = "" }
+                                            //SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
+                                        });
+
+                                    } else {
                                         // Repopulates the teacher list, closes the menu, and shows a success pop-up
                                         $scope.spinner.resolve();
                                         populateClasses();
                                         closeBulkMenu();
                                         SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
-                                    }).error(function (response, status, header, config) {
-                                        // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                        $scope.spinner.resolve();
-                                        if (response == null) { response = "" }
-                                        //SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
-                                    });
-
-                                } else {
+                                    }
+                                    DataService.ClassGradeAddNewBulk(classGrades)
+                                .success(function (response, status, header, config) {
+                                    alert("grade added")
+                                    grdindex++;
+                                    classGrades = [];
+                                    Addclassgrade();
+                                }).error(function (response, status, header, config) {
                                     // Repopulates the teacher list, closes the menu, and shows a success pop-up
                                     $scope.spinner.resolve();
-                                    populateClasses();
-                                    closeBulkMenu();
-                                    SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
-                                }
-                                DataService.ClassGradeAddNewBulk(classGrades)
-                            .success(function (response, status, header, config) {
-                                alert("grade added")
-                                grdindex++;
-                                classGrades = [];
-                                Addclassgrade();                                
-                            }).error(function (response, status, header, config) {
-                                // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                $scope.spinner.resolve();
-                                if (response == null) { response = "" }
-                                // SMAAlert.CreateInfoAlert("Failed to upload departments:<br><br>" + response);
-                            });
-                            }
-                        }
-                        Addclassgrade()
-                    } else {
-                        var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
-                        var teachers = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
-                        var teachers_length = teachers != null ? teachers.length : 0;
-                        for (var i = 0; i < teachers_length; i++) {
-                            if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
-                                teachers.splice(i, 1);
-                            }
-                        }
-                        if (teachers.length <= 0) {
-                            index++;
-                            BulkAddClass(index);
-                        }
-                        if (teachers.length > 0) {
-                            var teacherClasses = []
-                            for (var i = 0, leni = classes.length; i < leni; i++) {
-                                for (var j = 0, lenj = teachers.length; j < lenj; j++) {
-                                    var teacherClass = {
-                                        ClassID: classes[i].ClassID,
-                                        TeacherID: teachers[j]
-                                    }
-                                    teacherClasses.push(teacherClass);
+                                    if (response == null) { response = "" }
+                                    // SMAAlert.CreateInfoAlert("Failed to upload departments:<br><br>" + response);
+                                });
                                 }
                             }
-
-                            DataService.TeacherClassAddNewBulk(teacherClasses)
-                            .success(function (response3, status, header, config) {
+                            Addclassgrade()
+                        } else {
+                            var tc_toBeAdded = sessionStorage.getItem("tc_toBeAdded");
+                            var teachers = tc_toBeAdded != null ? tc_toBeAdded.split(',') : null;
+                            var teachers_length = teachers != null ? teachers.length : 0;
+                            for (var i = 0; i < teachers_length; i++) {
+                                if (teachers[i] == "" || teachers[i] == null || teachers[i] == undefined) {
+                                    teachers.splice(i, 1);
+                                }
+                            }
+                            if (teachers.length <= 0) {
                                 index++;
                                 BulkAddClass(index);
-                                if (index == schools.length) {
+                            }
+                            if (teachers.length > 0) {
+                                var teacherClasses = []
+                                for (var i = 0, leni = classes.length; i < leni; i++) {
+                                    for (var j = 0, lenj = teachers.length; j < lenj; j++) {
+                                        var teacherClass = {
+                                            ClassID: classes[i].ClassID,
+                                            TeacherID: teachers[j]
+                                        }
+                                        teacherClasses.push(teacherClass);
+                                    }
+                                }
+
+                                DataService.TeacherClassAddNewBulk(teacherClasses)
+                                .success(function (response3, status, header, config) {
+                                    index++;
+                                    BulkAddClass(index);
+                                    if (index == schools.length) {
+                                        // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                                        $scope.spinner.resolve();
+                                        populateClasses();
+                                        closeBulkMenu();
+                                        SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                                    }
+                                }).error(function (response, status, header, config) {
                                     // Repopulates the teacher list, closes the menu, and shows a success pop-up
                                     $scope.spinner.resolve();
-                                    populateClasses();
-                                    closeBulkMenu();
-                                    SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
-                                }
-                            }).error(function (response, status, header, config) {
-                                // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                                $scope.spinner.resolve();
-                                if (response == null) { response = "" }
-                                SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
-                            });
+                                    if (response == null) { response = "" }
+                                    SMAAlert.CreateInfoAlert("Failed to upload Departments:<br><br>" + response);
+                                });
 
+                            }
+                                // Repopulates the teacher list, closes the menu, and shows a success pop-up
+                            else {
+                                $scope.spinner.resolve();
+                                populateClasses();
+                                closeBulkMenu();
+                                SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
+                            }
                         }
-                            // Repopulates the teacher list, closes the menu, and shows a success pop-up
-                        else {
-                            $scope.spinner.resolve();
-                            populateClasses();
-                            closeBulkMenu();
-                            SMAAlert.CreateInfoAlert("Departments bulk upload was successful.");
-                        }
-                    }
-                }).error(function (response, status, header, config) {
-                    $scope.spinner.resolve();
-                    if (response == null) { response = "" }
-                   SMAAlert.CreateInfoAlert("Failed to upload departments:<br><br>" + response);
-                });
-            }
+                    }).error(function (response, status, header, config) {
+                        $scope.spinner.resolve();
+                        if (response == null) { response = "" }
+                        SMAAlert.CreateInfoAlert("Failed to upload departments:<br><br>" + response);
+                    });
                 }
-                BulkAddClass(0);
+            }
+            BulkAddClass(0);
         }
 
         // Selects all Grades checkboxes
@@ -1325,14 +1325,14 @@
             sessionStorage.setItem("tc_toBeAdded", "");
             sessionStorage.setItem("tc_toBeDeleted", "");
             $scope.spinner = SMAAlert.CreateSpinnerAlert();
-             
+
             $scope.objGradeList = [];
             $scope.objTeacherList = [];
-            populateGrades(-1,"","bulk")
+            populateGrades(-1, "", "bulk")
             //DataService.GradeGetAll()
             //.success(function (response1, status, header, config) {
             //    var grades = response1;
-                
+
             //    grades.sort(function (a, b) {
             //        var nameA = a.Name.toLowerCase();
             //        var nameB = b.Name.toLowerCase();
@@ -1346,48 +1346,48 @@
             //    });
             //    $scope.objGradeList = grades;
             //    $scope.objGradeList.forEach(function (obj) { obj.selection = false; });
-                DataService.MerchantGetListByCurrentUser()
-                .success(function (response2, status, header, config) {
-                    var merchants = response2;
+            DataService.MerchantGetListByCurrentUser()
+            .success(function (response2, status, header, config) {
+                var merchants = response2;
 
-                    function getTeachersByMerchants(index, length, merchants, teachers) {
-                        if (index < length) {
+                function getTeachersByMerchants(index, length, merchants, teachers) {
+                    if (index < length) {
 
-                            DataService.TeacherGetListByMerchant(merchants[index].MerchantID)
-                            .success(function (response3, status, header, config) {
-                                var tempTeachers = response3;
-                                for (var i = 0, len = tempTeachers.length; i < len; i++) {
-                                    teachers.push(tempTeachers[i]);
-                                }
+                        DataService.TeacherGetListByMerchant(merchants[index].MerchantID)
+                        .success(function (response3, status, header, config) {
+                            var tempTeachers = response3;
+                            for (var i = 0, len = tempTeachers.length; i < len; i++) {
+                                teachers.push(tempTeachers[i]);
+                            }
+                            index++;
+                            getTeachersByMerchants(index, length, merchants, teachers);
+                        }).error(function (response, status, header, config) {
+                            if (status !== 403) {
+                                $scope.spinner.resolve();
+                                if (response == null) { response = "" }
+                                SMAAlert.CreateInfoAlert("Failed to retrieve employees:<br><br>" + response1);
+                            } else {
                                 index++;
                                 getTeachersByMerchants(index, length, merchants, teachers);
-                            }).error(function (response, status, header, config) {
-                                if (status !== 403) {
-                                    $scope.spinner.resolve();
-                                    if (response == null) { response = "" }
-                                    SMAAlert.CreateInfoAlert("Failed to retrieve employees:<br><br>" + response1);
-                                } else {
-                                    index++;
-                                    getTeachersByMerchants(index, length, merchants, teachers);
-                                }
-                            });
+                            }
+                        });
 
-                        } else {
-                            // Renders the teacher checkboxes
-                            $scope.objTeacherList = teachers;
-                            $scope.objTeacherList.forEach(function (obj) { obj.selection = false; });
-                            $scope.spinner.resolve();
-                            showBulkMenu();
-                        }
+                    } else {
+                        // Renders the teacher checkboxes
+                        $scope.objTeacherList = teachers;
+                        $scope.objTeacherList.forEach(function (obj) { obj.selection = false; });
+                        $scope.spinner.resolve();
+                        showBulkMenu();
                     }
-                    getTeachersByMerchants(0, merchants.length, merchants, []);
-                }).error(function (response, status, header, config) {
-                    $scope.spinner.resolve();
-                    if (status !== 403) {
-                        if (response == null) { response = "" }
-                        SMAAlert.CreateInfoAlert("Failed to retrieve Groups:<br><br>" + response);
-                    }
-                });
+                }
+                getTeachersByMerchants(0, merchants.length, merchants, []);
+            }).error(function (response, status, header, config) {
+                $scope.spinner.resolve();
+                if (status !== 403) {
+                    if (response == null) { response = "" }
+                    SMAAlert.CreateInfoAlert("Failed to retrieve Groups:<br><br>" + response);
+                }
+            });
             //}).error(function (response, status, header, config) {
             //    $scope.spinner.resolve();
             //    if (status !== 403) {
@@ -1414,12 +1414,12 @@
                     var classGrades = res;
                     if (classGrades.length <= 0) {
                         //$scope.objGradeList = [];
-                    }else{
-                        var grdlst=$scope.objGradeList;
-                        if (classGrades.length >0) {
+                    } else {
+                        var grdlst = $scope.objGradeList;
+                        if (classGrades.length > 0) {
                             populateGrades("", classGrades)
                             // deselectAllGrades();
-                            
+
                         }
                     }
                 })
@@ -1433,7 +1433,7 @@
 
         // Collapse 
         function collapse(scholID) {
-            
+
             if ($("#" + scholID).data("act") != "expand") {
                 $("#" + scholID).html(" + ");
                 $("#" + scholID).data("act", "expand");
@@ -1475,7 +1475,7 @@
             });
         }
 
-        
+
         //--------------------Bulk Upload Code--------------------------------
         function processFile() {
             //$scope.spinner = SMAAlert.CreateSpinnerAlert();
@@ -1521,9 +1521,9 @@
         }
 
         //---------------------------------XX---------------------------------
-        function checkUserSchoolCheckboxes(schoolID,e) {
+        function checkUserSchoolCheckboxes(schoolID, e) {
             debugger
-            if (e.selection==true) {// If it's checked
+            if (e.selection == true) {// If it's checked
                 // Gets the session variables and splits them into arrays
                 schoolID = schoolID.replace('bulk', '');
                 var us_alreadySaved = sessionStorage.getItem("us_alreadySaved");
@@ -1580,18 +1580,8 @@
                 // Checks to see if this is a new or bulk upload!
                 //if ($("#UserIDHidden").val() == -999 || $("#UserIDHidden").val() == -1) {
                 var merchantID = $("#" + schoolID).data("merchantid");
-
-                var isObserver = false;
-
-                $(".userRoleCheckbox").each(function (i) {
-                    //console.log($(this).data("merchantid") + "   " + $(this).prop("checked") + "   " + $(this).data("rolename"));
-                    if ($(this).data("merchantid") == merchantID && $(this).prop("checked") == true && $(this).data("rolename") == "Observer") {
-                        isObserver = true;
-                    }
-                })
-
-                if (isObserver == true) {
-                    $scope.spinnerArr[schoolID] = SMAAlert.CreateSpinnerAlert();
+                                
+                $scope.spinner = SMAAlert.CreateSpinnerAlert();
                     DataService.TeacherGetListBySchool(schoolID)
                     .success(function (teachers, status, header, config) {
                         if (teachers.length > 0) {
@@ -1601,15 +1591,15 @@
                                 }
                             }
                         }
-                        $scope.spinnerArr[schoolID].resolve();
+                        $scope.spinner.resolve();
                     }).error(function (response, status, header, config) {
-                        $scope.spinnerArr[schoolID].resolve();
+                        $scope.spinner.resolve();
                         if (status !== 403) {
                             if (response == null) { response = "" }
-                            SMAAlert.CreateInfoAlert("Failed to retrieve employees by site:<br><br>" + response);
+                            SMAAlert.CreateInfoAlert("Failed to retrieve employees by:<br><br>" + response);
                         }
                     });
-                }
+                
                 selectColorBlack1(schoolID);
                 //}
             } else {// If it's unchecked
@@ -1644,11 +1634,29 @@
                 temporary_us_toBeAdded.join(",");
                 sessionStorage.setItem("us_toBeDeleted", temporary_us_toBeDeleted);
                 sessionStorage.setItem("us_toBeAdded", temporary_us_toBeAdded);
+
+                $scope.spinner = SMAAlert.CreateSpinnerAlert();
+                DataService.TeacherGetListBySchool(schoolID)
+                .success(function (teachers, status, header, config) {
+                    if (teachers.length > 0) {
+                        for (var i = 0, len = teachers.length; i < len; i++) {
+                            if ($("#" + teachers[i].TeacherID).prop("checked") == true) {
+                                $("#" + teachers[i].TeacherID).click();
+                            }
+                        }
+                    }
+                    $scope.spinner.resolve();
+                }).error(function (response, status, header, config) {
+                    $scope.spinner.resolve();
+                    if (status !== 403) {
+                        if (response == null) { response = "" }
+                        SMAAlert.CreateInfoAlert("Failed to retrieve employees:<br><br>" + response);
+                    }
+                });
                 selectColorBlack1(schoolID);
             }
         }
-        function AddBulkSchool()
-        {            
+        function AddBulkSchool() {
             var cg_toBeAdded = sessionStorage.getItem('us_toBeAdded');
             cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;
             var cg_toBeAdded_length = cg_toBeAdded != null ? cg_toBeAdded.length : 0;
@@ -1657,7 +1665,7 @@
                     cg_toBeAdded.splice(i, 1);
                 }
             }
-            if ($scope.sumbit_type == "create") {               
+            if ($scope.sumbit_type == "create") {
                 var index = 0;
                 var len = cg_toBeAdded != null ? cg_toBeAdded.length : 0;
                 $scope.lenth = len;
@@ -1675,13 +1683,13 @@
                     }
                     else {
                         $scope.spinner.resolve();
-                       // SMAAlert.CreateInfoAlert("New Department has been saved.")
-                         //populateClasses();
+                        // SMAAlert.CreateInfoAlert("New Department has been saved.")
+                        //populateClasses();
                     }
-                    
+
                 }
                 AddschoolinBulk(0);
-                
+
             }
             if ($scope.sumbit_type == "update") {
                 var subject = {
@@ -1692,7 +1700,7 @@
                 }
                 submitForm(subject)
             }
-               
+
         }
     }
 })();
