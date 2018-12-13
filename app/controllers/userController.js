@@ -17,9 +17,9 @@
             showDeleteButton: true,
             showChangePassword: false,
             changePasswordText: "Change password?",
-			//START NILESH-TSK79
+            //START NILESH-TSK79
             showSendPasswordResetMail: true,
-			//END NILESH-TSK79
+            //END NILESH-TSK79
         }
 
 
@@ -87,9 +87,9 @@
                 MerchantID: '',
                 userTeacher: { TeacherID: '' },
                 userState: '',
-				//START NILESH-TSK79
+                //START NILESH-TSK79
                 SendPasswordResetMail: true
-				//END NILESH-TSK79
+                //END NILESH-TSK79
             };
         }
         function clearUserInfo() {
@@ -100,9 +100,9 @@
             $scope.userInfo.LastName = '';
             $scope.userInfo.Email = '';
             $scope.userInfo.MerchantID = '';
-			//START NILESH-TSK79
+            //START NILESH-TSK79
             $scope.userInfo.SendPasswordResetMail = false;
-			//END NILESH-TSK79
+            //END NILESH-TSK79
         }
         // Populate Users
         function populateUsers() {
@@ -306,9 +306,9 @@
                 $scope.userInfo.userTeacher.TeacherID = user.teacherid;
                 $scope.popup.showChangePassword = false;
                 $scope.popup.changePasswordText = "Change Password?";
-				//START NILESH-TSK79
+                //START NILESH-TSK79
                 $scope.popup.showSendPasswordResetMail = false;
-				//END NILESH-TSK79
+                //END NILESH-TSK79
                 $scope.popup.title = "User - Information";
 
                 //$("#UserName").val(user.username);
@@ -348,10 +348,10 @@
                 populateClassesByMerchant(user.merchantid);
 
             } else {
-				//START NILESH-TSK79
+                //START NILESH-TSK79
                 $scope.popup.showSendPasswordResetMail = true;
                 $scope.userInfo.SendPasswordResetMail = true;
-				//END NILESH-TSK79
+                //END NILESH-TSK79
                 // Hides the Delete Button
                 $scope.popup.showDeleteButton = false;
                 $scope.popup.showChangePassword = true;
@@ -1133,10 +1133,15 @@
                     $('#BulkRoleContainerFor' + RoleData.merchantid + ' input:checked').each(function () {
                         userC.RoleNames.push($(this).data('rolename'));
                     });
-                if (userC.RoleNames.length == 1 && userC.RoleNames.includes("Viewer") == true) {
-                    deselectAllTeachers(RoleData.merchantid)
-                    $('#TeacherContainerFor' + RoleData.merchantid).hide();
-                    $('#BulkTeacherContainerFor' + RoleData.merchantid).hide();
+
+                //START NILESH-TSK95
+                if ((userC.RoleNames.length == 1 && userC.RoleNames.includes("Viewer") == true) || (userC.RoleNames.length == 1 && userC.RoleNames.findIndex(t=> (t || "").toLowerCase() == "self reflection") > -1)) {
+                    if (userC.RoleNames.length == 1 && userC.RoleNames.includes("Viewer") == true) {
+                        deselectAllTeachers(RoleData.merchantid)
+                        $('#TeacherContainerFor' + RoleData.merchantid).hide();
+                        $('#BulkTeacherContainerFor' + RoleData.merchantid).hide();
+                    }
+                    //END NILESH-TSK95
                     $('#classdivhide').show();
                     $('#bulkclassdivhide').show();
                 }
@@ -1144,6 +1149,7 @@
                     $('#classdivhide').hide();
                     $('#bulkclassdivhide').hide();
                 }
+
                 if ((userC.RoleNames.includes("Observer") == true || userC.RoleNames.includes("Peer Evaluator")) && userC.RoleNames.length == 1) {
                     $('#classdivhide').hide();
                     $('#bulkclassdivhide').hide();
@@ -1185,7 +1191,7 @@
                 if (index > -1) {
                     userC.RoleNames.splice(index, 1);
                 }
-                if (RoleName == "Viewer") {                    
+                if (RoleName == "Viewer") {
                     $('#TeacherContainerFor' + MerchantID).show();
                     $('#BulkTeacherContainerFor' + MerchantID).show();
                 }
@@ -1197,8 +1203,17 @@
                 if (userC.RoleNames.length == 0)
                     $('#TeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
                 $('#BulkTeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
-                $('#classdivhide').hide();
-                $('#bulkclassdivhide').hide();
+
+                //START NILESH-TSK95
+                if (userC.RoleNames.length == 1 && userC.RoleNames.findIndex(t=> (t || "").toLowerCase() == "self reflection") > -1) {
+                    $('#classdivhide').show();
+                    $('#bulkclassdivhide').show();
+                }
+                else {
+                    $('#classdivhide').hide();
+                    $('#bulkclassdivhide').hide();
+                }
+                //END NILESH-TSK95
 
                 var ur_alreadySaved = sessionStorage.getItem("ur_alreadySaved");
                 ur_alreadySaved = ur_alreadySaved.split(",");
@@ -1253,7 +1268,9 @@
         function selectAllDeptSchool(schoolID) {
             $("input.schoolID" + schoolID).each(function (i) {
                 if ($(this).prop("checked") == false) {
-                    $(this).click();
+                    $(this).prop("checked", true)
+                    checkTeacherClassCheckboxes(this.value)
+                    //$(this).click();
                 }
             });
         }
@@ -1339,14 +1356,35 @@
                 DataService.TeacherGetListByMerchant(merchantID)
                 .success(function (response2, status, header, config) {
                     //if (response2 != '') {
-                        if (response2 == "") { response2 = []; }
-                        var teachers = response2.filter(function (e) {
-                            return e.Email.substring(0, 9) == "INACTIVE-" == false;
+                    if (response2 == "") { response2 = []; }
+                    var teachers = response2.filter(function (e) {
+                        return e.Email.substring(0, 9) == "INACTIVE-" == false;
+                    });
+                    if (teachers.length > 0) {
+                        teachers.sort(function (a, b) {
+                            var nameA = a.LastName.toLowerCase();
+                            var nameB = b.LastName.toLowerCase();
+                            if (nameA < nameB) {
+                                return -1;
+                            } else if (nameA > nameB) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
                         });
-                        if (teachers.length > 0) {
-                            teachers.sort(function (a, b) {
-                                var nameA = a.LastName.toLowerCase();
-                                var nameB = b.LastName.toLowerCase();
+                        $('#TeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
+                        $('#BulkTeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
+                        objMerchant.teacherList = teachers;
+                        objMerchant.teacherList.forEach(function (obj) { obj.selection = false; });
+                    }
+                    DataService.RolesGetListForMerchant(merchantID)
+                    .success(function (response3, status, header, config) {
+                        var roles = [];
+                        roles = response3;
+                        if (roles.length > 0) {
+                            roles.sort(function (a, b) {
+                                var nameA = a.RoleName.toLowerCase();
+                                var nameB = b.RoleName.toLowerCase();
                                 if (nameA < nameB) {
                                     return -1;
                                 } else if (nameA > nameB) {
@@ -1355,43 +1393,22 @@
                                     return 0;
                                 }
                             });
-                            $('#TeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
-                            $('#BulkTeacherContainerFor' + $scope.userInfo.merchantList[0].MerchantID).hide();
-                            objMerchant.teacherList = teachers;
-                            objMerchant.teacherList.forEach(function (obj) { obj.selection = false; });
+                            objMerchant.roleList = roles;
+                            objMerchant.roleList.forEach(function (obj) { obj.selection = false; });
                         }
-                        DataService.RolesGetListForMerchant(merchantID)
-                        .success(function (response3, status, header, config) {
-                            var roles = [];
-                            roles = response3;
-                            if (roles.length > 0) {
-                                roles.sort(function (a, b) {
-                                    var nameA = a.RoleName.toLowerCase();
-                                    var nameB = b.RoleName.toLowerCase();
-                                    if (nameA < nameB) {
-                                        return -1;
-                                    } else if (nameA > nameB) {
-                                        return 1;
-                                    } else {
-                                        return 0;
-                                    }
-                                });
-                                objMerchant.roleList = roles;
-                                objMerchant.roleList.forEach(function (obj) { obj.selection = false; });
-                            }
 
 
-                            //$scope.spinner.resolve();
-                        }).error(function (response, status, header, config) {
-                            $scope.spinner.resolve();
-                            if (status !== 403) {
-                                if (response == null) { response = "" }
-                                SMAAlert.CreateInfoAlert("Failed to retrieve roles:<br><br>" + response);
-                            }
-                        });
+                        //$scope.spinner.resolve();
+                    }).error(function (response, status, header, config) {
+                        $scope.spinner.resolve();
+                        if (status !== 403) {
+                            if (response == null) { response = "" }
+                            SMAAlert.CreateInfoAlert("Failed to retrieve roles:<br><br>" + response);
+                        }
+                    });
 
 
-                        checkMerchantUserCheckboxes(merchantID);
+                    checkMerchantUserCheckboxes(merchantID);
                     //}
                     // $scope.spinner.resolve();
                 }).error(function (response, status, header, config) {
@@ -1547,8 +1564,13 @@
             // Data Validations
             var tableData = [];
             for (var i in table) {
+                var email = "";
+                if (table[i].Email != undefined && table[i].Email != "" && table[i].Email != null) {
+                    email = table[i].Email.replace(/ /g, '');
+                }
+                else{email=undefined}
                 var tbdata = {
-                    Email: table[i].Email,
+                    Email: email,
                     //START NILESH-TSK94
                     Password: table[i].Password,
                     //END NILESH-TSK94
@@ -1560,22 +1582,22 @@
                 }
                 tableData.push(tbdata);
             }
-            var error = "";
+            var error = [];
             for (var i = 0, len = tableData.length; i < len; i++) {
                 if (tableData[i].Email == undefined || tableData[i].Email == "" || tableData[i].Email == null) {
-                    error = "Email is missing on row " + i + ".";
-                    break;
+                    error.push("Email is missing on row " + i + ".");
+                   // break;
                 }
-                //START NILESH-TSK94
+                    //START NILESH-TSK94
                 else if (tableData[i].InviteUser != undefined && tableData[i].InviteUser != null && tableData[i].InviteUser != "") {
                     if (tableData[i].InviteUser.toLowerCase() == "yes") {
                         if (tableData[i].Password == undefined || tableData[i].Password == "" || tableData[i].Password == null) {
-                            error = "Password is missing on row " + i + ".";
-                            break;
+                           error.push("Password is missing on row " + i + ".");
+                            //break;
                         }
                         else if (tableData[i].Password.length < 5) {
-                            error = "Password on row " + i + " is less than 6 characters.";
-                            break;
+                            error.push("Password on row " + i + " is less than 6 characters.");
+                            //break;
                         }
                         else {
                             tableData[i].SendPasswordResetMail = true;
@@ -1584,22 +1606,23 @@
                     else {
                         tableData[i].Password = undefined;
                     }
-                    
+
                 }
-                //END NILESH-TSK94
+                    //END NILESH-TSK94
                 else if (tableData[i].FirstName == undefined || tableData[i].FirstName == "" || tableData[i].FirstName == null) {
-                    error = "FirstName is missing on row " + i + ".";
-                    break;
+                    error.push("FirstName is missing on row " + i + ".");
+                    //break;
                 } else if (tableData[i].LastName == undefined || tableData[i].LastName == "" || tableData[i].LastName == null) {
-                    error = "LastName is missing on row " + i + ".";
-                    break;
+                    error.push("LastName is missing on row " + i + ".");
+                    //break;
                 }
                 //tableData[i].InviteUser = undefined;
             }
+            tableData = tableData.filter(function (e) { return typeof e.Email != 'undefined' })
 
-            if (error !== "") {
-                SMAAlert.CreateInfoAlert("There was an error with your data:<br><br>" + error);
-            } else {
+            //if (error !== "") {
+            //    SMAAlert.CreateInfoAlert("There was an error with your data:<br><br>" + error);
+            //} else {
                 var mu_toBeAdded = sessionStorage.getItem("mu_toBeAdded");
                 var merchants = mu_toBeAdded.split(",");
                 var merchants_length = merchants.length;
@@ -1696,11 +1719,23 @@
                                         for (var i = 0, len = usersErrors.length; i < len; i++) {
                                             errorsList += "<li>" + usersErrors[i] + "</li>";
                                         }
+                                        for (var i in error) {
+                                            errorsList += "<li>" + error[i] + "</li>";
+                                        }
                                         errorsList += "</ul>";
 
                                         SMAAlert.CreateInfoAlert("While creating users the following errors occurred:<br><br>" + errorsList);
                                     } else {
-                                        SMAAlert.CreateInfoAlert("Users were successfully saved.");
+                                        if (error.length > 0) {
+                                            var errorsList = "<ul>";
+                                            for (var i in error) {
+                                                errorsList += "<li>" + error[i] + "</li>";
+                                            }
+                                            errorsList += "</ul>"; 
+                                            SMAAlert.CreateInfoAlert("Users were successfully saved. Except these user's with errors:<br><br>" + errorsList);
+                                        } else {
+                                            SMAAlert.CreateInfoAlert("Users were successfully saved.");
+                                        }
                                     }
                                 }
                             }
@@ -1791,10 +1826,23 @@
                                     for (var i = 0, len = usersErrors.length; i < len; i++) {
                                         errorsList += "<li>" + usersErrors[i] + "</li>";
                                     }
+                                    for (var i in error) {
+                                        errorsList += "<li>" + error[i] + "</li>";
+                                    }
+                                    errorsList += "</ul>";
                                     //errorsList.append += "</ul><br><br>";
                                     SMAAlert.CreateInfoAlert("While creating users the following errors occurred:<br><br>" + errorsList);
                                 } else {
-                                    SMAAlert.CreateInfoAlert("Users were successfully saved.");
+                                    if (error.length > 0) {
+                                        var errorsList = "<ul>";
+                                        for (var i in error) {
+                                            errorsList += "<li>" + error[i] + "</li>";
+                                        }
+                                        errorsList += "</ul>";
+                                        SMAAlert.CreateInfoAlert("Users were successfully saved. Except these user's with errors:<br><br>" + errorsList);
+                                    } else {
+                                        SMAAlert.CreateInfoAlert("Users were successfully saved.");
+                                    }
                                     closeMenu();
                                 }
                             }
@@ -1822,7 +1870,7 @@
                     }
                     saveUsers(tableData);
                 }
-            }
+           // }
         }
         function setDepartmentMerchant() {
             selectColorBlack("DeptMerchantSelect");
@@ -1917,9 +1965,9 @@
                 FirstName: $scope.userInfo.FirstName,
                 LastName: $scope.userInfo.LastName,
                 MerchantID: $scope.userInfo.MerchantID,
-				//START NILESH-TSK79
+                //START NILESH-TSK79
                 SendPasswordResetMail: $scope.userInfo.SendPasswordResetMail,
-				//END NILESH-TSK79
+                //END NILESH-TSK79
             }
 
             var oldTeacherID = $scope.userInfo.userTeacher.TeacherID;//$("#TeacherIDHidden").val();
