@@ -677,7 +677,11 @@
                             var ur_alreadySaved = [];
 
                             for (var i = 0, len = userRoles.length; i < len; i++) {
-                                $("#" + userRoles[i].UserID).prop("checked", true);
+                                var userobj = $scope.roleInfo.UserList.find(t=>t.UserID == userRoles[i].UserID);
+                                if(userobj) {
+                                    userobj.selection = true;
+                                }
+                                //$("#" + userRoles[i].UserID).prop("checked", true);
                                 ur_alreadySaved.push(userRoles[i].UserID);
                             }
 
@@ -725,6 +729,7 @@
                         });
                     } else {
                         $scope.roleInfo.UserList = users;
+                        $scope.roleInfo.UserList.forEach(function(element) { element.selection = false; });
                         getUserRoles();
                     }
                 }
@@ -824,8 +829,8 @@
                 }
 
                 // Resets the session storage variables
-                temporary_rr_toBeDeleted.join(",");
-                temporary_rr_toBeAdded.join(",");
+                temporary_rr_toBeDeleted = temporary_rr_toBeDeleted.join(",");
+                temporary_rr_toBeAdded=  temporary_rr_toBeAdded.join(",");
                 sessionStorage.setItem("rr_toBeDeleted", temporary_rr_toBeDeleted);
                 sessionStorage.setItem("rr_toBeAdded", temporary_rr_toBeAdded);
 
@@ -917,8 +922,10 @@
                 }
 
                 // Resets the session storage variables
-                temporary_ur_toBeDeleted.join(",");
-                temporary_ur_toBeAdded.join(",");
+                //NTSK1
+                temporary_ur_toBeDeleted = temporary_ur_toBeDeleted.join(",");
+                temporary_ur_toBeAdded = temporary_ur_toBeAdded.join(",");
+                //NTSK1
                 sessionStorage.setItem("ur_toBeDeleted", temporary_ur_toBeDeleted);
                 sessionStorage.setItem("ur_toBeAdded", temporary_ur_toBeAdded);
             }

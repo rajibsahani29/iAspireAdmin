@@ -138,7 +138,9 @@
                         });
                     }
                     $scope.userInfo.merchantList = merchants;
-                    $scope.userInfo.merchantList.forEach(function (obj) { obj.selection = false; });
+                    $scope.userInfo.merchantList.forEach(function (objMerchant) { 
+                        objMerchant.selection = false; 
+                    });
                     populateUsersLoop(merchants, 0, merchants.length, [], []);
                 } else {
                     $scope.spinner.resolve();
@@ -1063,8 +1065,8 @@
                 }
 
                 // Resets the session storage variables
-                temporary_uta_toBeDeleted.join(",");
-                temporary_uta_toBeAdded.join(",");
+                temporary_uta_toBeDeleted = temporary_uta_toBeDeleted.join(",");
+                temporary_uta_toBeAdded = temporary_uta_toBeAdded.join(",");
                 sessionStorage.setItem("uta_toBeDeleted", temporary_uta_toBeDeleted);
                 sessionStorage.setItem("uta_toBeAdded", temporary_uta_toBeAdded);
             }
