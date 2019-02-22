@@ -1096,26 +1096,25 @@
                             if (cg_toBeAdded != null) {
                                 cg_toBeAdded = cg_toBeAdded != null ? cg_toBeAdded.split(',') : null;;
                                 var cg_toBeAdded_length = cg_toBeAdded.length;
-                                for (var i = 0; i < cg_toBeAdded_length; i++) {
-                                    if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
+                                if (cg_toBeAdded[i] == "" || cg_toBeAdded[i] == null || cg_toBeAdded[i] == undefined) {
                                         cg_toBeAdded.splice(i, 1);
-                                    }
-                                }
-                            }
+                                    } else {
+                                        $.merge(grades, cg_toBeAdded);
+                                    }                            }
                             else {
                                 cg_toBeAdded = "";
                             }
                         }
-                        if (cg_toBeAdded.length > 0) {
+                        if (grades.length > 0) {
                             var classGrades = []
                             var grdindex = 0;
                             var maxlen = classes.length;
                             function Addclassgrade() {
                                 if (grdindex <= classes.length) {
-                                    for (var j = 0, lenj = cg_toBeAdded.length; j < lenj; j++) {
+                                    for (var j = 0, lenj = grades.length; j < lenj; j++) {
                                         var classGrade = {
                                             ClassID: classes[grdindex].ClassID,
-                                            GradeID: cg_toBeAdded[j]
+                                            GradeID: grades[j]
                                         }
                                         classGrades.push(classGrade);
                                     }
@@ -1168,7 +1167,7 @@
                                     }
                                     DataService.ClassGradeAddNewBulk(classGrades)
                                 .success(function (response, status, header, config) {
-                                    alert("grade added")
+                                    //alert("grade added")
                                     grdindex++;
                                     classGrades = [];
                                     Addclassgrade();
